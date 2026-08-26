@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Foundational Learning Path Leadership Hub</title>
+
+  <style>
+    :root {
+      --navy-dark: #001731;
+      --navy: #002855;
+      --light-blue-bg: #EEF6F9;
+      --light-gray: #F1F1F1;
+      --gray: #A7A7A7;
+      --blue: #0070F0;
+      --sky-blue: #46B1EF;
+      --green: #97E142;
+      --white: #FFFFFF;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--light-blue-bg);
+      color: var(--navy-dark);
+      line-height: 1.5;
+    }
+
+    /* =========================
+       PAGE HEADER
+    ========================== */
+
+    .hero {
+      background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+      color: var(--white);
+      padding: 55px 25px 50px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: rgba(70, 177, 239, 0.12);
+      right: -80px;
+      top: -100px;
+    }
+
+    .leadership-badge {
+      display: inline-block;
+      background: var(--green);
+      color: var(--navy-dark);
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      padding: 7px 15px;
+      border-radius: 999px;
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.3rem);
+      line-height: 1.1;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero p {
+      max-width: 800px;
+      margin: 18px auto 0;
+      font-size: 1.05rem;
+      color: #EEF6F9;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* =========================
+       MAIN CONTENT
+    ========================== */
+
+    .container {
+      width: min(1100px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 45px 0 60px;
+    }
+
+    .intro {
+      max-width: 850px;
+      margin: 0 auto 38px;
+      text-align: center;
+    }
+
+    .intro h2 {
+      color: var(--navy);
+      font-size: 1.65rem;
+      margin: 0 0 10px;
+    }
+
+    .intro p {
+      color: #425466;
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    /* =========================
+       LEARNING PATH GRID
+    ========================== */
+
+    .learning-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .learning-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 5px 18px rgba(0, 23, 49, 0.09);
+      border: 1px solid rgba(167, 167, 167, 0.28);
+      display: flex;
+      flex-direction: column;
+      min-height: 270px;
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .learning-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 7px;
+      height: 100%;
+      background: var(--sky-blue);
+    }
+
+    .learning-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(0, 23, 49, 0.14);
+      border-color: var(--sky-blue);
+    }
+
+    .path-number {
+      color: var(--blue);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .learning-card h3 {
+      margin: 0 0 10px;
+      color: var(--navy-dark);
+      font-size: 1.3rem;
+      line-height: 1.25;
+    }
+
+    .learning-card p {
+      margin: 0 0 18px;
+      color: #5A6775;
+      font-size: 0.95rem;
+    }
+
+    /* =========================
+       RESOURCE PREVIEW TAGS
+    ========================== */
+
+    .resource-preview {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 24px;
+      flex-grow: 1;
+      align-content: flex-start;
+    }
+
+    .resource-tag {
+      display: inline-block;
+      background: var(--light-blue-bg);
+      color: var(--navy);
+      border: 1px solid rgba(70, 177, 239, 0.35);
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    /* =========================
+       BUTTONS
+    ========================== */
+
+    .path-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      text-decoration: none;
+      background: var(--blue);
+      color: var(--white);
+      font-weight: 700;
+      border-radius: 9px;
+      padding: 13px 18px;
+      transition:
+        background 0.2s ease,
+        transform 0.15s ease;
+    }
+
+    .path-button:hover {
+      background: var(--navy);
+    }
+
+    .path-button:focus-visible {
+      outline: 4px solid var(--green);
+      outline-offset: 3px;
+    }
+
+    .arrow {
+      font-size: 1.1rem;
+    }
+
+    /* =========================
+       FOOTER MESSAGE
+    ========================== */
+
+    .footer-note {
+      margin-top: 38px;
+      background: var(--navy);
+      color: var(--white);
+      border-radius: 14px;
+      padding: 24px 28px;
+      text-align: center;
+    }
+
+    .footer-note strong {
+      color: var(--green);
+    }
+
+    .footer-note p {
+      margin: 0;
+    }
+
+    /* =========================
+       MOBILE
+    ========================== */
+
+    @media (max-width: 750px) {
+      .hero {
+        padding: 42px 20px;
+      }
+
+      .container {
+        width: min(100% - 26px, 1100px);
+        padding-top: 32px;
+      }
+
+      .learning-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .learning-card {
+        min-height: auto;
+      }
+    }
+
+    /* Reduce animation for users who prefer it */
+    @media (prefers-reduced-motion: reduce) {
+      .learning-card,
+      .path-button {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       HEADER
+  ========================== -->
+
+  <header class="hero">
+
+    <div class="leadership-badge">Leadership Resources</div>
+
+    <h1>Foundational Learning Path Leadership Hub</h1>
+
+    <p>
+      Access the tools and resources needed to assign, facilitate, monitor,
+      and support Peer Intern development throughout the Foundational learning paths.
+    </p>
+
+  </header>
+
+
+  <!-- =========================
+       MAIN CONTENT
+  ========================== -->
+
+  <main class="container">
+
+    <section class="intro">
+
+      <h2>Foundational Learning Path Resources</h2>
+
+      <p>
+        Select a learning path to access leader-facing materials including
+        presentations, training data, progress tracking, meeting resources,
+        rubrics, and other tools used to support intern development.
+      </p>
+
+    </section>
+
+
+    <section
+      class="learning-grid"
+      aria-label="Foundational Learning Path Leadership Resources"
+    >
+
+
+      <!-- =========================================================
+           LEARNING PATH 1
+      ========================================================== -->
+
+      <article class="learning-card">
+
+        <div class="path-number">Learning Path 01</div>
+
+        <h3>Foundations of Coaching</h3>
+
+        <p>
+          Access the leadership resources used to introduce and reinforce
+          the four foundational coaching skills.
+        </p>
+
+        <div class="resource-preview">
+          <span class="resource-tag">Presentations</span>
+          <span class="resource-tag">Progress Tracking</span>
+          <span class="resource-tag">Meeting Resources</span>
+          <span class="resource-tag">Rubrics</span>
+        </div>
+
+        <!-- =====================================================
+             ADD LINK HERE FOR FOUNDATIONS OF COACHING LEADERSHIP PAGE
+             Replace https://www.wgu.edu with the leadership resource page URL.
+        ====================================================== -->
+        <a
+          class="path-button"
+          href="https://www.wgu.edu"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Open Leadership Resources
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+
+      </article>
+
+
+      <!-- =========================================================
+           LEARNING PATH 2
+      ========================================================== -->
+
+      <article class="learning-card">
+
+        <div class="path-number">Learning Path 02</div>
+
+        <h3>Outreach</h3>
+
+        <p>
+          Access resources for supporting intern development around
+          effective outreach calls and productive coaching conversations.
+        </p>
+
+        <div class="resource-preview">
+          <span class="resource-tag">Presentations</span>
+          <span class="resource-tag">Quiz Data</span>
+          <span class="resource-tag">Progress Tracking</span>
+          <span class="resource-tag">Meeting Resources</span>
+        </div>
+
+        <!-- =====================================================
+             ADD LINK HERE FOR OUTREACH LEADERSHIP PAGE
+             Replace https://www.wgu.edu with the leadership resource page URL.
+        ====================================================== -->
+        <a
+          class="path-button"
+          href="https://www.wgu.edu"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Open Leadership Resources
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+
+      </article>
+
+
+      <!-- =========================================================
+           LEARNING PATH 3
+      ========================================================== -->
+
+      <article class="learning-card">
+
+        <div class="path-number">Learning Path 03</div>
+
+        <h3>Receiving &amp; Applying Feedback</h3>
+
+        <p>
+          Access resources used to help interns receive feedback openly,
+          reflect on coaching performance, and apply feedback to future interactions.
+        </p>
+
+        <div class="resource-preview">
+          <span class="resource-tag">Presentations</span>
+          <span class="resource-tag">Progress Tracking</span>
+          <span class="resource-tag">Meeting Agendas</span>
+          <span class="resource-tag">Rubrics</span>
+        </div>
+
+        <!-- =====================================================
+             ADD LINK HERE FOR RECEIVING & APPLYING FEEDBACK LEADERSHIP PAGE
+             Replace https://www.wgu.edu with the leadership resource page URL.
+        ====================================================== -->
+        <a
+          class="path-button"
+          href="https://www.wgu.edu"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Open Leadership Resources
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+
+      </article>
+
+
+      <!-- =========================================================
+           LEARNING PATH 4
+      ========================================================== -->
+
+      <article class="learning-card">
+
+        <div class="path-number">Learning Path 04</div>
+
+        <h3>I Do, We Do, You Do for Beginners</h3>
+
+        <p>
+          Access resources for helping interns strengthen their use of
+          demonstration, collaborative practice, and independent student practice.
+        </p>
+
+        <div class="resource-preview">
+          <span class="resource-tag">Presentations</span>
+          <span class="resource-tag">Quiz Data</span>
+          <span class="resource-tag">Progress Tracking</span>
+          <span class="resource-tag">Rubrics</span>
+        </div>
+
+        <!-- =====================================================
+             ADD LINK HERE FOR I DO WE DO YOU DO FOR BEGINNERS LEADERSHIP PAGE
+             Replace https://www.wgu.edu with the leadership resource page URL.
+        ====================================================== -->
+        <a
+          class="path-button"
+          href="https://www.wgu.edu"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Open Leadership Resources
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+
+      </article>
+
+
+      <!-- =========================================================
+           LEARNING PATH 5
+      ========================================================== -->
+
+      <article class="learning-card">
+
+        <div class="path-number">Learning Path 05</div>
+
+        <h3>Transitioning From Conversation to Action</h3>
+
+        <p>
+          Access resources for helping interns move coaching conversations
+          from exploration and reflection into clear strategy practice.
+        </p>
+
+        <div class="resource-preview">
+          <span class="resource-tag">Presentations</span>
+          <span class="resource-tag">Progress Tracking</span>
+          <span class="resource-tag">Meeting Agendas</span>
+          <span class="resource-tag">Rubrics</span>
+        </div>
+
+        <!-- =====================================================
+             ADD LINK HERE FOR TRANSITIONING FROM CONVERSATION TO ACTION LEADERSHIP PAGE
+             Replace https://www.wgu.edu with the leadership resource page URL.
+        ====================================================== -->
+        <a
+          class="path-button"
+          href="https://www.wgu.edu"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Open Leadership Resources
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+
+      </article>
+
+
+      <!-- =========================================================
+           LEARNING PATH 6
+      ========================================================== -->
+
+      <article class="learning-card">
+
+        <div class="path-number">Learning Path 06</div>
+
+        <h3>Setting Goals &amp; Accountability Plans</h3>
+
+        <p>
+          Access resources for supporting interns as they help students
+          establish goals, define next steps, and create meaningful accountability plans.
+        </p>
+
+        <div class="resource-preview">
+          <span class="resource-tag">Presentations</span>
+          <span class="resource-tag">Quiz Data</span>
+          <span class="resource-tag">Progress Tracking</span>
+          <span class="resource-tag">Meeting Resources</span>
+        </div>
+
+        <!-- =====================================================
+             ADD LINK HERE FOR SETTING GOALS & ACCOUNTABILITY PLANS LEADERSHIP PAGE
+             Replace https://www.wgu.edu with the leadership resource page URL.
+        ====================================================== -->
+        <a
+          class="path-button"
+          href="https://www.wgu.edu"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Open Leadership Resources
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+
+      </article>
+
+    </section>
+
+
+    <!-- =========================
+         BOTTOM MESSAGE
+    ========================== -->
+
+    <section class="footer-note">
+
+      <p>
+        <strong>One hub. Every resource.</strong>
+        Use each learning path page to prepare for training, monitor intern
+        progress, review learning data, and support continued development.
+      </p>
+
+    </section>
+
+  </main>
+
+</body>
+</html>
