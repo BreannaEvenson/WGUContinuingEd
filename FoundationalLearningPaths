@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Foundational Coach Learning Paths</title>
+
+  <style>
+    :root {
+      --navy-dark: #001731;
+      --navy: #002855;
+      --light-blue-bg: #EEF6F9;
+      --light-gray: #F1F1F1;
+      --gray: #A7A7A7;
+      --blue: #0070F0;
+      --sky-blue: #46B1EF;
+      --green: #97E142;
+      --white: #FFFFFF;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--light-blue-bg);
+      color: var(--navy-dark);
+      line-height: 1.5;
+    }
+
+    /* =========================
+       PAGE HEADER
+    ========================== */
+
+    .hero {
+      background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+      color: var(--white);
+      padding: 55px 25px 50px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: rgba(70, 177, 239, 0.12);
+      right: -80px;
+      top: -100px;
+    }
+
+    .level-badge {
+      display: inline-block;
+      background: var(--green);
+      color: var(--navy-dark);
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      padding: 7px 15px;
+      border-radius: 999px;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.3rem);
+      line-height: 1.1;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero p {
+      max-width: 750px;
+      margin: 18px auto 0;
+      font-size: 1.05rem;
+      color: #EEF6F9;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* =========================
+       MAIN CONTENT
+    ========================== */
+
+    .container {
+      width: min(1100px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 45px 0 60px;
+    }
+
+    .intro {
+      max-width: 820px;
+      margin: 0 auto 38px;
+      text-align: center;
+    }
+
+    .intro h2 {
+      color: var(--navy);
+      font-size: 1.65rem;
+      margin: 0 0 10px;
+    }
+
+    .intro p {
+      color: #425466;
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    /* =========================
+       LEARNING PATH GRID
+    ========================== */
+
+    .learning-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .learning-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 5px 18px rgba(0, 23, 49, 0.09);
+      border: 1px solid rgba(167, 167, 167, 0.28);
+      display: flex;
+      flex-direction: column;
+      min-height: 220px;
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .learning-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 7px;
+      height: 100%;
+      background: var(--sky-blue);
+    }
+
+    .learning-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(0, 23, 49, 0.14);
+      border-color: var(--sky-blue);
+    }
+
+    .path-number {
+      color: var(--blue);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .learning-card h3 {
+      margin: 0 0 10px;
+      color: var(--navy-dark);
+      font-size: 1.3rem;
+      line-height: 1.25;
+    }
+
+    .learning-card p {
+      margin: 0 0 24px;
+      color: #5A6775;
+      font-size: 0.95rem;
+      flex-grow: 1;
+    }
+
+    .path-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      text-decoration: none;
+      background: var(--blue);
+      color: var(--white);
+      font-weight: 700;
+      border-radius: 9px;
+      padding: 13px 18px;
+      transition:
+        background 0.2s ease,
+        transform 0.15s ease;
+    }
+
+    .path-button:hover {
+      background: var(--navy);
+    }
+
+    .path-button:focus-visible {
+      outline: 4px solid var(--green);
+      outline-offset: 3px;
+    }
+
+    .arrow {
+      font-size: 1.1rem;
+    }
+
+    /* =========================
+       FOOTER MESSAGE
+    ========================== */
+
+    .footer-note {
+      margin-top: 38px;
+      background: var(--navy);
+      color: var(--white);
+      border-radius: 14px;
+      padding: 24px 28px;
+      text-align: center;
+    }
+
+    .footer-note strong {
+      color: var(--green);
+    }
+
+    .footer-note p {
+      margin: 0;
+    }
+
+    /* =========================
+       MOBILE
+    ========================== */
+
+    @media (max-width: 750px) {
+      .hero {
+        padding: 42px 20px;
+      }
+
+      .container {
+        width: min(100% - 26px, 1100px);
+        padding-top: 32px;
+      }
+
+      .learning-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .learning-card {
+        min-height: auto;
+      }
+    }
+
+    /* Reduce animation for users who prefer it */
+    @media (prefers-reduced-motion: reduce) {
+      .learning-card,
+      .path-button {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       HEADER
+  ========================== -->
+
+  <header class="hero">
+    <div class="level-badge">Foundational Level</div>
+
+    <h1>Coach Learning Paths</h1>
+
+    <p>
+      Build the skills that create a strong foundation for effective peer coaching.
+      Select the learning path you have been assigned to access training materials,
+      resources, and activities.
+    </p>
+  </header>
+
+
+  <!-- =========================
+       MAIN CONTENT
+  ========================== -->
+
+  <main class="container">
+
+    <section class="intro">
+      <h2>Your Foundational Learning Paths</h2>
+
+      <p>
+        Each learning path focuses on a specific skill or practice you will use
+        throughout your development as a Peer Coach.
+      </p>
+    </section>
+
+
+    <section class="learning-grid" aria-label="Foundational Coach Learning Paths">
+
+
+      <!-- =========================================================
+           LEARNING PATH 1
+      ========================================================== -->
+
+      <article class="learning-card">
+
+        <div class="path-number">Learning Path 01</div>
+
+        <h3>Foundations of Coaching</h3>
+
+        <p>
+          Explore the core principles, mindset, and practices that create the
+          foundation for effective peer coaching.
+        </p>
+
+        <!-- =====================================================
+             ADD LINK HERE FOR FOUNDATIONS OF COACHING LEARNING PATH
+             Replace https://www.wgu.edu with the SharePoint page URL.
+        ====================================================== -->
+        <a
+          class="path-button"
+          href="https://www.wgu.edu"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Open Learning Path
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+
+      </article>
+
+
+      <!-- =========================================================
+           LEARNING PATH 2
+      ========================================================== -->
+
+      <article class="learning-card">
+
+        <div class="path-number">Learning Path 02</div>
+
+        <h3>Outreach</h3>
+
+        <p>
+          Strengthen your ability to initiate meaningful outreach and create
+          opportunities for productive coaching conversations.
+        </p>
+
+        <!-- =====================================================
+             ADD LINK HERE FOR OUTREACH LEARNING PATH
+             Replace https://www.wgu.edu with the SharePoint page URL.
+        ====================================================== -->
+        <a
+          class="path-button"
+          href="https://www.wgu.edu"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Open Learning Path
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+
+      </article>
+
+
+      <!-- =========================================================
+           LEARNING PATH 3
+      ========================================================== -->
+
+      <article class="learning-card">
+
+        <div class="path-number">Learning Path 03</div>
+
+        <h3>Receiving &amp; Applying Feedback</h3>
+
+        <p>
+          Develop strategies for receiving feedback openly, reflecting on it,
+          and translating feedback into meaningful changes in your coaching.
+        </p>
+
+        <!-- =====================================================
+             ADD LINK HERE FOR RECEIVING & APPLYING FEEDBACK LEARNING PATH
+             Replace https://www.wgu.edu with the SharePoint page URL.
+        ====================================================== -->
+        <a
+          class="path-button"
+          href="https://www.wgu.edu"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Open Learning Path
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+
+      </article>
+
+
+      <!-- =========================================================
+           LEARNING PATH 4
+      ========================================================== -->
+
+      <article class="learning-card">
+
+        <div class="path-number">Learning Path 04</div>
+
+        <h3>I Do, We Do, You Do for Beginners</h3>
+
+        <p>
+          Learn how to use a gradual-release approach to demonstrate strategies,
+          practice collaboratively, and support students as they apply skills independently.
+        </p>
+
+        <!-- =====================================================
+             ADD LINK HERE FOR I DO WE DO YOU DO FOR BEGINNERS LEARNING PATH
+             Replace https://www.wgu.edu with the SharePoint page URL.
+        ====================================================== -->
+        <a
+          class="path-button"
+          href="https://www.wgu.edu"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Open Learning Path
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+
+      </article>
+
+
+      <!-- =========================================================
+           LEARNING PATH 5
+      ========================================================== -->
+
+      <article class="learning-card">
+
+        <div class="path-number">Learning Path 05</div>
+
+        <h3>Transitioning From Conversation to Action</h3>
+
+        <p>
+          Practice moving coaching conversations from reflection and exploration
+          toward clear, realistic next steps.
+        </p>
+
+        <!-- =====================================================
+             ADD LINK HERE FOR TRANSITIONING FROM CONVERSATION TO ACTION LEARNING PATH
+             Replace https://www.wgu.edu with the SharePoint page URL.
+        ====================================================== -->
+        <a
+          class="path-button"
+          href="https://www.wgu.edu"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Open Learning Path
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+
+      </article>
+
+
+      <!-- =========================================================
+           LEARNING PATH 6
+      ========================================================== -->
+
+      <article class="learning-card">
+
+        <div class="path-number">Learning Path 06</div>
+
+        <h3>Setting Goals &amp; Accountability Plans</h3>
+
+        <p>
+          Learn how to help students establish meaningful goals, identify next
+          steps, and create accountability plans that support continued progress.
+        </p>
+
+        <!-- =====================================================
+             ADD LINK HERE FOR SETTING GOALS & ACCOUNTABILITY PLANS LEARNING PATH
+             Replace https://www.wgu.edu with the SharePoint page URL.
+        ====================================================== -->
+        <a
+          class="path-button"
+          href="https://www.wgu.edu"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Open Learning Path
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+
+      </article>
+
+    </section>
+
+
+    <!-- =========================
+         BOTTOM MESSAGE
+    ========================== -->
+
+    <section class="footer-note">
+      <p>
+        <strong>Development is a process.</strong>
+        Complete learning paths as they are assigned and bring questions,
+        reflections, and opportunities for practice into your coaching development conversations.
+      </p>
+    </section>
+
+  </main>
+
+</body>
+</html>
