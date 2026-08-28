@@ -17,6 +17,7 @@
       --sky-blue: #46B1EF;
       --green: #97E142;
       --white: #FFFFFF;
+      --error: #B3261E;
     }
 
     * {
@@ -66,6 +67,8 @@
       padding: 7px 15px;
       border-radius: 999px;
       margin-bottom: 18px;
+      position: relative;
+      z-index: 1;
     }
 
     .hero h1 {
@@ -131,7 +134,7 @@
       border: 1px solid rgba(167, 167, 167, 0.28);
       display: flex;
       flex-direction: column;
-      min-height: 220px;
+      min-height: 340px;
       transition:
         transform 0.2s ease,
         box-shadow 0.2s ease,
@@ -156,6 +159,14 @@
       border-color: var(--sky-blue);
     }
 
+    .learning-card.unlocked {
+      border-color: rgba(151, 225, 66, 0.8);
+    }
+
+    .learning-card.unlocked::before {
+      background: var(--green);
+    }
+
     .path-number {
       color: var(--blue);
       font-size: 0.78rem;
@@ -172,37 +183,147 @@
       line-height: 1.25;
     }
 
-    .learning-card p {
-      margin: 0 0 24px;
+    .path-description {
+      margin: 0 0 22px;
       color: #5A6775;
       font-size: 0.95rem;
-      flex-grow: 1;
     }
 
-    .path-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+    /* =========================
+       PASSCODE AREA
+    ========================== */
+
+    .unlock-section {
+      margin-top: auto;
+      margin-bottom: 16px;
+    }
+
+    .unlock-label {
+      display: block;
+      color: var(--navy);
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+
+    .passcode-row {
+      display: flex;
       gap: 8px;
-      width: 100%;
-      text-decoration: none;
-      background: var(--blue);
+    }
+
+    .passcode-input {
+      flex: 1;
+      min-width: 0;
+      border: 2px solid #C7D4DF;
+      border-radius: 8px;
+      padding: 11px 12px;
+      font-size: 0.95rem;
+      color: var(--navy-dark);
+      background: var(--white);
+    }
+
+    .passcode-input:focus {
+      outline: 3px solid rgba(70, 177, 239, 0.35);
+      border-color: var(--blue);
+    }
+
+    .unlock-button {
+      border: none;
+      border-radius: 8px;
+      padding: 11px 16px;
+      background: var(--navy);
       color: var(--white);
       font-weight: 700;
-      border-radius: 9px;
-      padding: 13px 18px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      white-space: nowrap;
       transition:
         background 0.2s ease,
         transform 0.15s ease;
     }
 
-    .path-button:hover {
+    .unlock-button:hover {
+      background: var(--blue);
+    }
+
+    .unlock-button:focus-visible {
+      outline: 4px solid var(--green);
+      outline-offset: 2px;
+    }
+
+    .passcode-message {
+      min-height: 21px;
+      margin: 7px 0 0;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .passcode-message.error {
+      color: var(--error);
+    }
+
+    .unlocked-message {
+      display: none;
+      margin-top: auto;
+      margin-bottom: 15px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: rgba(151, 225, 66, 0.16);
+      color: var(--navy-dark);
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-align: center;
+      border: 1px solid rgba(151, 225, 66, 0.7);
+    }
+
+    /* =========================
+       LEARNING PATH BUTTON
+    ========================== */
+
+    .path-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      width: 100%;
+      text-decoration: none;
+      font-weight: 700;
+      border-radius: 9px;
+      padding: 13px 18px;
+      transition:
+        background 0.2s ease,
+        transform 0.15s ease,
+        opacity 0.2s ease;
+    }
+
+    /* LOCKED STATE */
+
+    .path-button.locked {
+      background: #D8DDE2;
+      color: #68737D;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    /* UNLOCKED STATE */
+
+    .path-button.unlocked {
+      background: var(--blue);
+      color: var(--white);
+      cursor: pointer;
+    }
+
+    .path-button.unlocked:hover {
       background: var(--navy);
     }
 
-    .path-button:focus-visible {
+    .path-button.unlocked:focus-visible {
       outline: 4px solid var(--green);
       outline-offset: 3px;
+    }
+
+    .lock-icon {
+      font-size: 1.05rem;
     }
 
     .arrow {
@@ -253,10 +374,22 @@
       }
     }
 
+    @media (max-width: 480px) {
+      .passcode-row {
+        flex-direction: column;
+      }
+
+      .unlock-button {
+        width: 100%;
+      }
+    }
+
     /* Reduce animation for users who prefer it */
+
     @media (prefers-reduced-motion: reduce) {
       .learning-card,
-      .path-button {
+      .path-button,
+      .unlock-button {
         transition: none;
       }
     }
@@ -270,6 +403,7 @@
   ========================== -->
 
   <header class="hero">
+
     <div class="level-badge">Foundational Skills</div>
 
     <h1>Peer Intern Learning Paths</h1>
@@ -279,6 +413,7 @@
       Select the learning path you have been assigned to access training materials,
       resources, and activities. Do not enter into a learning path that you have not been assigned to.
     </p>
+
   </header>
 
 
@@ -289,12 +424,14 @@
   <main class="container">
 
     <section class="intro">
+
       <h2>Your Foundational Learning Paths</h2>
 
       <p>
         Each learning path focuses on a specific skill or practice you will use
         throughout your development as a Peer Intern.
       </p>
+
     </section>
 
 
@@ -303,30 +440,80 @@
 
       <!-- =========================================================
            LEARNING PATH 1
+           FOUNDATIONS OF COACHING
       ========================================================== -->
 
-      <article class="learning-card">
+      <article class="learning-card" id="card-foundations">
 
         <div class="path-number">Learning Path 01</div>
 
         <h3>Foundations of Coaching</h3>
 
-        <p>
+        <p class="path-description">
           Explore the four foundational coaching skills necessary for every student interaction.
         </p>
+
+        <div class="unlock-section" id="unlock-section-foundations">
+
+          <label
+            class="unlock-label"
+            for="passcode-foundations"
+          >
+            Enter Passcode to Unlock Learning Path
+          </label>
+
+          <div class="passcode-row">
+
+            <input
+              class="passcode-input"
+              id="passcode-foundations"
+              type="password"
+              autocomplete="off"
+              placeholder="Enter passcode"
+              aria-describedby="message-foundations"
+            />
+
+            <button
+              class="unlock-button"
+              type="button"
+              onclick="checkPasscode('foundations')"
+            >
+              Unlock
+            </button>
+
+          </div>
+
+          <p
+            class="passcode-message"
+            id="message-foundations"
+            aria-live="polite"
+          ></p>
+
+        </div>
+
+        <div
+          class="unlocked-message"
+          id="unlocked-message-foundations"
+          aria-live="polite"
+        >
+          ✓ Learning Path Unlocked
+        </div>
 
         <!-- =====================================================
              ADD LINK HERE FOR FOUNDATIONS OF COACHING LEARNING PATH
              Replace https://www.wgu.edu with the SharePoint page URL.
         ====================================================== -->
+
         <a
-          class="path-button"
+          class="path-button locked"
+          id="link-foundations"
           href="https://www.wgu.edu"
           target="_blank"
           rel="noopener noreferrer"
+          aria-disabled="true"
         >
-          Open Learning Path
-          <span class="arrow" aria-hidden="true">→</span>
+          <span class="lock-icon" aria-hidden="true">🔒</span>
+          <span class="button-text">Learning Path Locked</span>
         </a>
 
       </article>
@@ -334,31 +521,81 @@
 
       <!-- =========================================================
            LEARNING PATH 2
+           OUTREACH
       ========================================================== -->
 
-      <article class="learning-card">
+      <article class="learning-card" id="card-outreach">
 
         <div class="path-number">Learning Path 02</div>
 
         <h3>Outreach</h3>
 
-        <p>
+        <p class="path-description">
           Strengthen your ability to initiate meaningful outreach calls and create
           opportunities for productive coaching conversations.
         </p>
+
+        <div class="unlock-section" id="unlock-section-outreach">
+
+          <label
+            class="unlock-label"
+            for="passcode-outreach"
+          >
+            Enter Passcode to Unlock Learning Path
+          </label>
+
+          <div class="passcode-row">
+
+            <input
+              class="passcode-input"
+              id="passcode-outreach"
+              type="password"
+              autocomplete="off"
+              placeholder="Enter passcode"
+              aria-describedby="message-outreach"
+            />
+
+            <button
+              class="unlock-button"
+              type="button"
+              onclick="checkPasscode('outreach')"
+            >
+              Unlock
+            </button>
+
+          </div>
+
+          <p
+            class="passcode-message"
+            id="message-outreach"
+            aria-live="polite"
+          ></p>
+
+        </div>
+
+        <div
+          class="unlocked-message"
+          id="unlocked-message-outreach"
+          aria-live="polite"
+        >
+          ✓ Learning Path Unlocked
+        </div>
 
         <!-- =====================================================
              ADD LINK HERE FOR OUTREACH LEARNING PATH
              Replace https://www.wgu.edu with the SharePoint page URL.
         ====================================================== -->
+
         <a
-          class="path-button"
+          class="path-button locked"
+          id="link-outreach"
           href="https://www.wgu.edu"
           target="_blank"
           rel="noopener noreferrer"
+          aria-disabled="true"
         >
-          Open Learning Path
-          <span class="arrow" aria-hidden="true">→</span>
+          <span class="lock-icon" aria-hidden="true">🔒</span>
+          <span class="button-text">Learning Path Locked</span>
         </a>
 
       </article>
@@ -366,31 +603,81 @@
 
       <!-- =========================================================
            LEARNING PATH 3
+           RECEIVING & APPLYING FEEDBACK
       ========================================================== -->
 
-      <article class="learning-card">
+      <article class="learning-card" id="card-feedback">
 
         <div class="path-number">Learning Path 03</div>
 
         <h3>Receiving &amp; Applying Feedback</h3>
 
-        <p>
+        <p class="path-description">
           Develop strategies for receiving feedback openly, reflecting on it,
           and translating feedback into meaningful changes in your coaching.
         </p>
+
+        <div class="unlock-section" id="unlock-section-feedback">
+
+          <label
+            class="unlock-label"
+            for="passcode-feedback"
+          >
+            Enter Passcode to Unlock Learning Path
+          </label>
+
+          <div class="passcode-row">
+
+            <input
+              class="passcode-input"
+              id="passcode-feedback"
+              type="password"
+              autocomplete="off"
+              placeholder="Enter passcode"
+              aria-describedby="message-feedback"
+            />
+
+            <button
+              class="unlock-button"
+              type="button"
+              onclick="checkPasscode('feedback')"
+            >
+              Unlock
+            </button>
+
+          </div>
+
+          <p
+            class="passcode-message"
+            id="message-feedback"
+            aria-live="polite"
+          ></p>
+
+        </div>
+
+        <div
+          class="unlocked-message"
+          id="unlocked-message-feedback"
+          aria-live="polite"
+        >
+          ✓ Learning Path Unlocked
+        </div>
 
         <!-- =====================================================
              ADD LINK HERE FOR RECEIVING & APPLYING FEEDBACK LEARNING PATH
              Replace https://www.wgu.edu with the SharePoint page URL.
         ====================================================== -->
+
         <a
-          class="path-button"
+          class="path-button locked"
+          id="link-feedback"
           href="https://www.wgu.edu"
           target="_blank"
           rel="noopener noreferrer"
+          aria-disabled="true"
         >
-          Open Learning Path
-          <span class="arrow" aria-hidden="true">→</span>
+          <span class="lock-icon" aria-hidden="true">🔒</span>
+          <span class="button-text">Learning Path Locked</span>
         </a>
 
       </article>
@@ -398,31 +685,81 @@
 
       <!-- =========================================================
            LEARNING PATH 4
+           I DO, WE DO, YOU DO FOR BEGINNERS
       ========================================================== -->
 
-      <article class="learning-card">
+      <article class="learning-card" id="card-gradual-release">
 
         <div class="path-number">Learning Path 04</div>
 
         <h3>I Do, We Do, You Do for Beginners</h3>
 
-        <p>
+        <p class="path-description">
           Improve your approach to demonstrating strategies,
           practicing collaboratively, and supporting students as they apply skills independently.
         </p>
+
+        <div class="unlock-section" id="unlock-section-gradual-release">
+
+          <label
+            class="unlock-label"
+            for="passcode-gradual-release"
+          >
+            Enter Passcode to Unlock Learning Path
+          </label>
+
+          <div class="passcode-row">
+
+            <input
+              class="passcode-input"
+              id="passcode-gradual-release"
+              type="password"
+              autocomplete="off"
+              placeholder="Enter passcode"
+              aria-describedby="message-gradual-release"
+            />
+
+            <button
+              class="unlock-button"
+              type="button"
+              onclick="checkPasscode('gradual-release')"
+            >
+              Unlock
+            </button>
+
+          </div>
+
+          <p
+            class="passcode-message"
+            id="message-gradual-release"
+            aria-live="polite"
+          ></p>
+
+        </div>
+
+        <div
+          class="unlocked-message"
+          id="unlocked-message-gradual-release"
+          aria-live="polite"
+        >
+          ✓ Learning Path Unlocked
+        </div>
 
         <!-- =====================================================
              ADD LINK HERE FOR I DO WE DO YOU DO FOR BEGINNERS LEARNING PATH
              Replace https://www.wgu.edu with the SharePoint page URL.
         ====================================================== -->
+
         <a
-          class="path-button"
+          class="path-button locked"
+          id="link-gradual-release"
           href="https://www.wgu.edu"
           target="_blank"
           rel="noopener noreferrer"
+          aria-disabled="true"
         >
-          Open Learning Path
-          <span class="arrow" aria-hidden="true">→</span>
+          <span class="lock-icon" aria-hidden="true">🔒</span>
+          <span class="button-text">Learning Path Locked</span>
         </a>
 
       </article>
@@ -430,31 +767,81 @@
 
       <!-- =========================================================
            LEARNING PATH 5
+           TRANSITIONING FROM CONVERSATION TO ACTION
       ========================================================== -->
 
-      <article class="learning-card">
+      <article class="learning-card" id="card-action">
 
         <div class="path-number">Learning Path 05</div>
 
         <h3>Transitioning From Conversation to Action</h3>
 
-        <p>
+        <p class="path-description">
           Practice moving coaching conversations from reflection and exploration
           toward clear and defined strategy practice.
         </p>
+
+        <div class="unlock-section" id="unlock-section-action">
+
+          <label
+            class="unlock-label"
+            for="passcode-action"
+          >
+            Enter Passcode to Unlock Learning Path
+          </label>
+
+          <div class="passcode-row">
+
+            <input
+              class="passcode-input"
+              id="passcode-action"
+              type="password"
+              autocomplete="off"
+              placeholder="Enter passcode"
+              aria-describedby="message-action"
+            />
+
+            <button
+              class="unlock-button"
+              type="button"
+              onclick="checkPasscode('action')"
+            >
+              Unlock
+            </button>
+
+          </div>
+
+          <p
+            class="passcode-message"
+            id="message-action"
+            aria-live="polite"
+          ></p>
+
+        </div>
+
+        <div
+          class="unlocked-message"
+          id="unlocked-message-action"
+          aria-live="polite"
+        >
+          ✓ Learning Path Unlocked
+        </div>
 
         <!-- =====================================================
              ADD LINK HERE FOR TRANSITIONING FROM CONVERSATION TO ACTION LEARNING PATH
              Replace https://www.wgu.edu with the SharePoint page URL.
         ====================================================== -->
+
         <a
-          class="path-button"
+          class="path-button locked"
+          id="link-action"
           href="https://www.wgu.edu"
           target="_blank"
           rel="noopener noreferrer"
+          aria-disabled="true"
         >
-          Open Learning Path
-          <span class="arrow" aria-hidden="true">→</span>
+          <span class="lock-icon" aria-hidden="true">🔒</span>
+          <span class="button-text">Learning Path Locked</span>
         </a>
 
       </article>
@@ -462,31 +849,81 @@
 
       <!-- =========================================================
            LEARNING PATH 6
+           SETTING GOALS & ACCOUNTABILITY PLANS
       ========================================================== -->
 
-      <article class="learning-card">
+      <article class="learning-card" id="card-goals">
 
         <div class="path-number">Learning Path 06</div>
 
         <h3>Setting Goals &amp; Accountability Plans</h3>
 
-        <p>
+        <p class="path-description">
           Learn how to help students establish meaningful goals, identify next
           steps, and create accountability plans that support continued progress.
         </p>
+
+        <div class="unlock-section" id="unlock-section-goals">
+
+          <label
+            class="unlock-label"
+            for="passcode-goals"
+          >
+            Enter Passcode to Unlock Learning Path
+          </label>
+
+          <div class="passcode-row">
+
+            <input
+              class="passcode-input"
+              id="passcode-goals"
+              type="password"
+              autocomplete="off"
+              placeholder="Enter passcode"
+              aria-describedby="message-goals"
+            />
+
+            <button
+              class="unlock-button"
+              type="button"
+              onclick="checkPasscode('goals')"
+            >
+              Unlock
+            </button>
+
+          </div>
+
+          <p
+            class="passcode-message"
+            id="message-goals"
+            aria-live="polite"
+          ></p>
+
+        </div>
+
+        <div
+          class="unlocked-message"
+          id="unlocked-message-goals"
+          aria-live="polite"
+        >
+          ✓ Learning Path Unlocked
+        </div>
 
         <!-- =====================================================
              ADD LINK HERE FOR SETTING GOALS & ACCOUNTABILITY PLANS LEARNING PATH
              Replace https://www.wgu.edu with the SharePoint page URL.
         ====================================================== -->
+
         <a
-          class="path-button"
+          class="path-button locked"
+          id="link-goals"
           href="https://www.wgu.edu"
           target="_blank"
           rel="noopener noreferrer"
+          aria-disabled="true"
         >
-          Open Learning Path
-          <span class="arrow" aria-hidden="true">→</span>
+          <span class="lock-icon" aria-hidden="true">🔒</span>
+          <span class="button-text">Learning Path Locked</span>
         </a>
 
       </article>
@@ -499,14 +936,225 @@
     ========================== -->
 
     <section class="footer-note">
+
       <p>
         <strong>Development is a process.</strong>
         Complete learning paths as they are assigned and bring questions,
-        reflections, and and a growth mindset to improve your coaching interactions with students.
+        reflections, and a growth mindset to improve your coaching interactions with students.
       </p>
+
     </section>
 
   </main>
+
+
+  <!-- =========================================================
+       PASSCODE + LOCAL STORAGE SCRIPT
+  ========================================================== -->
+
+  <script>
+
+    /* =========================================================
+       LEARNING PATH PASSCODES
+
+       These passcodes are case-sensitive.
+    ========================================================== */
+
+    const learningPaths = {
+
+      foundations: {
+        passcode: "ActiveListening"
+      },
+
+      outreach: {
+        passcode: "CareCalling"
+      },
+
+      feedback: {
+        passcode: "GrowthMindset"
+      },
+
+      "gradual-release": {
+        passcode: "IntentionalPractice"
+      },
+
+      action: {
+        passcode: "LiveStrategies"
+      },
+
+      goals: {
+        passcode: "MovingForward"
+      }
+
+    };
+
+
+    /* =========================================================
+       CHECK A PASSCODE
+    ========================================================== */
+
+    function checkPasscode(pathId) {
+
+      const input = document.getElementById(`passcode-${pathId}`);
+      const message = document.getElementById(`message-${pathId}`);
+
+      const enteredPasscode = input.value.trim();
+      const correctPasscode = learningPaths[pathId].passcode;
+
+      if (enteredPasscode === correctPasscode) {
+
+        /* Save this path as unlocked in this browser */
+        localStorage.setItem(
+          `foundationalLearningPath_${pathId}`,
+          "unlocked"
+        );
+
+        unlockPath(pathId);
+
+      } else {
+
+        message.textContent =
+          "Incorrect passcode. Please check the passcode and try again.";
+
+        message.classList.add("error");
+
+        input.value = "";
+        input.focus();
+
+      }
+    }
+
+
+    /* =========================================================
+       VISUALLY UNLOCK A LEARNING PATH
+    ========================================================== */
+
+    function unlockPath(pathId) {
+
+      const card =
+        document.getElementById(`card-${pathId}`);
+
+      const unlockSection =
+        document.getElementById(`unlock-section-${pathId}`);
+
+      const unlockedMessage =
+        document.getElementById(`unlocked-message-${pathId}`);
+
+      const link =
+        document.getElementById(`link-${pathId}`);
+
+      const icon =
+        link.querySelector(".lock-icon");
+
+      const buttonText =
+        link.querySelector(".button-text");
+
+
+      /* Change card appearance */
+
+      card.classList.add("unlocked");
+
+
+      /* Hide the passcode entry area */
+
+      unlockSection.style.display = "none";
+
+
+      /* Show confirmation */
+
+      unlockedMessage.style.display = "block";
+
+
+      /* Activate the learning path button */
+
+      link.classList.remove("locked");
+
+      link.classList.add("unlocked");
+
+      link.removeAttribute("aria-disabled");
+
+
+      /* Change lock icon */
+
+      icon.textContent = "🔓";
+
+
+      /* Change button text */
+
+      buttonText.textContent = "Open Learning Path";
+
+
+      /* Add arrow */
+
+      if (!link.querySelector(".arrow")) {
+
+        const arrow = document.createElement("span");
+
+        arrow.className = "arrow";
+
+        arrow.setAttribute("aria-hidden", "true");
+
+        arrow.textContent = "→";
+
+        link.appendChild(arrow);
+
+      }
+
+    }
+
+
+    /* =========================================================
+       ALLOW ENTER KEY TO SUBMIT PASSCODES
+    ========================================================== */
+
+    document.querySelectorAll(".passcode-input").forEach(input => {
+
+      input.addEventListener("keydown", function(event) {
+
+        if (event.key === "Enter") {
+
+          event.preventDefault();
+
+          const pathId =
+            this.id.replace("passcode-", "");
+
+          checkPasscode(pathId);
+
+        }
+
+      });
+
+    });
+
+
+    /* =========================================================
+       RESTORE PREVIOUSLY UNLOCKED PATHS
+
+       When the page loads, check browser local storage.
+       If a learning path was unlocked previously on this
+       browser/device, leave it unlocked.
+    ========================================================== */
+
+    window.addEventListener("DOMContentLoaded", function() {
+
+      Object.keys(learningPaths).forEach(pathId => {
+
+        const savedStatus =
+          localStorage.getItem(
+            `foundationalLearningPath_${pathId}`
+          );
+
+        if (savedStatus === "unlocked") {
+
+          unlockPath(pathId);
+
+        }
+
+      });
+
+    });
+
+  </script>
 
 </body>
 </html>
