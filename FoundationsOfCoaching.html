@@ -1,0 +1,2966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Foundations of Coaching</title>
+
+  <!-- Optional Google Fonts. The page will still work with the fallback fonts if these are blocked. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy-dark: #001731;
+      --navy: #002855;
+      --light-blue-bg: #EEF6F9;
+      --light-gray: #F1F1F1;
+      --gray: #A7A7A7;
+      --blue: #0070F0;
+      --sky-blue: #46B1EF;
+      --green: #97E142;
+      --white: #FFFFFF;
+      --error: #B3261E;
+      --warning: #A85B00;
+      --success-bg: #F2FAE9;
+      --panel-blue: #073562;
+      --panel-blue-2: #174A79;
+      --border-blue: #6FA4C8;
+      --text-soft: #425466;
+      --shadow: 0 16px 40px rgba(0, 23, 49, 0.10);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--light-blue-bg);
+      color: var(--navy-dark);
+      font-family: "Poppins", Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .screen {
+      min-height: 100vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      padding: clamp(42px, 6vw, 88px) clamp(22px, 5vw, 72px);
+      position: relative;
+    }
+
+    .screen-inner {
+      width: min(1220px, 100%);
+      margin: 0 auto;
+    }
+
+    .display-title {
+      margin: 0;
+      color: var(--blue);
+      font-family: "Anton", Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      font-size: clamp(4.7rem, 11vw, 9.1rem);
+      line-height: 0.93;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    .step-title {
+      margin: 0;
+      color: var(--blue);
+      font-family: "Anton", Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      font-size: clamp(4.4rem, 9vw, 8rem);
+      line-height: 0.95;
+      letter-spacing: -0.015em;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    .section-subtitle {
+      margin: 12px 0 0;
+      color: var(--navy);
+      font-size: clamp(1.4rem, 2.4vw, 2rem);
+      line-height: 1.2;
+      font-weight: 500;
+    }
+
+    .muted {
+      color: var(--text-soft);
+    }
+
+    .sr-only {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+
+    /* =========================================================
+       HERO
+    ========================================================== */
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+      gap: clamp(38px, 7vw, 90px);
+      align-items: stretch;
+    }
+
+    .hero-copy {
+      display: flex;
+      flex-direction: column;
+      min-height: 680px;
+    }
+
+    .hero-title {
+      max-width: 650px;
+    }
+
+    .duration-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: clamp(42px, 7vw, 82px);
+      max-width: 620px;
+      font-size: 1rem;
+    }
+
+    .duration-label {
+      max-width: 170px;
+    }
+
+    .start-confirm {
+      margin-top: auto;
+      padding-top: 58px;
+      max-width: 650px;
+      text-align: center;
+    }
+
+    .start-confirm label {
+      display: block;
+      max-width: 580px;
+      margin: 0 auto 18px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.35;
+    }
+
+    .confirm-row {
+      display: flex;
+      border: 4px solid var(--navy-dark);
+      border-radius: 999px;
+      overflow: hidden;
+      background: transparent;
+    }
+
+    .confirm-row input {
+      flex: 1;
+      min-width: 0;
+      border: none;
+      outline: none;
+      padding: 13px 18px;
+      background: transparent;
+      color: var(--navy-dark);
+      text-align: center;
+      font-size: 1.05rem;
+    }
+
+    .confirm-row button {
+      border: 0;
+      background: var(--navy-dark);
+      color: white;
+      padding: 12px 22px;
+      font-weight: 700;
+    }
+
+    .start-status {
+      min-height: 24px;
+      margin: 10px 0 0;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .hero-image {
+      width: 100%;
+      min-height: 680px;
+      object-fit: cover;
+      border-radius: 42px;
+      box-shadow: var(--shadow);
+    }
+
+    /* =========================================================
+       LEARNING OBJECTIVES
+    ========================================================== */
+
+    .objectives-grid {
+      display: grid;
+      grid-template-columns: minmax(330px, 0.9fr) minmax(420px, 1.1fr);
+      gap: clamp(40px, 8vw, 110px);
+      align-items: center;
+    }
+
+    .objectives-graphic {
+      width: min(340px, 80%);
+      margin: 58px auto 0;
+    }
+
+    .objectives-list > p:first-child {
+      margin-top: 0;
+    }
+
+    .objective-item {
+      margin: 34px 0 0;
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+    }
+
+    .objective-item strong {
+      color: var(--navy);
+    }
+
+    /* =========================================================
+       WHAT YOU'LL DO
+    ========================================================== */
+
+    .what-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(22px, 4vw, 56px);
+      margin-top: 70px;
+    }
+
+    .what-card p {
+      min-height: 78px;
+      margin: 0 8px 14px;
+      font-size: 1rem;
+    }
+
+    .what-card strong {
+      color: var(--navy);
+    }
+
+    .what-card img {
+      width: 100%;
+      aspect-ratio: 1.05 / 1;
+      object-fit: cover;
+      border-radius: 24px;
+    }
+
+    /* =========================================================
+       STEP INTRO
+    ========================================================== */
+
+    .step-intro-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(310px, 0.95fr);
+      gap: clamp(34px, 7vw, 82px);
+      align-items: start;
+    }
+
+    .step-copy {
+      padding-top: 8px;
+    }
+
+    .step-copy .description {
+      max-width: 660px;
+      margin-top: 28px;
+      font-size: 1rem;
+    }
+
+    .step-image {
+      width: 100%;
+      max-height: 430px;
+      object-fit: cover;
+      border-radius: 34px;
+    }
+
+    /* =========================================================
+       SKILL TABLE
+    ========================================================== */
+
+    .skill-table {
+      margin-top: 66px;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    .skill-row {
+      display: grid;
+      grid-template-columns: 210px 1fr;
+      border-bottom: 1px solid rgba(0, 23, 49, 0.55);
+      padding: 22px 0;
+      align-items: start;
+      gap: 28px;
+    }
+
+    .skill-row:last-child {
+      border-bottom: 0;
+    }
+
+    .skill-name {
+      text-align: center;
+      font-weight: 700;
+      color: var(--navy);
+      align-self: center;
+    }
+
+    .skill-row p {
+      margin: 0;
+      font-size: 0.96rem;
+    }
+
+    .warning-banner {
+      margin: 36px auto 0;
+      text-align: center;
+      font-size: clamp(1.15rem, 2vw, 1.7rem);
+      font-weight: 700;
+      color: #111;
+      max-width: 1100px;
+    }
+
+    /* =========================================================
+       STEP TWO / SIMULATION
+    ========================================================== */
+
+    #step-two {
+      align-items: flex-start;
+    }
+
+    .simulation-intro {
+      max-width: 1040px;
+      margin: 30px auto 36px;
+      text-align: center;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .simulation-lock {
+      max-width: 850px;
+      margin: 0 auto 24px;
+      padding: 26px;
+      background: var(--white);
+      border-radius: 18px;
+      border: 1px solid rgba(0, 40, 85, 0.15);
+      box-shadow: 0 10px 24px rgba(0, 23, 49, 0.07);
+    }
+
+    .simulation-lock label {
+      display: block;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+
+    .simulation-passcode-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .simulation-passcode-row input {
+      flex: 1;
+      min-width: 0;
+      border: 2px solid #BCD1DF;
+      border-radius: 10px;
+      padding: 12px 14px;
+      background: white;
+      color: var(--navy-dark);
+    }
+
+    .simulation-passcode-row button {
+      border: 0;
+      border-radius: 10px;
+      background: var(--blue);
+      color: white;
+      font-weight: 700;
+      padding: 12px 20px;
+    }
+
+    .simulation-passcode-row button:hover {
+      background: var(--navy);
+    }
+
+    .simulation-lock-status {
+      min-height: 22px;
+      margin: 8px 0 0;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .simulation-shell {
+      max-width: 1040px;
+      margin: 0 auto;
+      background: var(--navy-dark);
+      color: white;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      display: none;
+    }
+
+    .simulation-shell.visible {
+      display: block;
+    }
+
+    .sim-progress-wrap {
+      padding: 18px 24px 0;
+      background: var(--navy-dark);
+    }
+
+    .sim-progress-labels {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      color: #C9E6F6;
+      font-size: 0.78rem;
+      margin-bottom: 7px;
+    }
+
+    .sim-progress {
+      height: 8px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .sim-progress-bar {
+      width: 0;
+      height: 100%;
+      background: var(--green);
+      border-radius: inherit;
+      transition: width 0.25s ease;
+    }
+
+    .sim-stage {
+      padding: clamp(24px, 4vw, 46px);
+    }
+
+    .sim-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .sim-pill {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid rgba(151,225,66,0.65);
+      color: var(--green);
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: .03em;
+      text-transform: uppercase;
+    }
+
+    .student-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.17);
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 22px;
+    }
+
+    .speaker {
+      display: block;
+      color: var(--sky-blue);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .student-card p {
+      margin: 0;
+      font-size: clamp(1.03rem, 1.6vw, 1.25rem);
+      line-height: 1.55;
+    }
+
+    .sim-prompt {
+      margin: 0 0 14px;
+      font-size: clamp(1.05rem, 1.7vw, 1.25rem);
+      font-weight: 700;
+    }
+
+    .choice-list {
+      display: grid;
+      gap: 11px;
+    }
+
+    .choice-button {
+      width: 100%;
+      border: 1px solid rgba(111,164,200,0.85);
+      border-radius: 12px;
+      background: #0B3D6D;
+      color: white;
+      text-align: left;
+      padding: 15px 18px;
+      line-height: 1.45;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+
+    .choice-button:hover {
+      background: #135083;
+      border-color: var(--sky-blue);
+      transform: translateY(-1px);
+    }
+
+    .choice-button:focus-visible {
+      outline: 4px solid var(--green);
+      outline-offset: 2px;
+    }
+
+    .sim-result {
+      display: none;
+      margin-top: 18px;
+    }
+
+    .sim-result.visible {
+      display: block;
+    }
+
+    .student-reaction {
+      background: rgba(70,177,239,0.11);
+      border-left: 5px solid var(--sky-blue);
+      border-radius: 10px;
+      padding: 16px 18px;
+    }
+
+    .student-reaction p {
+      margin: 0;
+    }
+
+    .impact-card {
+      margin-top: 12px;
+      border-radius: 10px;
+      padding: 15px 18px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .impact-label {
+      display: inline-block;
+      margin-bottom: 7px;
+      font-size: .78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .impact-label.strong {
+      color: var(--green);
+    }
+
+    .impact-label.moderate {
+      color: #FFD166;
+    }
+
+    .impact-label.less {
+      color: #FF9B85;
+    }
+
+    .impact-card p {
+      margin: 0;
+      color: #EEF6F9;
+    }
+
+    .sim-next-row {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .sim-next,
+    .sim-restart {
+      border: 0;
+      border-radius: 10px;
+      padding: 11px 18px;
+      font-weight: 700;
+    }
+
+    .sim-next {
+      background: var(--sky-blue);
+      color: var(--navy-dark);
+    }
+
+    .sim-restart {
+      background: rgba(255,255,255,.14);
+      color: white;
+    }
+
+    .simulation-complete {
+      display: none;
+      padding: clamp(28px, 4vw, 50px);
+      text-align: center;
+    }
+
+    .simulation-complete.visible {
+      display: block;
+    }
+
+    .simulation-complete h3 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 4vw, 3.3rem);
+      color: var(--green);
+    }
+
+    .simulation-complete p {
+      max-width: 780px;
+      margin: 0 auto 18px;
+    }
+
+    .debrief-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin: 26px auto;
+      max-width: 850px;
+      text-align: left;
+    }
+
+    .debrief-card {
+      padding: 16px;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 12px;
+      background: rgba(255,255,255,.06);
+    }
+
+    .debrief-card strong {
+      color: var(--sky-blue);
+    }
+
+    .continue-to-step3 {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 12px 18px;
+      border-radius: 10px;
+      background: var(--green);
+      color: var(--navy-dark);
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    /* =========================================================
+       STEP THREE / SELF-EVALUATION
+    ========================================================== */
+
+    #step-three {
+      align-items: flex-start;
+    }
+
+    .step-three-top {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 0.95fr);
+      gap: clamp(30px, 7vw, 72px);
+      align-items: start;
+    }
+
+    .self-eval-intro {
+      max-width: 640px;
+      margin-top: 26px;
+    }
+
+    /* =========================================================
+       RECORDING REQUEST BUTTON + MODAL
+    ========================================================== */
+
+    .recording-request-area {
+      margin-top: 24px;
+      max-width: 640px;
+    }
+
+    .recording-request-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 48px;
+      padding: 12px 20px;
+      border: 0;
+      border-radius: 10px;
+      background: var(--blue);
+      color: white;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 5px 14px rgba(0, 112, 240, .18);
+      transition: transform .15s ease, background .2s ease, opacity .2s ease;
+    }
+
+    .recording-request-button:hover:not(:disabled) {
+      background: var(--navy);
+      transform: translateY(-1px);
+    }
+
+    .recording-request-button:focus-visible {
+      outline: 4px solid var(--green);
+      outline-offset: 3px;
+    }
+
+    .recording-request-button:disabled {
+      background: #C9D0D7;
+      color: #5D6872;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .recording-request-status {
+      min-height: 22px;
+      margin: 9px 0 0;
+      font-size: .88rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(0, 23, 49, .72);
+      z-index: 1000;
+    }
+
+    .modal-backdrop.visible {
+      display: flex;
+    }
+
+    .recording-modal {
+      width: min(520px, 100%);
+      background: white;
+      color: var(--navy-dark);
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0, 23, 49, .28);
+      padding: 28px;
+    }
+
+    .recording-modal h3 {
+      margin: 0 0 8px;
+      font-size: 1.7rem;
+    }
+
+    .recording-modal p {
+      margin: 0 0 20px;
+      color: #4B5968;
+    }
+
+    .recording-modal label {
+      display: block;
+      margin-bottom: 7px;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .recording-modal input {
+      width: 100%;
+      border: 2px solid #CAD6E0;
+      border-radius: 9px;
+      padding: 12px 13px;
+      font: inherit;
+      color: var(--navy-dark);
+    }
+
+    .recording-modal input:focus {
+      outline: 3px solid rgba(70,177,239,.35);
+      border-color: var(--blue);
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .modal-button {
+      border: 0;
+      border-radius: 9px;
+      padding: 11px 16px;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .modal-button.secondary {
+      background: var(--light-gray);
+      color: var(--navy);
+    }
+
+    .modal-button.primary {
+      background: var(--blue);
+      color: white;
+    }
+
+    .modal-button.primary:hover {
+      background: var(--navy);
+    }
+
+    .modal-error {
+      min-height: 20px;
+      margin: 8px 0 0;
+      color: #B3261E;
+      font-size: .86rem;
+      font-weight: 700;
+    }
+
+    .self-eval-form-wrap {
+      margin-top: 58px;
+      background: var(--panel-blue);
+      color: white;
+      border-radius: 14px;
+      padding: clamp(24px, 4vw, 38px);
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .self-eval-form-wrap.locked::after {
+      content: "Complete the simulation before submitting your self-evaluation.";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 30px;
+      background: rgba(0,23,49,.93);
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: inherit;
+      z-index: 5;
+    }
+
+    .self-eval-form-wrap h3 {
+      margin: 0 0 28px;
+      font-size: clamp(1.6rem, 3vw, 2.3rem);
+    }
+
+    .form-question {
+      margin-top: 28px;
+    }
+
+    .form-question:first-of-type {
+      margin-top: 0;
+    }
+
+    .form-question label,
+    .form-legend {
+      display: block;
+      margin-bottom: 9px;
+      font-weight: 700;
+      font-size: .93rem;
+      line-height: 1.4;
+    }
+
+    .text-input,
+    .text-area {
+      width: 100%;
+      border: 1px solid var(--border-blue);
+      background: transparent;
+      color: white;
+      border-radius: 7px;
+      padding: 11px 12px;
+      outline: none;
+    }
+
+    .text-area {
+      min-height: 88px;
+      resize: vertical;
+    }
+
+    .text-input:focus,
+    .text-area:focus {
+      outline: 3px solid rgba(70,177,239,.35);
+      border-color: var(--sky-blue);
+    }
+
+    .rating-group {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 7px;
+    }
+
+    .rating-option,
+    .choice-radio {
+      position: relative;
+    }
+
+    .rating-option input,
+    .choice-radio input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .rating-option label,
+    .choice-radio label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 43px;
+      margin: 0;
+      padding: 8px 10px;
+      border-radius: 7px;
+      background: #244E78;
+      color: white;
+      cursor: pointer;
+      border: 2px solid transparent;
+      font-weight: 700;
+    }
+
+    .rating-option input:checked + label,
+    .choice-radio input:checked + label {
+      background: var(--sky-blue);
+      color: var(--navy-dark);
+      border-color: white;
+    }
+
+    .rating-option input:focus-visible + label,
+    .choice-radio input:focus-visible + label {
+      outline: 3px solid var(--green);
+      outline-offset: 2px;
+    }
+
+    .radio-stack {
+      display: grid;
+      gap: 8px;
+    }
+
+    .choice-radio label {
+      justify-content: flex-start;
+    }
+
+    .submit-button {
+      width: 100%;
+      border: 0;
+      border-radius: 999px;
+      background: var(--sky-blue);
+      color: white;
+      font-weight: 800;
+      font-size: 1.05rem;
+      padding: 13px 20px;
+      margin-top: 30px;
+    }
+
+    .submit-button:hover {
+      background: var(--blue);
+    }
+
+    .form-status {
+      min-height: 24px;
+      margin: 12px 0 0;
+      text-align: center;
+      font-weight: 700;
+      font-size: .9rem;
+    }
+
+    /* =========================================================
+       CONGRATULATIONS
+    ========================================================== */
+
+    #congratulations {
+      min-height: 62vh;
+      text-align: center;
+      display: none;
+    }
+
+    #congratulations.visible {
+      display: flex;
+    }
+
+    .congrats-title {
+      margin: 0;
+      color: var(--blue);
+      font-family: "Anton", Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      font-size: clamp(4rem, 10vw, 8rem);
+      font-weight: 400;
+      text-transform: uppercase;
+      line-height: .95;
+    }
+
+    .congrats-copy {
+      max-width: 950px;
+      margin: 26px auto 0;
+      font-size: 1.05rem;
+    }
+
+    .congrats-copy strong {
+      display: block;
+      margin-bottom: 18px;
+      color: #111;
+    }
+
+    /* =========================================================
+       SMALL HELPERS
+    ========================================================== */
+
+    .error-text {
+      color: var(--error);
+    }
+
+    .success-text {
+      color: #3D7600;
+    }
+
+    .light-success-text {
+      color: var(--green);
+    }
+
+    .top-link {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 20;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: white;
+      display: grid;
+      place-items: center;
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(0,23,49,.22);
+      font-weight: 800;
+    }
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================== */
+
+    @media (max-width: 900px) {
+      .screen {
+        min-height: auto;
+      }
+
+      .hero-grid,
+      .objectives-grid,
+      .step-intro-grid,
+      .step-three-top {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy {
+        min-height: auto;
+      }
+
+      .start-confirm {
+        margin-top: 30px;
+      }
+
+      .hero-image {
+        min-height: 480px;
+        max-height: 640px;
+      }
+
+      .objectives-graphic {
+        margin-top: 24px;
+        width: 250px;
+      }
+
+      .what-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .what-card p {
+        min-height: auto;
+      }
+
+      .what-card img {
+        aspect-ratio: 16 / 9;
+      }
+
+      .skill-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .skill-name {
+        text-align: left;
+      }
+
+      .debrief-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .duration-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .duration-label {
+        max-width: none;
+      }
+
+      .confirm-row,
+      .simulation-passcode-row {
+        flex-direction: column;
+        border-radius: 18px;
+      }
+
+      .confirm-row {
+        border-width: 3px;
+      }
+
+      .confirm-row button {
+        width: 100%;
+      }
+
+      .simulation-passcode-row button {
+        width: 100%;
+      }
+
+      .rating-group {
+        grid-template-columns: repeat(5, minmax(42px, 1fr));
+      }
+
+      .screen {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .self-eval-form-wrap {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      * {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body id="top">
+
+  <!-- =========================================================
+       HERO / START
+  ========================================================== -->
+  <section class="screen" id="start">
+    <div class="screen-inner hero-grid">
+
+      <div class="hero-copy">
+        <h1 class="display-title hero-title">Foundations<br>of Coaching</h1>
+
+        <div class="duration-grid" aria-label="Learning path time commitment">
+          <div class="duration-label">
+            Estimated duration of<br>learning path:
+          </div>
+          <div>
+            2.5 hour time commitment<br>over a 2 week period
+          </div>
+        </div>
+
+        <div class="start-confirm">
+          <label for="coach-name-start">
+            Type your first and last name in the textbox below to confirm you are starting this learning path.
+          </label>
+
+          <div class="confirm-row">
+            <input
+              id="coach-name-start"
+              type="text"
+              autocomplete="name"
+              placeholder="Type your name here"
+            />
+            <button type="button" id="confirm-start">Confirm</button>
+          </div>
+
+          <p class="start-status" id="start-status" aria-live="polite"></p>
+        </div>
+      </div>
+
+      <img
+        class="hero-image"
+        src="assets/hero-coaching.png"
+        alt="A coach having a focused conversation with another person."
+      />
+
+    </div>
+  </section>
+
+
+  <!-- =========================================================
+       LEARNING OBJECTIVES
+  ========================================================== -->
+  <section class="screen" id="learning-objectives">
+    <div class="screen-inner objectives-grid">
+
+      <div>
+        <h2 class="display-title">Learning<br>Objectives</h2>
+        <img
+          class="objectives-graphic"
+          src="assets/handshake.png"
+          alt=""
+          aria-hidden="true"
+        />
+      </div>
+
+      <div class="objectives-list">
+        <p>Throughout this learning path, you should gain these competencies.</p>
+
+        <p class="objective-item">
+          <strong>Active Listening:</strong>
+          Understand what active listening is and demonstrate effective listening.
+        </p>
+
+        <p class="objective-item">
+          <strong>Powerful Questions:</strong>
+          Identify the difference between deeply powerful, moderately powerful, and not powerful questions.
+        </p>
+
+        <p class="objective-item">
+          <strong>Encouragement &amp; Meaningful Feedback:</strong>
+          Can provide appropriate encouragement and meaningful feedback from a coaching perspective.
+        </p>
+
+        <p class="objective-item">
+          <strong>Goal-Setting:</strong>
+          Demonstrates ability to facilitate a meaningful goal-setting conversation.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =========================================================
+       WHAT YOU'LL DO
+  ========================================================== -->
+  <section class="screen" id="what-youll-do">
+    <div class="screen-inner">
+
+      <h2 class="display-title">What You’ll Do</h2>
+
+      <div class="what-grid">
+        <article class="what-card">
+          <p>
+            <strong>Workshop:</strong>
+            live Foundations of Coaching workshop with facilitator and peers
+          </p>
+          <img src="assets/workshop.png" alt="A small group collaborating together." />
+        </article>
+
+        <article class="what-card">
+          <p>
+            <strong>Simulation:</strong>
+            asynchronous Foundational Coaching Skills simulated scenario
+          </p>
+          <img src="assets/simulation.png" alt="Two people having a coaching conversation." />
+        </article>
+
+        <article class="what-card">
+          <p>
+            <strong>Self-Evaluation:</strong>
+            listen to your call recording to evaluate your new skills
+          </p>
+          <img src="assets/self-evaluation.png" alt="A person wearing headphones while reviewing something on a phone." />
+        </article>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =========================================================
+       STEP ONE
+  ========================================================== -->
+  <section class="screen" id="step-one">
+    <div class="screen-inner">
+
+      <div class="step-intro-grid">
+        <div class="step-copy">
+          <h2 class="step-title">Step One</h2>
+          <p class="section-subtitle">Foundations of Coaching Workshop</p>
+
+          <p class="description">
+            To prepare for the Foundations of Coaching workshop, review the information on this page.
+            This information should be reviewed <strong>before</strong> the workshop so you are able to
+            fully participate with the group. Each Foundations of Coaching workshop will consist of a
+            group of 2-5 coaches, real student scenarios, and opportunities to think critically and have
+            conversations about the four foundational coaching skills listed below.
+          </p>
+        </div>
+
+        <img
+          class="step-image"
+          src="assets/workshop-step.png"
+          alt="Several people working on laptops around a table."
+        />
+      </div>
+
+      <div class="skill-table" role="table" aria-label="Foundational coaching skills review">
+
+        <div class="skill-row" role="row">
+          <div class="skill-name" role="rowheader">Active Listening</div>
+          <p role="cell">
+            Active listening means being fully present, focusing on both the speaker’s words and nonverbal cues,
+            and responding in a way that shows understanding. It includes behaviors like maintaining eye contact,
+            removing distractions, allowing the speaker to finish, using small affirmations, paraphrasing or
+            summarizing, and asking clarifying or exploratory questions. The goal is to create a safe space and
+            better understand the speaker’s message and challenges.
+          </p>
+        </div>
+
+        <div class="skill-row" role="row">
+          <div class="skill-name" role="rowheader">Powerful Questions</div>
+          <p role="cell">
+            Powerful questions are open-ended and thought-provoking, designed to encourage reflection, deeper
+            understanding, and self-discovery. They often begin with words like what, how, or why and explore
+            underlying beliefs, motivations, and learning processes. Rather than giving students solutions,
+            powerful questions help students think through challenges and discover their own answers.
+          </p>
+        </div>
+
+        <div class="skill-row" role="row">
+          <div class="skill-name" role="rowheader">Encouragement &amp;<br>Meaningful Feedback</div>
+          <p role="cell">
+            Encouragement and meaningful feedback help students recognize their strengths while identifying clear
+            areas for growth. Effective feedback combines empathy, clarity, and constructive guidance, while also
+            being specific and actionable by referring to particular behaviors and offering concrete suggestions.
+            It should also highlight progress so students can see what is working and continue building on it.
+          </p>
+        </div>
+
+        <div class="skill-row" role="row">
+          <div class="skill-name" role="rowheader">Goal-Setting</div>
+          <p role="cell">
+            Goal setting is about turning broad intentions into clear, manageable steps that give students something
+            concrete to work toward. Strong goals are more specific than vague statements like “I want to do better”
+            and help clarify what the student plans to accomplish, how they’ll know they’re making progress, and when
+            they’ll take action. In coaching conversations, the goal is to help students leave with a realistic next
+            step they can actually follow through on.
+          </p>
+        </div>
+
+      </div>
+
+      <p class="warning-banner">
+        Do not move onto the Foundational Coaching Skills simulation until you have attended the Foundations of Coaching workshop.
+      </p>
+
+    </div>
+  </section>
+
+
+  <!-- =========================================================
+       STEP TWO: SIMULATION
+  ========================================================== -->
+  <section class="screen" id="step-two">
+    <div class="screen-inner">
+
+      <h2 class="step-title">Step Two: Simulation</h2>
+
+      <p class="simulation-intro">
+        During the Foundations of Coaching workshop, your facilitator shared the passcode to begin the
+        Foundational Skills Simulation below. To start the simulation, enter the passcode. If you do not
+        remember the passcode, reach out to the facilitator or anyone who was in the Foundations of Coaching
+        workshop to get the passcode.
+      </p>
+
+      <div class="simulation-lock" id="simulation-lock">
+        <label for="simulation-passcode">Enter workshop passcode</label>
+        <div class="simulation-passcode-row">
+          <input
+            id="simulation-passcode"
+            type="password"
+            autocomplete="off"
+            placeholder="Enter passcode"
+            aria-describedby="simulation-lock-status"
+          />
+          <button type="button" id="unlock-simulation">Unlock Simulation</button>
+        </div>
+        <p class="simulation-lock-status" id="simulation-lock-status" aria-live="polite"></p>
+      </div>
+
+      <div class="simulation-shell" id="simulation-shell" aria-live="polite">
+
+        <div class="sim-progress-wrap">
+          <div class="sim-progress-labels">
+            <span id="sim-progress-text">Scenario in progress</span>
+            <span id="sim-skill-text">Foundational coaching skills</span>
+          </div>
+          <div class="sim-progress" aria-hidden="true">
+            <div class="sim-progress-bar" id="sim-progress-bar"></div>
+          </div>
+        </div>
+
+        <div class="sim-stage" id="sim-stage">
+          <div class="sim-meta">
+            <span class="sim-pill" id="sim-scene-label">Scenario</span>
+            <span class="sim-pill" id="sim-skill-label">Skill Focus</span>
+          </div>
+
+          <div class="student-card" id="student-card">
+            <span class="speaker" id="student-speaker">Jordan</span>
+            <p id="student-text"></p>
+          </div>
+
+          <p class="sim-prompt" id="sim-prompt"></p>
+
+          <div class="choice-list" id="choice-list"></div>
+
+          <div class="sim-result" id="sim-result">
+            <div class="student-reaction">
+              <span class="speaker">Jordan responds</span>
+              <p id="student-reaction-text"></p>
+            </div>
+
+            <div class="impact-card">
+              <span class="impact-label" id="impact-label"></span>
+              <p id="impact-text"></p>
+            </div>
+
+            <div class="sim-next-row">
+              <button class="sim-next" type="button" id="sim-next">Continue</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="simulation-complete" id="simulation-complete">
+          <h3>Simulation Complete</h3>
+
+          <p>
+            You reached the end of Jordan’s appointment. The purpose of this simulation is not simply to
+            identify a “correct” response—it is to notice how your choices affect student ownership,
+            clarity, engagement, and the direction of the coaching conversation.
+          </p>
+
+          <div class="debrief-grid">
+            <div class="debrief-card">
+              <strong>Active Listening</strong><br>
+              Did your responses show that you understood both what Jordan was saying and how Jordan was feeling?
+            </div>
+            <div class="debrief-card">
+              <strong>Powerful Questions</strong><br>
+              Did your questions encourage Jordan to reflect and discover rather than wait for you to provide the answer?
+            </div>
+            <div class="debrief-card">
+              <strong>Encouragement &amp; Meaningful Feedback</strong><br>
+              Did you recognize genuine strengths while helping Jordan identify a useful opportunity for growth?
+            </div>
+            <div class="debrief-card">
+              <strong>Goal-Setting</strong><br>
+              Did Jordan leave with a clear, realistic action rather than a vague intention or a coach-created plan?
+            </div>
+          </div>
+
+          <p id="sim-summary"></p>
+
+          <button class="sim-restart" type="button" id="restart-simulation">Restart Simulation</button>
+          <a class="continue-to-step3" href="#step-three">Continue to Step Three ↓</a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =========================================================
+       STEP THREE: SELF-EVALUATION
+  ========================================================== -->
+  <section class="screen" id="step-three">
+    <div class="screen-inner">
+
+      <div class="step-three-top">
+        <div>
+          <h2 class="step-title">Step Three</h2>
+          <p class="section-subtitle">Self-Evaluation</p>
+
+          <p class="self-eval-intro">
+            For your self-evaluation, you will request a call or live event recording and listen for the
+            coaching skills that were covered in this learning path. While you are listening to your recording,
+            fill out the form on this page and submit your responses.
+            <strong>Note:</strong> The recording must be from an interaction that was performed after you attended
+            the Foundations of Coaching workshop and completed the Foundational Coaching Skills simulation exercise.
+            Therefore, it may take a few days for the development supervisor to provide your recording. If you are
+            a live event coach only, one of your live events will be recorded for you to review.
+          </p>
+
+          <div class="recording-request-area">
+            <button
+              class="recording-request-button"
+              id="request-recording-button"
+              type="button"
+              disabled
+            >
+              <span aria-hidden="true">🎧</span>
+              Click here to request recording
+            </button>
+            <p class="recording-request-status" id="recording-request-status" aria-live="polite"></p>
+          </div>
+        </div>
+
+        <img
+          class="step-image"
+          src="assets/self-eval-step.png"
+          alt="A person listening and taking notes while reviewing work on a laptop."
+        />
+      </div>
+
+      <div class="self-eval-form-wrap locked" id="self-eval-form-wrap">
+        <h3>Self-Evaluation Reflections</h3>
+
+        <form id="self-evaluation-form">
+
+          <div class="form-question">
+            <label for="self-name">Type your first and last name here</label>
+            <input class="text-input" id="self-name" name="name" type="text" autocomplete="name" required />
+          </div>
+
+          <div class="form-question">
+            <label for="interaction-focus">What was the main purpose or focus of this student appointment or live event?</label>
+            <textarea class="text-area" id="interaction-focus" name="interactionFocus" required></textarea>
+          </div>
+
+          <fieldset class="form-question" style="border:0;padding:0;margin-left:0;margin-right:0;">
+            <legend class="form-legend">
+              Overall, how effective do you feel this coaching interaction was? (1 = not very effective, 5 = very effective)
+            </legend>
+            <div class="rating-group">
+              <div class="rating-option"><input id="overall1" type="radio" name="overallEffectiveness" value="1" required><label for="overall1">1</label></div>
+              <div class="rating-option"><input id="overall2" type="radio" name="overallEffectiveness" value="2"><label for="overall2">2</label></div>
+              <div class="rating-option"><input id="overall3" type="radio" name="overallEffectiveness" value="3"><label for="overall3">3</label></div>
+              <div class="rating-option"><input id="overall4" type="radio" name="overallEffectiveness" value="4"><label for="overall4">4</label></div>
+              <div class="rating-option"><input id="overall5" type="radio" name="overallEffectiveness" value="5"><label for="overall5">5</label></div>
+            </div>
+          </fieldset>
+
+          <div class="form-question">
+            <label for="good-moment">What is one moment from the interaction that you felt especially good about?</label>
+            <textarea class="text-area" id="good-moment" name="goodMoment" required></textarea>
+          </div>
+
+          <div class="form-question">
+            <label for="redo-moment">What is one moment you would handle differently if you could redo the interaction?</label>
+            <textarea class="text-area" id="redo-moment" name="redoMoment" required></textarea>
+          </div>
+
+          <fieldset class="form-question" style="border:0;padding:0;margin-left:0;margin-right:0;">
+            <legend class="form-legend">
+              How consistently did you demonstrate active listening throughout the appointment or live event? (1 = rarely, 5 = consistently)
+            </legend>
+            <div class="rating-group">
+              <div class="rating-option"><input id="listen1" type="radio" name="activeListeningRating" value="1" required><label for="listen1">1</label></div>
+              <div class="rating-option"><input id="listen2" type="radio" name="activeListeningRating" value="2"><label for="listen2">2</label></div>
+              <div class="rating-option"><input id="listen3" type="radio" name="activeListeningRating" value="3"><label for="listen3">3</label></div>
+              <div class="rating-option"><input id="listen4" type="radio" name="activeListeningRating" value="4"><label for="listen4">4</label></div>
+              <div class="rating-option"><input id="listen5" type="radio" name="activeListeningRating" value="5"><label for="listen5">5</label></div>
+            </div>
+          </fieldset>
+
+          <div class="form-question">
+            <label for="listening-example">Describe a moment from the interaction that you demonstrated active listening.</label>
+            <textarea class="text-area" id="listening-example" name="activeListeningExample" required></textarea>
+          </div>
+
+          <div class="form-question">
+            <label for="listen-more">Was there a point where you could have slowed down, listened more closely, or explored something the student said further? If so, describe it.</label>
+            <textarea class="text-area" id="listen-more" name="activeListeningGrowth" required></textarea>
+          </div>
+
+          <fieldset class="form-question" style="border:0;padding:0;margin-left:0;margin-right:0;">
+            <legend class="form-legend">
+              How effectively did you use open-ended, thought-provoking questions? (1 = rarely, 5 = very effectively)
+            </legend>
+            <div class="rating-group">
+              <div class="rating-option"><input id="questions1" type="radio" name="powerfulQuestionsRating" value="1" required><label for="questions1">1</label></div>
+              <div class="rating-option"><input id="questions2" type="radio" name="powerfulQuestionsRating" value="2"><label for="questions2">2</label></div>
+              <div class="rating-option"><input id="questions3" type="radio" name="powerfulQuestionsRating" value="3"><label for="questions3">3</label></div>
+              <div class="rating-option"><input id="questions4" type="radio" name="powerfulQuestionsRating" value="4"><label for="questions4">4</label></div>
+              <div class="rating-option"><input id="questions5" type="radio" name="powerfulQuestionsRating" value="5"><label for="questions5">5</label></div>
+            </div>
+          </fieldset>
+
+          <div class="form-question">
+            <label for="question-example">Identify one question you asked that helped the student reflect, explore, or think more deeply. Why was it effective?</label>
+            <textarea class="text-area" id="question-example" name="powerfulQuestionExample" required></textarea>
+          </div>
+
+          <fieldset class="form-question" style="border:0;padding:0;margin-left:0;margin-right:0;">
+            <legend class="form-legend">
+              How effectively did you recognize the student’s strengths, progress, or effort? (1 = rarely, 5 = very effectively)
+            </legend>
+            <div class="rating-group">
+              <div class="rating-option"><input id="encourage1" type="radio" name="encouragementRating" value="1" required><label for="encourage1">1</label></div>
+              <div class="rating-option"><input id="encourage2" type="radio" name="encouragementRating" value="2"><label for="encourage2">2</label></div>
+              <div class="rating-option"><input id="encourage3" type="radio" name="encouragementRating" value="3"><label for="encourage3">3</label></div>
+              <div class="rating-option"><input id="encourage4" type="radio" name="encouragementRating" value="4"><label for="encourage4">4</label></div>
+              <div class="rating-option"><input id="encourage5" type="radio" name="encouragementRating" value="5"><label for="encourage5">5</label></div>
+            </div>
+          </fieldset>
+
+          <div class="form-question">
+            <label for="encouragement-example">Provide an example of encouragement or positive feedback you gave during the interaction.</label>
+            <textarea class="text-area" id="encouragement-example" name="encouragementExample" required></textarea>
+          </div>
+
+          <fieldset class="form-question" style="border:0;padding:0;margin-left:0;margin-right:0;">
+            <legend class="form-legend">
+              When you provided feedback or guidance, how specific and actionable was it? (1 = very vague, 5 = very specific and actionable)
+            </legend>
+            <div class="rating-group">
+              <div class="rating-option"><input id="feedback1" type="radio" name="feedbackSpecificityRating" value="1" required><label for="feedback1">1</label></div>
+              <div class="rating-option"><input id="feedback2" type="radio" name="feedbackSpecificityRating" value="2"><label for="feedback2">2</label></div>
+              <div class="rating-option"><input id="feedback3" type="radio" name="feedbackSpecificityRating" value="3"><label for="feedback3">3</label></div>
+              <div class="rating-option"><input id="feedback4" type="radio" name="feedbackSpecificityRating" value="4"><label for="feedback4">4</label></div>
+              <div class="rating-option"><input id="feedback5" type="radio" name="feedbackSpecificityRating" value="5"><label for="feedback5">5</label></div>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-question" style="border:0;padding:0;margin-left:0;margin-right:0;">
+            <legend class="form-legend">Did the student leave the appointment or live event with a clear next step or goal?</legend>
+            <div class="radio-stack">
+              <div class="choice-radio"><input id="goal-yes" type="radio" name="clearGoal" value="Yes" required><label for="goal-yes">Yes</label></div>
+              <div class="choice-radio"><input id="goal-somewhat" type="radio" name="clearGoal" value="Somewhat"><label for="goal-somewhat">Somewhat</label></div>
+              <div class="choice-radio"><input id="goal-no" type="radio" name="clearGoal" value="No"><label for="goal-no">No</label></div>
+            </div>
+          </fieldset>
+
+          <div class="form-question">
+            <label for="goal-growth">What could you have done, if anything, to make the student’s goal more specific or easier to follow through on?</label>
+            <textarea class="text-area" id="goal-growth" name="goalGrowth" required></textarea>
+          </div>
+
+          <div class="form-question">
+            <label for="strongest-skill">Which of the four coaching skills was strongest in this appointment or live event? What evidence supports your answer?</label>
+            <textarea class="text-area" id="strongest-skill" name="strongestSkill" required></textarea>
+          </div>
+
+          <button class="submit-button" type="submit">Submit</button>
+          <p class="form-status" id="form-status" aria-live="polite"></p>
+
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =========================================================
+       COMPLETION
+  ========================================================== -->
+  <section class="screen" id="congratulations">
+    <div class="screen-inner">
+
+      <h2 class="congrats-title">Congratulations</h2>
+
+      <div class="congrats-copy">
+        <strong>You have completed the Foundations of Coaching learning path.</strong>
+
+        <p>
+          To confirm competency, a member of the development team will listen to one of your call recordings
+          or review one of your live events and provide feedback on the coaching skills highlighted in this learning path.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <a class="top-link" href="#top" aria-label="Back to top">↑</a>
+
+
+  <!-- =========================================================
+       RECORDING REQUEST MODAL
+  ========================================================== -->
+  <div class="modal-backdrop" id="recording-modal-backdrop" role="presentation">
+    <div
+      class="recording-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="recording-modal-title"
+      aria-describedby="recording-modal-description"
+    >
+      <h3 id="recording-modal-title">Request a Recording</h3>
+      <p id="recording-modal-description">
+        Enter your first and last name so the development team knows whose recording to provide.
+      </p>
+
+      <form id="recording-request-form">
+        <label for="recording-request-name">First and last name</label>
+        <input
+          id="recording-request-name"
+          name="recordingRequestName"
+          type="text"
+          autocomplete="name"
+          required
+          placeholder="First Last"
+        />
+        <p class="modal-error" id="recording-request-error" aria-live="polite"></p>
+
+        <div class="modal-actions">
+          <button class="modal-button secondary" id="cancel-recording-request" type="button">Cancel</button>
+          <button class="modal-button primary" id="submit-recording-request" type="submit">Send Request</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <script>
+    /* =========================================================
+       EASY-TO-CHANGE SETTINGS
+    ========================================================== */
+
+    /*
+      IMPORTANT:
+      Change the simulation passcode below to the passcode your facilitators
+      will share at the end of the Foundations of Coaching workshop.
+    */
+    const SIMULATION_PASSCODE = "WorkshopComplete"; // <<< CHANGE SIMULATION PASSCODE HERE
+
+    /*
+      OPTIONAL:
+      If you later create a Google Apps Script, Power Automate flow, or another
+      endpoint to collect the self-evaluation responses, paste the URL below.
+
+      Leave it blank to save submissions only in this browser's local storage.
+    */
+    const SELF_EVAL_ENDPOINT = ""; // <<< ADD SELF-EVALUATION SUBMISSION LINK HERE
+
+    /*
+      POWER AUTOMATE RECORDING REQUEST:
+      Create your Power Automate flow, copy the HTTP/webhook URL that starts the flow,
+      and paste it between the quotation marks below.
+
+      The page sends these values:
+      - name
+      - learningPath
+      - requestType
+      - requestedAt
+    */
+    const RECORDING_REQUEST_ENDPOINT = ""; // <<< ADD POWER AUTOMATE RECORDING REQUEST LINK HERE
+
+
+    /* =========================================================
+       LOCAL STORAGE KEYS
+    ========================================================== */
+
+    const STORAGE = {
+      coachName: "foundations_coachName",
+      startDate: "foundations_startDate",
+      simulationUnlocked: "foundations_simulationUnlocked",
+      simulationCompleted: "foundations_simulationCompleted",
+      simulationNode: "foundations_simulationNode",
+      simulationStats: "foundations_simulationStats",
+      selfEvaluation: "foundations_selfEvaluation",
+      learningPathCompleted: "foundations_learningPathCompleted",
+      recordingRequest: "foundations_recordingRequest"
+    };
+
+
+    /* =========================================================
+       START CONFIRMATION
+    ========================================================== */
+
+    const startNameInput = document.getElementById("coach-name-start");
+    const confirmStartButton = document.getElementById("confirm-start");
+    const startStatus = document.getElementById("start-status");
+    const selfNameInput = document.getElementById("self-name");
+
+    function saveCoachName() {
+      const name = startNameInput.value.trim();
+
+      if (name.length < 3 || !name.includes(" ")) {
+        startStatus.textContent = "Please enter your first and last name.";
+        startStatus.className = "start-status error-text";
+        startNameInput.focus();
+        return;
+      }
+
+      localStorage.setItem(STORAGE.coachName, name);
+
+      if (!localStorage.getItem(STORAGE.startDate)) {
+        localStorage.setItem(STORAGE.startDate, new Date().toISOString());
+      }
+
+      selfNameInput.value = name;
+      startStatus.textContent = `Learning path started for ${name}.`;
+      startStatus.className = "start-status success-text";
+    }
+
+    confirmStartButton.addEventListener("click", saveCoachName);
+
+    startNameInput.addEventListener("keydown", event => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        saveCoachName();
+      }
+    });
+
+
+    /* =========================================================
+       SIMULATION PASSCODE
+    ========================================================== */
+
+    const simulationLock = document.getElementById("simulation-lock");
+    const simulationPasscodeInput = document.getElementById("simulation-passcode");
+    const simulationUnlockButton = document.getElementById("unlock-simulation");
+    const simulationLockStatus = document.getElementById("simulation-lock-status");
+    const simulationShell = document.getElementById("simulation-shell");
+
+    function unlockSimulation() {
+      localStorage.setItem(STORAGE.simulationUnlocked, "true");
+      simulationLock.style.display = "none";
+      simulationShell.classList.add("visible");
+      loadSimulationState();
+    }
+
+    function checkSimulationPasscode() {
+      const entered = simulationPasscodeInput.value.trim();
+
+      if (entered === SIMULATION_PASSCODE) {
+        simulationLockStatus.textContent = "Simulation unlocked.";
+        simulationLockStatus.className = "simulation-lock-status success-text";
+        unlockSimulation();
+      } else {
+        simulationLockStatus.textContent = "That passcode does not match. Please check it and try again.";
+        simulationLockStatus.className = "simulation-lock-status error-text";
+        simulationPasscodeInput.value = "";
+        simulationPasscodeInput.focus();
+      }
+    }
+
+    simulationUnlockButton.addEventListener("click", checkSimulationPasscode);
+
+    simulationPasscodeInput.addEventListener("keydown", event => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        checkSimulationPasscode();
+      }
+    });
+
+
+    /* =========================================================
+       BRANCHING SIMULATION DATA
+
+       The scenario below is based on the Canva flow:
+       "Foundational Coaching Simulation Flow"
+    ========================================================== */
+
+    const nodes = {
+
+      start: {
+        scene: "Scene 1",
+        skill: "Active Listening",
+        progress: 5,
+        student:
+          "I’m honestly getting really frustrated. I feel like I’m studying all the time, but then when I actually need to remember the information, it’s like none of it sticks. I’m starting to feel like I’m just wasting my time.",
+        prompt: "What do you say?",
+        choices: [
+          {
+            text:
+              "It sounds like you’ve been putting in a lot of effort, but you’re frustrated because that effort doesn’t seem to be translating into being able to recall what you’ve learned. Tell me a little more about what studying has looked like for you.",
+            quality: "strong",
+            reaction:
+              "Exactly. I’m spending hours on it. I usually reread things, look back through my notes, and sometimes watch videos again. It feels familiar while I’m studying, but later I can’t remember much.",
+            impact:
+              "The coach acknowledges Jordan’s effort and frustration, paraphrases what was heard, and invites Jordan to continue.",
+            next: "studyProcess"
+          },
+          {
+            text:
+              "Don’t worry. A lot of students feel that way. You’re probably doing better than you think.",
+            quality: "moderate",
+            reaction:
+              "I mean…maybe. But it really doesn’t feel like I’m doing better.",
+            impact:
+              "Jordan’s frustration has been reassured away instead of explored. You now have less information about what is actually happening.",
+            next: "recoverReassurance"
+          },
+          {
+            text:
+              "You should probably try a different study strategy.",
+            quality: "less",
+            reaction:
+              "Okay…like what?",
+            impact:
+              "The conversation becomes coach-directed before you understand what Jordan has already tried or why the current approach is not working.",
+            next: "recoverDirective"
+          }
+        ]
+      },
+
+      recoverReassurance: {
+        scene: "Recovery Branch",
+        skill: "Active Listening",
+        progress: 11,
+        student:
+          "I mean…maybe. But it really doesn’t feel like I’m doing better.",
+        prompt: "What could you say now to better understand Jordan’s experience?",
+        choices: [
+          {
+            text:
+              "Hmm…yeah, I get that. Why don’t you tell me a little bit more about what your studying process looks like?",
+            quality: "strong",
+            reaction:
+              "I’m spending hours on it. I usually reread things, look back through my notes, and sometimes watch videos again. It feels familiar while I’m studying, but later I can’t remember much.",
+            impact:
+              "This question reopens the conversation and gives Jordan space to provide information you can use to dive deeper into the challenge.",
+            next: "studyProcess"
+          },
+          {
+            text:
+              "You said you are studying all the time. How much time are you actually spending studying?",
+            quality: "moderate",
+            reaction:
+              "Usually a couple of hours at a time. I’m definitely putting time into it, but I still don’t remember much later.",
+            impact:
+              "This is not a bad question, but it is narrower than the other option and may not give you the full picture of Jordan’s approach.",
+            next: "recoverNarrow"
+          }
+        ]
+      },
+
+      recoverDirective: {
+        scene: "Recovery Branch",
+        skill: "Active Listening",
+        progress: 11,
+        student:
+          "Okay…like what?",
+        prompt: "How should you respond to move the interaction back into a student-led conversation?",
+        choices: [
+          {
+            text:
+              "So, you mentioned you’re spending a lot of time studying but don’t feel like the information is sticking. Could you tell me a little bit more about your approach?",
+            quality: "strong",
+            reaction:
+              "I’m spending hours on it. I usually reread things, look back through my notes, and sometimes watch videos again. It feels familiar while I’m studying, but later I can’t remember much.",
+            impact:
+              "You return the conversation to exploration instead of prescribing a solution.",
+            next: "studyProcess"
+          },
+          {
+            text:
+              "For me personally, it helps when I actively engage with my notes instead of just writing them and moving onto the next lesson. Do you think this sounds like something that you want to explore together?",
+            quality: "less",
+            reaction:
+              "Maybe. I guess I’m still not really sure what I should be doing.",
+            impact:
+              "You are moving into mentoring by suggesting something that personally helped you instead of first helping Jordan examine their own process.",
+            next: "recoverMentoring"
+          }
+        ]
+      },
+
+      recoverNarrow: {
+        scene: "Recovery Branch",
+        skill: "Powerful Questions",
+        progress: 15,
+        student:
+          "Usually a couple of hours at a time. I’m definitely putting time into it, but I still don’t remember much later.",
+        prompt: "What question would help Jordan take the lead again?",
+        choices: [
+          {
+            text:
+              "So, you mentioned you’re spending a lot of time studying but don’t feel like the information is sticking. Could you tell me a little bit more about your approach?",
+            quality: "strong",
+            reaction:
+              "I usually reread things, look back through my notes, and sometimes watch videos again. It feels familiar while I’m studying, but later I can’t remember much.",
+            impact:
+              "The open question broadens the conversation and gives Jordan room to describe the actual process.",
+            next: "studyProcess"
+          },
+          {
+            text:
+              "For me personally, it helps when I actively engage with my notes. Do you think that would help?",
+            quality: "less",
+            reaction:
+              "Maybe. I’m not sure.",
+            impact:
+              "The conversation is drifting toward your experience instead of Jordan’s thinking.",
+            next: "recoverMentoring"
+          }
+        ]
+      },
+
+      recoverMentoring: {
+        scene: "Recovery Branch",
+        skill: "Powerful Questions",
+        progress: 19,
+        student:
+          "Maybe. I’m not sure.",
+        prompt: "What can you ask instead to understand Jordan’s learning process?",
+        choices: [
+          {
+            text:
+              "Can you tell me a little bit more about how you are checking your understanding and retention when you study?",
+            quality: "strong",
+            reaction:
+              "Honestly…I’m not really doing that. I’m mostly looking at the material over and over.",
+            impact:
+              "This prompts Jordan to examine the learning process rather than simply accept a coach-provided solution.",
+            next: "discovery"
+          },
+          {
+            text:
+              "What if you took notes on a section and then, when you got through the section, put your notes away and tried to quiz yourself on what you remember?",
+            quality: "less",
+            reaction:
+              "Sure, I can try that.",
+            impact:
+              "The strategy may work, but you did the thinking for Jordan. Student ownership is reduced.",
+            next: "goalNeedsOwnership"
+          }
+        ]
+      },
+
+      studyProcess: {
+        scene: "Scene 2",
+        skill: "Powerful Questions",
+        progress: 24,
+        student:
+          "I’m spending hours on it. I usually reread things, look back through my notes, and sometimes watch videos again. It feels familiar while I’m studying, but later I can’t remember much.",
+        prompt: "What do you say next?",
+        choices: [
+          {
+            text:
+              "When you’re studying, how are you checking whether you can actually recall or explain the information without looking at your notes?",
+            quality: "strong",
+            reaction:
+              "Honestly…I’m not really doing that. I’m mostly looking at the material over and over.",
+            impact:
+              "The question encourages Jordan to examine their own learning process and begin identifying the gap.",
+            next: "discovery"
+          },
+          {
+            text:
+              "Do you think rereading your notes is working?",
+            quality: "moderate",
+            reaction:
+              "I guess not?",
+            impact:
+              "Jordan responds, but the yes-or-no structure does much of the thinking for the student and gives you less information.",
+            next: "recoverClosedQuestion"
+          },
+          {
+            text:
+              "Why aren’t you doing practice questions instead?",
+            quality: "less",
+            reaction:
+              "I don’t know. I didn’t realize I was supposed to.",
+            impact:
+              "The wording sounds corrective and assumes a solution before Jordan has had an opportunity to reflect.",
+            next: "recoverCorrective"
+          }
+        ]
+      },
+
+      recoverClosedQuestion: {
+        scene: "Recovery Branch",
+        skill: "Powerful Questions",
+        progress: 30,
+        student: "I guess not?",
+        prompt:
+          "Jordan already knew something about the current approach was not working. What can you say to move Jordan toward deeper reflection?",
+        choices: [
+          {
+            text:
+              "Can you tell me a little bit more about how you are checking your understanding and retention when you study?",
+            quality: "strong",
+            reaction:
+              "Now that you’re asking me that, I guess most of my studying is just looking at information. I don’t really make myself do anything with it.",
+            impact:
+              "This shifts the focus from what Jordan has done “wrong” to what Jordan can notice about the learning process.",
+            next: "insight"
+          },
+          {
+            text:
+              "For me personally, it helps when I actively engage with my notes instead of just writing them and moving on. Do you want to try that?",
+            quality: "less",
+            reaction:
+              "Maybe. I guess I could.",
+            impact:
+              "You have moved into mentoring and prescribed a direction before Jordan has done the cognitive work.",
+            next: "recoverMentoring"
+          }
+        ]
+      },
+
+      recoverCorrective: {
+        scene: "Recovery Branch",
+        skill: "Powerful Questions",
+        progress: 30,
+        student:
+          "I don’t know. I didn’t realize I was supposed to.",
+        prompt: "What can you say to move the interaction in a more productive direction?",
+        choices: [
+          {
+            text:
+              "Can you tell me a little bit more about how you are checking your understanding and retention when you study?",
+            quality: "strong",
+            reaction:
+              "Now that you’re asking me that, I guess most of my studying is just looking at information. I don’t really make myself do anything with it.",
+            impact:
+              "This prompts Jordan to think about the current process without implying that Jordan should already know the answer.",
+            next: "insight"
+          },
+          {
+            text:
+              "Do you want to try something different?",
+            quality: "less",
+            reaction:
+              "I mean, yes. I just don’t really know what.",
+            impact:
+              "This yes-or-no question does not prompt deeper reflection or help Jordan generate possible solutions.",
+            next: "stalled"
+          }
+        ]
+      },
+
+      discovery: {
+        scene: "Scene 3",
+        skill: "Powerful Questions",
+        progress: 36,
+        student:
+          "Honestly…I’m not really doing that. I’m mostly looking at the material over and over.",
+        prompt: "What response would best help Jordan build on that observation?",
+        choices: [
+          {
+            text:
+              "That’s an important observation. It sounds like you’ve noticed a difference between seeing information and actually having to retrieve or use it. What do you think you could change about your studying based on that?",
+            quality: "strong",
+            reaction:
+              "Maybe I need to stop looking at my notes so much and actually test myself somehow.",
+            impact:
+              "You recognize Jordan’s insight while leaving ownership of the solution with the student.",
+            next: "encouragement"
+          },
+          {
+            text:
+              "Yeah, rereading is usually not a very effective way to study.",
+            quality: "less",
+            reaction:
+              "Oh. I’ve been doing that basically every day.",
+            impact:
+              "Jordan begins focusing on what was done “wrong” instead of the useful discovery that just occurred.",
+            next: "stalled"
+          }
+        ]
+      },
+
+      insight: {
+        scene: "Scene 3",
+        skill: "Powerful Questions",
+        progress: 36,
+        student:
+          "Now that you’re asking me that, I guess most of my studying is just looking at information. I don’t really make myself do anything with it.",
+        prompt: "What is the strongest response?",
+        choices: [
+          {
+            text:
+              "That’s an important observation. It sounds like you’ve noticed a difference between seeing information and actually having to retrieve or use it. What do you think you could change about your studying based on that?",
+            quality: "strong",
+            reaction:
+              "Maybe I need to stop looking at my notes so much and actually test myself somehow.",
+            impact:
+              "You recognize the student’s insight but leave ownership of the solution with Jordan.",
+            next: "encouragement"
+          },
+          {
+            text:
+              "Yeah, rereading is usually not a very effective way to study.",
+            quality: "less",
+            reaction:
+              "Oh. I’ve been doing that basically every day.",
+            impact:
+              "Jordan begins focusing on the mistake instead of the useful discovery.",
+            next: "stalled"
+          }
+        ]
+      },
+
+      stalled: {
+        scene: "Recovery Branch",
+        skill: "Powerful Questions",
+        progress: 41,
+        student:
+          "I know I need to change something. I’m just not sure what that should be.",
+        prompt:
+          "The conversation has stalled. What question can you ask to encourage Jordan to start thinking about possible solutions?",
+        choices: [
+          {
+            text:
+              "It’s clear that you are really putting in the effort. What changes do you think you could make to maximize your efforts?",
+            quality: "strong",
+            reaction:
+              "Maybe I need to rely on my notes less and find a way to test myself instead of just looking at the material.",
+            impact:
+              "You provide an affirmation and follow it with a question that guides Jordan toward generating a solution.",
+            next: "encouragement"
+          },
+          {
+            text:
+              "Do you want to try something different?",
+            quality: "less",
+            reaction:
+              "Yes, but I don’t know what.",
+            impact:
+              "This is a yes-or-no question that does not prompt the deeper reflection Jordan needs.",
+            next: "recoverSolutions"
+          }
+        ]
+      },
+
+      recoverSolutions: {
+        scene: "Recovery Branch",
+        skill: "Powerful Questions",
+        progress: 45,
+        student:
+          "Yes, but I don’t know what.",
+        prompt: "What can you ask to help Jordan generate possible solutions?",
+        choices: [
+          {
+            text:
+              "You mentioned that you think you might need to rely on your notes less and find a way to test yourself. What are some ways that come to mind for you that might help you do this?",
+            quality: "strong",
+            reaction:
+              "I could probably study a section and then close everything and try to write down what I remember. Then I could check my notes afterward.",
+            impact:
+              "The question provides enough direction to focus the conversation while keeping the cognitive work with Jordan.",
+            next: "encouragementFromSolution"
+          },
+          {
+            text:
+              "What if you took notes on a section and then, when you got through the section, put your notes away and tried to quiz yourself on what you remember?",
+            quality: "less",
+            reaction:
+              "Sure, I can try that.",
+            impact:
+              "You did the thinking for Jordan. The strategy could work, but student ownership is reduced.",
+            next: "goalNeedsOwnership"
+          }
+        ]
+      },
+
+      encouragement: {
+        scene: "Scene 4",
+        skill: "Encouragement & Meaningful Feedback",
+        progress: 52,
+        student:
+          "I feel kind of stupid now. I’ve spent so much time doing something that apparently wasn’t helping very much.",
+        prompt: "How do you respond?",
+        choices: [
+          {
+            text:
+              "I wouldn’t look at that time as wasted. You’ve actually identified something really useful today: you’re putting in the effort, and now you know one specific way to make that effort more intentional. The fact that you noticed this gives you something concrete to change.",
+            quality: "strong",
+            reaction:
+              "Yeah, that actually makes me feel better. I guess the effort isn’t the problem—I just need to change what I’m doing with that time.",
+            impact:
+              "The feedback recognizes a genuine strength—effort—while connecting it to a specific opportunity for improvement.",
+            next: "solution"
+          },
+          {
+            text:
+              "You’re doing great! Don’t be so hard on yourself.",
+            quality: "moderate",
+            reaction:
+              "Thanks.",
+            impact:
+              "The encouragement is positive but vague. It does not help Jordan understand what specifically is going well or what progress was made.",
+            next: "solution"
+          },
+          {
+            text:
+              "Well, at least now you know not to study that way anymore.",
+            quality: "less",
+            reaction:
+              "Yeah…I guess.",
+            impact:
+              "Jordan becomes quieter. The response emphasizes the mistake rather than reinforcing reflection and growth.",
+            next: "solution"
+          }
+        ]
+      },
+
+      encouragementFromSolution: {
+        scene: "Scene 4",
+        skill: "Encouragement & Meaningful Feedback",
+        progress: 52,
+        student:
+          "That actually makes me feel a little better. I guess I’m starting to see what I can change.",
+        prompt: "What would be the strongest encouragement in this moment?",
+        choices: [
+          {
+            text:
+              "You’ve done some important thinking here. You came in knowing that the effort wasn’t producing the result you wanted, and you were able to identify a specific change you can test. That gives you something concrete to build from.",
+            quality: "strong",
+            reaction:
+              "Yeah, I like that. I want to try it and see if it helps.",
+            impact:
+              "The encouragement is specific, grounded in Jordan’s actual work, and points toward progress.",
+            next: "goal"
+          },
+          {
+            text:
+              "Great job! I think you’ve got this.",
+            quality: "moderate",
+            reaction:
+              "Thanks.",
+            impact:
+              "The encouragement is positive but does not identify what Jordan did well.",
+            next: "goal"
+          }
+        ]
+      },
+
+      solution: {
+        scene: "Scene 5",
+        skill: "Powerful Questions",
+        progress: 63,
+        student:
+          "I definitely want to try studying differently. I just don’t really know what that should look like.",
+        prompt: "What do you say?",
+        choices: [
+          {
+            text:
+              "Based on what you noticed today, what could you do during your next study session that would require you to recall, explain, or use the information without immediately looking at your materials?",
+            quality: "strong",
+            reaction:
+              "I could probably study a section and then close everything and try to write down what I remember. Then I could check my notes afterward.",
+            impact:
+              "You provide enough structure to guide Jordan’s thinking without prescribing the exact solution.",
+            next: "goal"
+          },
+          {
+            text:
+              "Why don’t you do a brain dump after every section?",
+            quality: "moderate",
+            reaction:
+              "Sure, I can try that.",
+            impact:
+              "The strategy may be useful, but the coach selected it rather than helping Jordan determine what would work.",
+            next: "recoverPrescribing"
+          },
+          {
+            text:
+              "You have lots of options. You could use flashcards, practice questions, teach it to someone, do a brain dump, make a concept map, or summarize everything from memory.",
+            quality: "less",
+            reaction:
+              "Okay…that’s kind of a lot. Which one am I supposed to do?",
+            impact:
+              "Jordan becomes overwhelmed and the appointment starts to get off track.",
+            next: "recoverPrescribing"
+          }
+        ]
+      },
+
+      recoverPrescribing: {
+        scene: "Recovery Branch",
+        skill: "Powerful Questions",
+        progress: 68,
+        student:
+          "I’m not really sure which strategy I’m supposed to use.",
+        prompt:
+          "You’ve started prescribing strategies before allowing Jordan to do some of the cognitive lift. What can you say to empower Jordan to think of possible solutions?",
+        choices: [
+          {
+            text:
+              "You mentioned that you think you might need to rely on your notes less and find a way to test yourself. What are some ways that come to mind for you that might help you do this?",
+            quality: "strong",
+            reaction:
+              "I could probably study a section and then close everything and try to write down what I remember. Then I could check my notes afterward.",
+            impact:
+              "You return ownership to Jordan and help the student generate a strategy.",
+            next: "goal"
+          },
+          {
+            text:
+              "What if you took notes on a section and then, when you got through the section, you put your notes away and tried to quiz yourself on what you remember?",
+            quality: "less",
+            reaction:
+              "Yeah, I’ll do that. I think that’s all I needed help with today. Thank you for your help.",
+            impact:
+              "You did the thinking for Jordan. The strategy may work, but the goal is still coach-created and not yet specific.",
+            next: "goalNeedsOwnership"
+          }
+        ]
+      },
+
+      goal: {
+        scene: "Scene 6",
+        skill: "Goal-Setting",
+        progress: 78,
+        student:
+          "I like the idea of closing my notes and writing down what I remember.",
+        prompt: "Which response creates the strongest goal-setting conversation?",
+        choices: [
+          {
+            text:
+              "Let’s make that a little more concrete. When do you plan to try it, and what exactly will you do?",
+            quality: "strong",
+            reaction:
+              "I’m studying tomorrow evening. After I finish one section, I’ll close my materials and spend about five minutes writing everything I can remember before I check my notes.",
+            impact:
+              "Jordan’s general intention becomes a clear and realistic next step.",
+            next: "closing"
+          },
+          {
+            text:
+              "Great! So your goal is to use better study strategies.",
+            quality: "less",
+            reaction:
+              "Yeah.",
+            impact:
+              "The goal sounds positive but remains vague. Jordan could leave without knowing exactly what action to take.",
+            next: "goalNeedsOwnership"
+          },
+          {
+            text:
+              "Perfect. You should do that for every section you study from now on.",
+            quality: "less",
+            reaction:
+              "Every section? I’m not sure I’ll have enough time to do that.",
+            impact:
+              "A manageable idea has become a larger coach-created commitment that Jordan is already questioning.",
+            next: "goalNeedsOwnership"
+          }
+        ]
+      },
+
+      goalNeedsOwnership: {
+        scene: "Recovery Branch",
+        skill: "Goal-Setting",
+        progress: 84,
+        student:
+          "I think I know the general idea, but I’m still not totally sure what I’m going to do.",
+        prompt:
+          "Jordan doesn’t have a clear goal yet. What can you say to help create something more specific and actionable?",
+        choices: [
+          {
+            text:
+              "Closing your notes and rewriting what you remember sounds like a strong foundation. How do you envision that process going when you sit down to do it?",
+            quality: "strong",
+            reaction:
+              "Tomorrow evening, after I finish one section, I’ll close my materials and spend about five minutes writing what I remember before checking my notes.",
+            impact:
+              "You help Jordan add specificity while still allowing the student to design the plan.",
+            next: "closing"
+          },
+          {
+            text:
+              "I think you should start doing this today when we get done with our call. Open up the next section that you need to work on, go through it and take good notes, then take a short break, come back, and write down what you remember. How does that sound?",
+            quality: "less",
+            reaction:
+              "Yeah, I’ll do that. I think that’s all I needed help with today.",
+            impact:
+              "The coach has created the goal for the student, which reduces ownership.",
+            next: "closing"
+          }
+        ]
+      },
+
+      closing: {
+        scene: "Scene 7",
+        skill: "Goal-Setting + Active Listening",
+        progress: 94,
+        student:
+          "So my plan is to try this during my next study session and see how it goes.",
+        prompt: "What should you do before ending the appointment?",
+        choices: [
+          {
+            text:
+              "How are you feeling about that plan? Does it feel realistic for you to follow through on?",
+            quality: "strong",
+            reaction:
+              "Yeah. Starting with one section actually feels really manageable. If it helps, I can start doing it more often.",
+            impact:
+              "You check for student ownership and realism before ending the appointment.",
+            next: "end"
+          },
+          {
+            text:
+              "Sounds good! I think we’ve got a great plan as long as you stick to it. Make sure to reach out if there is anything you need at all.",
+            quality: "moderate",
+            reaction:
+              "Okay.",
+            impact:
+              "The goal exists, but the closing becomes more directive and misses an opportunity to check how Jordan feels about the plan.",
+            next: "end"
+          }
+        ]
+      },
+
+      end: {
+        scene: "Final Scene",
+        skill: "Reflection",
+        progress: 100,
+        student:
+          "I actually feel a lot better than I did when we started. I was thinking that I just wasn’t good at remembering things, but now I can see that there’s something specific I can change. I’m going to try that tomorrow. Thanks for your help. Bye.",
+        prompt: "",
+        choices: []
+      }
+    };
+
+
+    /* =========================================================
+       SIMULATION ENGINE
+    ========================================================== */
+
+    const studentText = document.getElementById("student-text");
+    const simPrompt = document.getElementById("sim-prompt");
+    const choiceList = document.getElementById("choice-list");
+    const simResult = document.getElementById("sim-result");
+    const studentReactionText = document.getElementById("student-reaction-text");
+    const impactLabel = document.getElementById("impact-label");
+    const impactText = document.getElementById("impact-text");
+    const simNext = document.getElementById("sim-next");
+    const simSceneLabel = document.getElementById("sim-scene-label");
+    const simSkillLabel = document.getElementById("sim-skill-label");
+    const simProgressBar = document.getElementById("sim-progress-bar");
+    const simProgressText = document.getElementById("sim-progress-text");
+    const simSkillText = document.getElementById("sim-skill-text");
+    const simStage = document.getElementById("sim-stage");
+    const simulationComplete = document.getElementById("simulation-complete");
+    const simSummary = document.getElementById("sim-summary");
+    const restartSimulationButton = document.getElementById("restart-simulation");
+
+    let currentNode = "start";
+    let pendingNextNode = null;
+    let stats = {
+      strong: 0,
+      moderate: 0,
+      less: 0,
+      choices: 0
+    };
+
+    function labelForQuality(quality) {
+      if (quality === "strong") return "Strong coaching move";
+      if (quality === "moderate") return "Less effective";
+      return "Needs redirection";
+    }
+
+    function saveSimulationState() {
+      localStorage.setItem(STORAGE.simulationNode, currentNode);
+      localStorage.setItem(STORAGE.simulationStats, JSON.stringify(stats));
+    }
+
+    function renderNode(nodeId) {
+      currentNode = nodeId;
+      const node = nodes[nodeId];
+
+      if (!node) {
+        console.error("Simulation node not found:", nodeId);
+        return;
+      }
+
+      saveSimulationState();
+
+      simResult.classList.remove("visible");
+      choiceList.innerHTML = "";
+      pendingNextNode = null;
+
+      simSceneLabel.textContent = node.scene;
+      simSkillLabel.textContent = node.skill;
+      simSkillText.textContent = node.skill;
+      simProgressBar.style.width = `${node.progress}%`;
+      simProgressText.textContent = node.progress >= 100 ? "Scenario complete" : "Scenario in progress";
+
+      studentText.textContent = node.student;
+      simPrompt.textContent = node.prompt || "";
+
+      if (nodeId === "end") {
+        setTimeout(completeSimulation, 450);
+        return;
+      }
+
+      node.choices.forEach((choice, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "choice-button";
+        button.innerHTML = `<strong>${String.fromCharCode(65 + index)}.</strong> ${choice.text}`;
+        button.addEventListener("click", () => selectChoice(choice));
+        choiceList.appendChild(button);
+      });
+    }
+
+    function selectChoice(choice) {
+      const buttons = choiceList.querySelectorAll("button");
+      buttons.forEach(button => button.disabled = true);
+
+      stats[choice.quality] += 1;
+      stats.choices += 1;
+
+      studentReactionText.textContent = choice.reaction;
+      impactLabel.textContent = labelForQuality(choice.quality);
+      impactLabel.className = `impact-label ${choice.quality}`;
+      impactText.textContent = choice.impact;
+
+      pendingNextNode = choice.next;
+      simResult.classList.add("visible");
+
+      saveSimulationState();
+    }
+
+    simNext.addEventListener("click", () => {
+      if (pendingNextNode) {
+        renderNode(pendingNextNode);
+        simStage.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+
+    function completeSimulation() {
+      simStage.style.display = "none";
+      simulationComplete.classList.add("visible");
+      localStorage.setItem(STORAGE.simulationCompleted, "true");
+
+      const total = Math.max(stats.choices, 1);
+      const strongPercent = Math.round((stats.strong / total) * 100);
+
+      simSummary.textContent =
+        `You made ${stats.choices} coaching decisions in this path. ${stats.strong} were strong coaching moves. ` +
+        `Use the debrief above to think about where you maintained student ownership and where you had to recover the conversation.`;
+
+      unlockSelfEvaluation();
+    }
+
+    function restartSimulation() {
+      currentNode = "start";
+      pendingNextNode = null;
+      stats = { strong: 0, moderate: 0, less: 0, choices: 0 };
+
+      localStorage.removeItem(STORAGE.simulationCompleted);
+      localStorage.removeItem(STORAGE.simulationNode);
+      localStorage.removeItem(STORAGE.simulationStats);
+
+      simStage.style.display = "block";
+      simulationComplete.classList.remove("visible");
+      renderNode("start");
+      lockSelfEvaluation();
+
+      document.getElementById("step-two").scrollIntoView({ behavior: "smooth" });
+    }
+
+    restartSimulationButton.addEventListener("click", restartSimulation);
+
+    function loadSimulationState() {
+      const isCompleted = localStorage.getItem(STORAGE.simulationCompleted) === "true";
+      const savedNode = localStorage.getItem(STORAGE.simulationNode);
+      const savedStats = localStorage.getItem(STORAGE.simulationStats);
+
+      if (savedStats) {
+        try {
+          stats = JSON.parse(savedStats);
+        } catch (error) {
+          stats = { strong: 0, moderate: 0, less: 0, choices: 0 };
+        }
+      }
+
+      if (isCompleted) {
+        simStage.style.display = "none";
+        simulationComplete.classList.add("visible");
+        simProgressBar.style.width = "100%";
+        simProgressText.textContent = "Scenario complete";
+        simSummary.textContent =
+          `You completed the branching scenario. You made ${stats.choices || 0} coaching decisions and can restart the simulation at any time for additional practice.`;
+        unlockSelfEvaluation();
+      } else {
+        simStage.style.display = "block";
+        simulationComplete.classList.remove("visible");
+        renderNode(savedNode && nodes[savedNode] ? savedNode : "start");
+      }
+    }
+
+
+    /* =========================================================
+       SELF-EVALUATION
+    ========================================================== */
+
+    const selfEvalFormWrap = document.getElementById("self-eval-form-wrap");
+    const selfEvalForm = document.getElementById("self-evaluation-form");
+    const formStatus = document.getElementById("form-status");
+    const congratulations = document.getElementById("congratulations");
+    const requestRecordingButton = document.getElementById("request-recording-button");
+    const recordingRequestStatus = document.getElementById("recording-request-status");
+
+    function unlockSelfEvaluation() {
+      selfEvalFormWrap.classList.remove("locked");
+      requestRecordingButton.disabled = false;
+    }
+
+    function lockSelfEvaluation() {
+      selfEvalFormWrap.classList.add("locked");
+      requestRecordingButton.disabled = true;
+      recordingRequestStatus.textContent = "Complete the simulation before requesting your recording.";
+    }
+
+    /* =========================================================
+       RECORDING REQUEST / POWER AUTOMATE
+    ========================================================== */
+
+    const recordingModalBackdrop = document.getElementById("recording-modal-backdrop");
+    const recordingRequestForm = document.getElementById("recording-request-form");
+    const recordingRequestName = document.getElementById("recording-request-name");
+    const recordingRequestError = document.getElementById("recording-request-error");
+    const cancelRecordingRequest = document.getElementById("cancel-recording-request");
+    const submitRecordingRequest = document.getElementById("submit-recording-request");
+
+    function openRecordingRequestModal() {
+      if (requestRecordingButton.disabled) return;
+
+      const savedName = localStorage.getItem(STORAGE.coachName) || selfNameInput.value || "";
+      recordingRequestName.value = savedName;
+      recordingRequestError.textContent = "";
+      recordingModalBackdrop.classList.add("visible");
+      document.body.style.overflow = "hidden";
+
+      setTimeout(() => {
+        recordingRequestName.focus();
+        recordingRequestName.select();
+      }, 50);
+    }
+
+    function closeRecordingRequestModal() {
+      recordingModalBackdrop.classList.remove("visible");
+      document.body.style.overflow = "";
+      requestRecordingButton.focus();
+    }
+
+    requestRecordingButton.addEventListener("click", openRecordingRequestModal);
+    cancelRecordingRequest.addEventListener("click", closeRecordingRequestModal);
+
+    recordingModalBackdrop.addEventListener("click", event => {
+      if (event.target === recordingModalBackdrop) closeRecordingRequestModal();
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && recordingModalBackdrop.classList.contains("visible")) {
+        closeRecordingRequestModal();
+      }
+    });
+
+    recordingRequestForm.addEventListener("submit", async event => {
+      event.preventDefault();
+
+      const name = recordingRequestName.value.trim();
+
+      if (name.length < 3 || !name.includes(" ")) {
+        recordingRequestError.textContent = "Please enter your first and last name.";
+        recordingRequestName.focus();
+        return;
+      }
+
+      const payload = {
+        name,
+        learningPath: "Foundations of Coaching",
+        requestType: "Call or live event recording request",
+        requestedAt: new Date().toISOString()
+      };
+
+      localStorage.setItem(STORAGE.coachName, name);
+      startNameInput.value = name;
+      selfNameInput.value = name;
+      submitRecordingRequest.disabled = true;
+      submitRecordingRequest.textContent = "Sending...";
+      recordingRequestError.textContent = "";
+
+      try {
+        if (!RECORDING_REQUEST_ENDPOINT) {
+          localStorage.setItem(STORAGE.recordingRequest, JSON.stringify(payload));
+          closeRecordingRequestModal();
+          recordingRequestStatus.textContent =
+            "Recording request is ready, but the Power Automate link still needs to be added to the page code.";
+          return;
+        }
+
+        const response = await fetch(RECORDING_REQUEST_ENDPOINT, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          throw new Error(`Request failed with status ${response.status}`);
+        }
+
+        localStorage.setItem(STORAGE.recordingRequest, JSON.stringify(payload));
+        closeRecordingRequestModal();
+        recordingRequestStatus.textContent =
+          `Recording requested for ${name}. The development team has been notified.`;
+
+      } catch (error) {
+        console.error("Recording request failed:", error);
+        recordingRequestError.textContent =
+          "The request could not be sent. Please try again or contact the development team.";
+      } finally {
+        submitRecordingRequest.disabled = false;
+        submitRecordingRequest.textContent = "Send Request";
+      }
+    });
+
+    function restoreRecordingRequestStatus() {
+      const savedRequest = localStorage.getItem(STORAGE.recordingRequest);
+      if (!savedRequest) return;
+
+      try {
+        const request = JSON.parse(savedRequest);
+        if (request.name && localStorage.getItem(STORAGE.simulationCompleted) === "true") {
+          recordingRequestStatus.textContent =
+            `A recording request was previously submitted for ${request.name} on this browser.`;
+        }
+      } catch (error) {
+        console.warn("Could not restore recording request status.", error);
+      }
+    }
+
+    function formDataToObject(form) {
+      const formData = new FormData(form);
+      return Object.fromEntries(formData.entries());
+    }
+
+    async function submitSelfEvaluation(event) {
+      event.preventDefault();
+
+      if (!selfEvalForm.checkValidity()) {
+        selfEvalForm.reportValidity();
+        return;
+      }
+
+      const submission = {
+        ...formDataToObject(selfEvalForm),
+        learningPath: "Foundations of Coaching",
+        startedAt: localStorage.getItem(STORAGE.startDate) || "",
+        submittedAt: new Date().toISOString(),
+        simulationCompleted: localStorage.getItem(STORAGE.simulationCompleted) === "true"
+      };
+
+      formStatus.textContent = "Submitting…";
+      formStatus.className = "form-status";
+
+      try {
+        if (SELF_EVAL_ENDPOINT) {
+          const response = await fetch(SELF_EVAL_ENDPOINT, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(submission)
+          });
+
+          if (!response.ok) {
+            throw new Error(`Submission failed with status ${response.status}`);
+          }
+        }
+
+        localStorage.setItem(STORAGE.selfEvaluation, JSON.stringify(submission));
+        localStorage.setItem(STORAGE.learningPathCompleted, "true");
+
+        formStatus.textContent = SELF_EVAL_ENDPOINT
+          ? "Your self-evaluation was submitted successfully."
+          : "Your self-evaluation has been saved in this browser.";
+
+        formStatus.className = "form-status light-success-text";
+
+        congratulations.classList.add("visible");
+
+        setTimeout(() => {
+          congratulations.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 250);
+
+      } catch (error) {
+        console.error(error);
+        formStatus.textContent =
+          "Your responses could not be submitted. Please try again or contact your facilitator.";
+        formStatus.className = "form-status";
+      }
+    }
+
+    selfEvalForm.addEventListener("submit", submitSelfEvaluation);
+
+
+    /* =========================================================
+       RESTORE SAVED PAGE STATE
+    ========================================================== */
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const savedName = localStorage.getItem(STORAGE.coachName);
+
+      if (savedName) {
+        startNameInput.value = savedName;
+        selfNameInput.value = savedName;
+        startStatus.textContent = `Learning path started for ${savedName}.`;
+        startStatus.className = "start-status success-text";
+      }
+
+      if (localStorage.getItem(STORAGE.simulationUnlocked) === "true") {
+        simulationLock.style.display = "none";
+        simulationShell.classList.add("visible");
+        loadSimulationState();
+    restoreRecordingRequestStatus();
+      }
+
+      if (localStorage.getItem(STORAGE.simulationCompleted) === "true") {
+        unlockSelfEvaluation();
+      } else {
+        lockSelfEvaluation();
+      }
+
+      if (localStorage.getItem(STORAGE.learningPathCompleted) === "true") {
+        congratulations.classList.add("visible");
+      }
+
+      const savedEval = localStorage.getItem(STORAGE.selfEvaluation);
+
+      if (savedEval) {
+        try {
+          const values = JSON.parse(savedEval);
+
+          Object.entries(values).forEach(([name, value]) => {
+            const field = selfEvalForm.elements[name];
+
+            if (!field) return;
+
+            if (field instanceof RadioNodeList) {
+              field.value = value;
+            } else if (field && "value" in field) {
+              field.value = value;
+            }
+          });
+        } catch (error) {
+          console.warn("Could not restore saved self-evaluation.", error);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
