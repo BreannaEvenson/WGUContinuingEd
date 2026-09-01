@@ -2338,6 +2338,8 @@
 
     const SELF_EVALUATION_ENDPOINT =
   "https://foundationsofcoachingselfeval.breanna-evenson.workers.dev/";
+    const SIMULATION_ENDPOINT =
+  "https://foundationsofcoachingsimulation.breanna-evenson.workers.dev/";
 
 
     /* =========================================================
@@ -2363,6 +2365,11 @@
 
       simulationStats:
         "foundations_simulation_stats",
+      simulationResponses:
+  "foundations_simulation_responses",
+
+simulationAttemptId:
+  "foundations_simulation_attempt_id",
 
       simulationCompleted:
         "foundations_simulation_completed",
@@ -3950,7 +3957,47 @@
       less: 0
 
     };
+let simulationResponses = [];
 
+const savedSimulationResponses =
+  localStorage.getItem(
+    STORAGE.simulationResponses
+  );
+
+if (savedSimulationResponses) {
+
+  try {
+
+    simulationResponses =
+      JSON.parse(
+        savedSimulationResponses
+      );
+
+  } catch (error) {
+
+    simulationResponses = [];
+
+  }
+
+}
+
+
+let simulationAttemptId =
+  localStorage.getItem(
+    STORAGE.simulationAttemptId
+  );
+
+if (!simulationAttemptId) {
+
+  simulationAttemptId =
+    crypto.randomUUID();
+
+  localStorage.setItem(
+    STORAGE.simulationAttemptId,
+    simulationAttemptId
+  );
+
+}
 
     /* =========================================================
        UNLOCK SIMULATION
@@ -4294,7 +4341,17 @@
         simulationStats.less++;
 
       }
+simulationResponses.push({
+  selectedResponse: option.text,
+  bestChoice: option.quality === "best"
+});
 
+localStorage.setItem(
+  STORAGE.simulationResponses,
+  JSON.stringify(
+    simulationResponses
+  )
+);
 
       localStorage.setItem(
         STORAGE.simulationStats,
@@ -4424,7 +4481,7 @@
        COMPLETE SIMULATION
     ========================================================== */
 
-    function finishSimulation(
+    async function finishSimulation(
       ending
     ) {
 
@@ -4450,7 +4507,36 @@
         STORAGE.simulationNode,
         "complete"
       );
+try {
 
+  const coachName =
+    localStorage.getItem(
+      STORAGE.coachName
+    ) || "";
+
+  await fetch(
+    SIMULATION_ENDPOINT,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        coachName: coachName,
+        attemptId: simulationAttemptId,
+        responses: simulationResponses
+      })
+    }
+  );
+
+} catch (error) {
+
+  console.error(
+    "Could not save simulation responses:",
+    error
+  );
+
+}
 
       simulationComplete.classList.add(
         "visible"
@@ -4513,6 +4599,24 @@
         less: 0
 
       };
+
+      simulationResponses = [];
+
+simulationAttemptId =
+  crypto.randomUUID();
+
+localStorage.setItem(
+  STORAGE.simulationAttemptId,
+  simulationAttemptId
+);
+
+localStorage.removeItem(
+  STORAGE.simulationResponses
+);
+
+      localStorage.removeItem(
+  STORAGE.simulationAttemptId
+);
 
 
       localStorage.removeItem(
