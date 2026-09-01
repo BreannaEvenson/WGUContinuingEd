@@ -2306,6 +2306,16 @@
 
     /*
     =============================================================
+    START TRACKING ENDPOINT
+    =============================================================
+    */
+
+    const START_ENDPOINT =
+      "https://foundationsofcoachingstart.breanna-evenson.workers.dev/";
+
+
+    /*
+    =============================================================
     ADD POWER AUTOMATE RECORDING REQUEST LINK HERE
 
     Paste the HTTP trigger URL from your Power Automate flow
@@ -2340,6 +2350,9 @@
 
       startDate:
         "foundations_start_date",
+
+      startSynced:
+        "foundations_start_synced",
 
       simulationUnlocked:
         "foundations_simulation_unlocked",
@@ -2382,7 +2395,7 @@
       document.getElementById("self-name");
 
 
-    function confirmLearningPathStart() {
+    async function confirmLearningPathStart() {
 
       const name =
         startNameInput.value.trim();
@@ -2404,34 +2417,152 @@
       }
 
 
-      localStorage.setItem(
-        STORAGE.coachName,
-        name
-      );
+      const alreadySynced =
+        localStorage.getItem(
+          STORAGE.startSynced
+        ) === "true" &&
+        localStorage.getItem(
+          STORAGE.coachName
+        ) === name;
+
 
       if (
-        !localStorage.getItem(
-          STORAGE.startDate
-        )
+        alreadySynced
       ) {
 
-        localStorage.setItem(
-          STORAGE.startDate,
-          new Date().toISOString()
-        );
+        selfNameInput.value =
+          name;
 
+        startStatus.textContent =
+          `Learning path started for ${name}.`;
+
+        startStatus.className =
+          "success-text";
+
+        return;
       }
 
 
-      selfNameInput.value =
-        name;
-
+      confirmStartButton.disabled =
+        true;
 
       startStatus.textContent =
-        `Learning path started for ${name}.`;
+        "Recording your start...";
 
       startStatus.className =
-        "success-text";
+        "";
+
+
+      try {
+
+        const response =
+          await fetch(
+            START_ENDPOINT,
+            {
+              method: "POST",
+
+              headers: {
+                "Content-Type":
+                  "application/json"
+              },
+
+              body:
+                JSON.stringify({
+                  name
+                })
+            }
+          );
+
+
+        const result =
+          await response
+            .json()
+            .catch(
+              () => ({})
+            );
+
+
+        if (
+          !response.ok ||
+          result.success !== true
+        ) {
+
+          throw new Error(
+            result.message ||
+            "Unable to record start."
+          );
+
+        }
+
+
+        const centralStartDate =
+          new Intl.DateTimeFormat(
+            "en-CA",
+            {
+              timeZone:
+                "America/Chicago",
+
+              year:
+                "numeric",
+
+              month:
+                "2-digit",
+
+              day:
+                "2-digit"
+            }
+          ).format(
+            new Date()
+          );
+
+
+        localStorage.setItem(
+          STORAGE.coachName,
+          name
+        );
+
+        localStorage.setItem(
+          STORAGE.startDate,
+          centralStartDate
+        );
+
+        localStorage.setItem(
+          STORAGE.startSynced,
+          "true"
+        );
+
+
+        selfNameInput.value =
+          name;
+
+
+        startStatus.textContent =
+          `Learning path started for ${name}.`;
+
+        startStatus.className =
+          "success-text";
+
+      } catch (
+        error
+      ) {
+
+        console.error(
+          "Start tracking error:",
+          error
+        );
+
+        startStatus.textContent =
+          "We couldn't record your start. Please try again.";
+
+        startStatus.className =
+          "error-text";
+
+      } finally {
+
+        confirmStartButton.disabled =
+          false;
+
+      }
 
     }
 
