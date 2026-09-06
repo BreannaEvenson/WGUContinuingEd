@@ -1,0 +1,5135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Outreach Learning Path</title>
+
+  <style>
+    :root {
+      --navy-dark: #001731;
+      --navy: #002855;
+      --light-blue: #EEF6F9;
+      --light-gray: #F1F1F1;
+      --gray: #A7A7A7;
+      --blue: #0070F0;
+      --sky-blue: #46B1EF;
+      --green: #97E142;
+      --white: #FFFFFF;
+      --error: #B3261E;
+      --warning: #8A5400;
+      --shadow: 0 8px 24px rgba(0, 23, 49, 0.10);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--light-blue);
+      color: var(--navy-dark);
+      line-height: 1.55;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    video:focus-visible,
+    .drop-zone:focus-visible,
+    .resource-chip:focus-visible {
+      outline: 4px solid var(--green);
+      outline-offset: 3px;
+    }
+
+    .section {
+      padding: 70px 40px;
+    }
+
+    .section-inner {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+    }
+
+    .section-white {
+      background: var(--white);
+    }
+
+    .section-light {
+      background: var(--light-blue);
+    }
+
+    .section-gray {
+      background: var(--light-gray);
+    }
+
+    .section-navy {
+      background: var(--navy-dark);
+      color: var(--white);
+    }
+
+    .big-heading {
+      margin: 0 0 22px;
+      font-size: clamp(3rem, 7vw, 5.8rem);
+      line-height: 0.98;
+      font-weight: 800;
+      color: var(--blue);
+      letter-spacing: -0.04em;
+    }
+
+    .section-navy .big-heading {
+      color: var(--white);
+    }
+
+    .section-heading {
+      margin: 0 0 16px;
+      color: var(--navy);
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+    }
+
+    .step-label {
+      color: var(--blue);
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 800;
+      line-height: 1;
+      margin: 0 0 10px;
+      text-transform: uppercase;
+    }
+
+    .lead {
+      font-size: 1.08rem;
+      max-width: 900px;
+    }
+
+    .small-note {
+      font-size: 0.9rem;
+      color: #526474;
+    }
+
+    .success-text {
+      color: #2A6900;
+      font-weight: 700;
+    }
+
+    .error-text {
+      color: var(--error);
+      font-weight: 700;
+    }
+
+    .primary-button,
+    .secondary-button {
+      border: 0;
+      border-radius: 9px;
+      padding: 13px 22px;
+      font-weight: 800;
+    }
+
+    .primary-button {
+      background: var(--blue);
+      color: var(--white);
+    }
+
+    .primary-button:hover {
+      background: var(--navy);
+    }
+
+    .primary-button:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    .secondary-button {
+      background: var(--light-gray);
+      color: var(--navy);
+      border: 2px solid #B8CDDC;
+    }
+
+    .secondary-button:hover {
+      background: #E1EBF2;
+    }
+
+    .wide-button {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    /* =========================================================
+       HERO
+    ========================================================== */
+
+    #start {
+      padding-top: 55px;
+      padding-bottom: 55px;
+    }
+
+    .hero-title {
+      width: 100%;
+      max-width: none;
+      margin: 0 0 24px;
+    }
+
+    .hero-copy {
+      max-width: 820px;
+      margin: 0 0 30px;
+      font-size: 1.12rem;
+      color: #D8ECF6;
+    }
+
+    .start-box {
+      width: 100%;
+      background: var(--white);
+      color: var(--navy-dark);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .start-box label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .name-row {
+      display: flex;
+      width: 100%;
+    }
+
+    .name-row input {
+      flex: 1;
+      min-width: 0;
+      border: 2px solid #B8CDDC;
+      border-right: 0;
+      border-radius: 9px 0 0 9px;
+      padding: 14px 16px;
+    }
+
+    .name-row button {
+      border: 0;
+      background: var(--blue);
+      color: var(--white);
+      padding: 14px 26px;
+      border-radius: 0 9px 9px 0;
+      font-weight: 700;
+    }
+
+    .name-row button:hover {
+      background: var(--navy);
+    }
+
+    #start-status {
+      min-height: 24px;
+      margin: 10px 0 0;
+      font-size: 0.9rem;
+    }
+
+    /* =========================================================
+       OVERALL PROGRESS
+    ========================================================== */
+
+    .overall-progress {
+      margin-top: 28px;
+      padding: 18px 20px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+    }
+
+    .overall-progress-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      font-size: 0.9rem;
+      margin-bottom: 9px;
+      color: #D8ECF6;
+    }
+
+    .progress-track {
+      height: 9px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    #overall-progress-bar {
+      height: 100%;
+      width: 0;
+      background: var(--green);
+      border-radius: inherit;
+      transition: width 0.3s ease;
+    }
+
+    /* =========================================================
+       OBJECTIVES
+    ========================================================== */
+
+    .objectives-intro {
+      margin: 0 0 30px;
+      font-size: 1.05rem;
+    }
+
+    .objectives-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .objective-card {
+      background: var(--white);
+      border: 1px solid rgba(0, 40, 85, 0.15);
+      border-top: 5px solid var(--sky-blue);
+      border-radius: 14px;
+      padding: 25px;
+      min-height: 135px;
+      box-shadow: var(--shadow);
+    }
+
+    .objective-card strong {
+      color: var(--navy);
+    }
+
+    /* =========================================================
+       WHAT YOU'LL DO
+    ========================================================== */
+
+    .activity-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 35px;
+    }
+
+    .activity-card {
+      background: var(--white);
+      border-radius: 15px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      border-top: 5px solid var(--sky-blue);
+    }
+
+    .activity-number {
+      display: inline-flex;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      background: var(--green);
+      color: var(--navy-dark);
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .activity-card h3 {
+      color: var(--navy);
+      margin: 0 0 10px;
+    }
+
+    /* =========================================================
+       SHARED STEP STYLES
+    ========================================================== */
+
+    .step-intro {
+      max-width: 950px;
+      margin-top: 25px;
+    }
+
+    .step-shell {
+      margin-top: 34px;
+    }
+
+    .locked-content {
+      position: relative;
+    }
+
+    .locked-content.is-locked > .unlockable {
+      opacity: 0.28;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .lock-message {
+      display: none;
+      background: var(--navy-dark);
+      color: var(--white);
+      border-left: 6px solid var(--green);
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin-bottom: 24px;
+      font-weight: 700;
+    }
+
+    .locked-content.is-locked .lock-message {
+      display: block;
+    }
+
+    .completion-banner {
+      display: none;
+      margin-top: 18px;
+      padding: 15px 18px;
+      border-radius: 10px;
+      background: #EAF7DF;
+      border-left: 5px solid var(--green);
+      color: #234E00;
+      font-weight: 700;
+    }
+
+    .completion-banner.visible {
+      display: block;
+    }
+
+    /* =========================================================
+       VIDEO
+    ========================================================== */
+
+    .video-wrap {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      overflow: hidden;
+    }
+
+    .video-wrap video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: contain;
+      background: #000;
+    }
+
+    /* =========================================================
+       QUIZ QUESTIONS
+    ========================================================== */
+
+    fieldset.quiz-question {
+      border: 0;
+      padding: 0;
+      margin: 0 0 30px;
+    }
+
+    fieldset.quiz-question:last-child {
+      margin-bottom: 0;
+    }
+
+    .quiz-question legend {
+      width: 100%;
+      color: var(--navy);
+      font-weight: 800;
+      font-size: 1.04rem;
+      margin-bottom: 13px;
+    }
+
+    .option-list {
+      display: grid;
+      gap: 9px;
+    }
+
+    .radio-option {
+      display: block;
+      position: relative;
+    }
+
+    .radio-option input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .radio-option span {
+      display: block;
+      border: 2px solid #CEDAE3;
+      background: var(--white);
+      border-radius: 9px;
+      padding: 12px 14px;
+      transition:
+        border-color 0.15s ease,
+        background 0.15s ease;
+    }
+
+    .radio-option input:checked + span {
+      border-color: var(--blue);
+      background: #E9F4FF;
+    }
+
+    .radio-option input:focus-visible + span {
+      outline: 4px solid var(--green);
+      outline-offset: 2px;
+    }
+
+    .quiz-question.review-correct {
+      border-left: 5px solid var(--green);
+      padding-left: 16px;
+    }
+
+    .quiz-question.review-incorrect {
+      border-left: 5px solid #F0A23B;
+      padding-left: 16px;
+    }
+
+    .status-line {
+      min-height: 24px;
+      margin: 12px 0 0;
+      font-weight: 700;
+    }
+
+    /* =========================================================
+       CLICK-THROUGH AUDIO / VIDEO QUIZ
+    ========================================================== */
+
+    .audio-interactive {
+      margin-top: 30px;
+      background: var(--white);
+      border: 1px solid rgba(0, 40, 85, 0.12);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .audio-progress-wrap {
+      padding: 20px 24px 18px;
+      background: var(--navy-dark);
+      color: var(--white);
+      border-bottom: 5px solid var(--sky-blue);
+    }
+
+    .audio-progress-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 9px;
+      color: #D8ECF6;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .audio-progress-track {
+      height: 9px;
+      background: rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    #audio-progress-bar {
+      height: 100%;
+      width: 0;
+      background: var(--green);
+      border-radius: inherit;
+      transition: width 0.25s ease;
+    }
+
+    .audio-screen {
+      display: none;
+    }
+
+    .audio-screen.active {
+      display: block;
+    }
+
+    .audio-screen-header {
+      padding: 26px 28px 10px;
+    }
+
+    .audio-screen-header .eyebrow {
+      margin: 0 0 6px;
+      color: var(--blue);
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .audio-screen-header h3 {
+      margin: 0;
+      color: var(--navy);
+      font-size: clamp(1.45rem, 3vw, 2rem);
+    }
+
+    .audio-screen .video-wrap {
+      margin-top: 14px;
+    }
+
+    .audio-question-body {
+      padding: 12px 28px 4px;
+    }
+
+    .audio-question-body fieldset.quiz-question {
+      margin-bottom: 0;
+    }
+
+    .audio-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 24px 28px 28px;
+      flex-wrap: wrap;
+    }
+
+    .audio-nav .nav-spacer {
+      flex: 1;
+    }
+
+    .audio-nav .secondary-button {
+      border: 2px solid var(--navy);
+      background: var(--white);
+      color: var(--navy);
+      border-radius: 9px;
+      padding: 12px 20px;
+      font-weight: 800;
+    }
+
+    .audio-nav .secondary-button:hover {
+      background: var(--light-blue);
+    }
+
+    .audio-nav button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .audio-inline-status {
+      padding: 0 28px 24px;
+      min-height: 24px;
+      font-weight: 700;
+    }
+
+    /* =========================================================
+       RESOURCE MATCHING READING
+    ========================================================== */
+
+    .reading-card {
+      background: var(--white);
+      border-left: 6px solid var(--sky-blue);
+      border-radius: 14px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      margin-bottom: 32px;
+    }
+
+    .reading-card h3 {
+      margin-top: 0;
+      color: var(--navy);
+      font-size: 1.6rem;
+    }
+
+    .reading-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* =========================================================
+       MATCHING GAME
+    ========================================================== */
+
+    .matching-shell {
+      background: var(--navy-dark);
+      color: var(--white);
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .matching-shell h3 {
+      margin-top: 0;
+    }
+
+    .resource-bank {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 18px 0 28px;
+      padding: 18px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+    }
+
+    .resource-chip {
+      border: 2px solid var(--sky-blue);
+      border-radius: 999px;
+      background: #174A79;
+      color: var(--white);
+      padding: 9px 14px;
+      font-weight: 700;
+      cursor: grab;
+    }
+
+    .resource-chip:hover,
+    .resource-chip.selected {
+      background: var(--blue);
+    }
+
+    .resource-chip.used {
+      opacity: 0.45;
+    }
+
+    .resource-chip:active {
+      cursor: grabbing;
+    }
+
+    .matching-instructions {
+      color: #D8ECF6;
+      margin-bottom: 0;
+    }
+
+    .scenario-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .scenario-card {
+      background: var(--white);
+      color: var(--navy-dark);
+      border-radius: 12px;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 1.45fr 0.8fr;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .scenario-text {
+      margin: 0;
+      font-weight: 700;
+    }
+
+    .drop-zone {
+      width: 100%;
+      min-height: 64px;
+      border: 2px dashed #7CA8C7;
+      border-radius: 10px;
+      background: var(--light-blue);
+      color: var(--navy);
+      padding: 12px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .drop-zone.drag-over {
+      border-color: var(--green);
+      background: #F3FFE8;
+    }
+
+    .drop-zone.has-match {
+      border-style: solid;
+      border-color: var(--blue);
+      background: #E9F4FF;
+    }
+
+    .drop-zone.correct {
+      border-color: #5B9900;
+      background: #EAF7DF;
+    }
+
+    .drop-zone.incorrect {
+      border-color: #C77700;
+      background: #FFF2DD;
+    }
+
+    .matching-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+    }
+
+    /* =========================================================
+       FINAL EXAM
+    ========================================================== */
+
+    .exam-shell {
+      background: var(--navy);
+      color: var(--white);
+      border-radius: 18px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    .exam-shell .quiz-question legend {
+      color: var(--white);
+    }
+
+    .exam-shell .radio-option span {
+      color: var(--white);
+      background: #214C77;
+      border-color: #6C9CBE;
+    }
+
+    .exam-shell .radio-option input:checked + span {
+      background: var(--sky-blue);
+      border-color: var(--sky-blue);
+      color: var(--navy-dark);
+    }
+
+    /* =========================================================
+       CONGRATULATIONS
+    ========================================================== */
+
+    #congratulations {
+      display: none;
+      background: var(--light-blue);
+      text-align: center;
+      padding: 80px 35px;
+    }
+
+    #congratulations.visible {
+      display: block;
+    }
+
+    #congratulations h2 {
+      margin: 0;
+      color: var(--blue);
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      line-height: 1;
+    }
+
+    #congratulations p {
+      max-width: 780px;
+      margin: 22px auto 0;
+      font-size: 1.15rem;
+    }
+
+    .score-pill {
+      display: inline-block;
+      margin-top: 24px;
+      background: var(--navy-dark);
+      color: var(--white);
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-weight: 800;
+    }
+
+    /* =========================================================
+       MOBILE
+    ========================================================== */
+
+    @media (max-width: 900px) {
+      .activity-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 800px) {
+      .section {
+        padding: 50px 20px;
+      }
+
+      .objectives-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .scenario-card {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .activity-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .name-row {
+        display: grid;
+      }
+
+      .name-row input {
+        border-right: 2px solid #B8CDDC;
+        border-radius: 9px 9px 0 0;
+      }
+
+      .name-row button {
+        border-radius: 0 0 9px 9px;
+      }
+
+      .primary-button,
+      .secondary-button {
+        width: 100%;
+      }
+
+      .matching-actions {
+        display: grid;
+      }
+
+      .audio-progress-label {
+        display: grid;
+        gap: 4px;
+      }
+
+      .audio-screen-header,
+      .audio-question-body,
+      .audio-nav {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .audio-nav button {
+        width: 100%;
+      }
+
+      .audio-nav .nav-spacer {
+        display: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================================================
+       HERO / START
+  ========================================================== -->
+
+  <section class="section section-navy" id="start">
+    <div class="section-inner">
+
+      <h1 class="big-heading hero-title">
+        Outreach
+      </h1>
+
+      <p class="hero-copy">
+        Build outreach conversations that feel supportive, curious, and useful —
+        not scripted or transactional.
+      </p>
+
+      <div class="start-box">
+
+        <label for="start-name">
+          Type your first and last name below to begin this learning path.
+        </label>
+
+        <div class="name-row">
+          <input
+            id="start-name"
+            type="text"
+            autocomplete="name"
+            placeholder="First and last name"
+          >
+
+          <button
+            id="confirm-start"
+            type="button"
+          >
+            Confirm
+          </button>
+        </div>
+
+        <p
+          id="start-status"
+          aria-live="polite"
+        ></p>
+
+      </div>
+
+      <div
+        class="overall-progress"
+        aria-label="Learning path progress"
+      >
+        <div class="overall-progress-label">
+          <span>Learning path progress</span>
+          <span id="overall-progress-text">0 of 4 steps complete</span>
+        </div>
+
+        <div class="progress-track">
+          <div id="overall-progress-bar"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================
+       LEARNING OBJECTIVES
+  ========================================================== -->
+
+  <section
+    class="section section-light"
+    id="learning-objectives"
+  >
+    <div class="section-inner">
+
+      <h2 class="big-heading">
+        Learning Objectives
+      </h2>
+
+      <p class="objectives-intro">
+        Throughout this learning path, you should be able to:
+      </p>
+
+      <div class="objectives-grid">
+
+        <div class="objective-card">
+          Explain the purpose and mindset of outreach calling and how it differs
+          from “cold calls.”
+        </div>
+
+        <div class="objective-card">
+          Identify characteristics of an effective, student-centered outreach
+          conversation.
+        </div>
+
+        <div class="objective-card">
+          Apply bite-sized coaching techniques to explore a student’s needs and
+          provide appropriate support.
+        </div>
+
+        <div class="objective-card">
+          Select resources and support options that align with a student’s
+          identified needs.
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================
+       WHAT YOU'LL DO
+  ========================================================== -->
+
+  <section class="section section-gray">
+    <div class="section-inner">
+
+      <h2 class="section-heading">
+        What You'll Do
+      </h2>
+
+      <p class="lead">
+        Complete each step in order. The next activity unlocks when the prior
+        step is completed.
+      </p>
+
+      <div class="activity-grid">
+
+        <div class="activity-card">
+          <span class="activity-number">1</span>
+          <h3>Mindset of Outreach</h3>
+          <p>
+            Watch the overview video about support-focused outreach and
+            bite-sized coaching.
+          </p>
+        </div>
+
+        <div class="activity-card">
+          <span class="activity-number">2</span>
+          <h3>What Did You Hear?</h3>
+          <p>
+            Watch real outreach examples and identify the coaching moves
+            demonstrated in each call.
+          </p>
+        </div>
+
+        <div class="activity-card">
+          <span class="activity-number">3</span>
+          <h3>Resource Matching</h3>
+          <p>
+            Match student needs to the support that most directly addresses
+            what the student shared.
+          </p>
+        </div>
+
+        <div class="activity-card">
+          <span class="activity-number">4</span>
+          <h3>Final Exam</h3>
+          <p>
+            Demonstrate your understanding of outreach mindset, coaching, and
+            resource matching.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================
+       STEP ONE
+  ========================================================== -->
+
+  <section
+    class="section section-white"
+    id="step-one"
+  >
+    <div class="section-inner">
+
+      <p class="step-label">
+        Step One
+      </p>
+
+      <h2 class="section-heading">
+        Mindset of Outreach
+      </h2>
+
+      <p class="lead step-intro">
+        Begin with the overview video on the mindset of outreach, bite-sized
+        coaching conversations, and what effective outreach sounds like.
+      </p>
+
+      <div class="step-shell">
+
+        <!-- PANOPTO VIDEO -->
+        <div
+          class="video-frame"
+          style="
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%;
+            overflow: hidden;
+            border-radius: 16px;
+            background: #000;
+          "
+        >
+          <iframe
+            src="https://wgu.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=d2f121c4-2dde-4412-9ff7-b4bd016c53ac&amp;autoplay=false&amp;offerviewer=true&amp;showtitle=true&amp;showbrand=true&amp;captions=true&amp;interactivity=all"
+            style="
+              border: 1px solid #464646;
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              box-sizing: border-box;
+            "
+            allowfullscreen
+            allow="autoplay"
+            aria-label="Panopto Embedded Video Player"
+            aria-description="The Mindset of Outreach"
+            title="The Mindset of Outreach"
+          ></iframe>
+        </div>
+
+        <p
+          class="small-note"
+          style="margin-top: 12px;"
+        >
+          After you finish watching the video, select the button below to
+          unlock Step Two.
+        </p>
+
+        <button
+          class="primary-button"
+          id="complete-step-one-button"
+          type="button"
+          style="margin-top: 8px;"
+        >
+          I’ve Finished the Video
+        </button>
+
+        <div
+          class="completion-banner"
+          id="step-one-complete"
+        >
+          Step One complete. The What Did You Hear? activity is now unlocked.
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================
+       STEP TWO: WHAT DID YOU HEAR?
+  ========================================================== -->
+
+  <section
+    class="section section-light"
+    id="step-two"
+  >
+    <div class="section-inner">
+
+      <p class="step-label">
+        Step Two
+      </p>
+
+      <h2 class="section-heading">
+        What Did You Hear?
+      </h2>
+
+      <p class="lead step-intro">
+        Move through this activity one screen at a time. Watch each outreach
+        example, then click Next to answer the questions connected to that
+        call. The questions focus on the coaching moves demonstrated — not on
+        memorizing random details.
+      </p>
+
+      <div
+        class="locked-content is-locked"
+        id="audio-lock-wrap"
+      >
+
+        <div
+          class="lock-message"
+          id="audio-lock-message"
+        >
+          Complete Step One to unlock this activity.
+        </div>
+
+        <div class="unlockable">
+
+          <form id="audio-quiz-form">
+
+            <div class="audio-interactive">
+
+              <div class="audio-progress-wrap">
+
+                <div class="audio-progress-label">
+                  <span id="audio-progress-text">
+                    Outreach Example 1 of 4
+                  </span>
+
+                  <span id="audio-screen-count">
+                    1 of 14
+                  </span>
+                </div>
+
+                <div
+                  class="audio-progress-track"
+                  aria-hidden="true"
+                >
+                  <div id="audio-progress-bar"></div>
+                </div>
+
+              </div>
+
+              <!-- =====================================================
+                   KARI VIDEO
+              ====================================================== -->
+
+              <section
+                class="audio-screen"
+                data-screen-type="video"
+                data-screen-label="Kari B – C722 Outreach"
+              >
+                <div class="audio-screen-header">
+                  <p class="eyebrow">
+                    Outreach Example
+                  </p>
+
+                  <h3>
+                    Kari B – C722 Outreach
+                  </h3>
+                </div>
+
+                <div class="video-wrap">
+                  <video
+                    controls
+                    preload="metadata"
+                    playsinline
+                    aria-label="Kari B C722 outreach example"
+                  >
+                    <source
+                      src="Kari%20B%20-%20C722%20Outreach(1).mp4"
+                      type="video/mp4"
+                    >
+
+                    Your browser does not support HTML5 video.
+                  </video>
+                </div>
+
+                <div class="audio-nav">
+
+                  <button
+                    class="secondary-button audio-back"
+                    type="button"
+                  >
+                    Back
+                  </button>
+
+                  <span class="nav-spacer"></span>
+
+                  <button
+                    class="primary-button audio-next"
+                    type="button"
+                  >
+                    Next: Question 1
+                  </button>
+
+                </div>
+              </section>
+
+              <!-- KARI QUESTION 1 -->
+
+              <section
+                class="audio-screen"
+                data-screen-type="question"
+                data-question-name="aq1"
+                data-screen-label="Question 1 of 10"
+              >
+                <div class="audio-screen-header">
+
+                  <p class="eyebrow">
+                    Question 1 of 10
+                  </p>
+
+                  <h3>
+                    Kari B – C722 Outreach
+                  </h3>
+
+                </div>
+
+                <div class="audio-question-body">
+
+                  <fieldset
+                    class="quiz-question"
+                    data-correct="C"
+                  >
+                    <legend>
+                      The student initially indicated that they did not really
+                      have any questions. How did the peer still uncover an
+                      opportunity to provide support?
+                    </legend>
+
+                    <div class="option-list">
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq1"
+                          value="A"
+                        >
+                        <span>
+                          A. The peer ended the call because the student did
+                          not have a question.
+                        </span>
+                      </label>
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq1"
+                          value="B"
+                        >
+                        <span>
+                          B. The peer talked to the student about what most
+                          other students found challenging.
+                        </span>
+                      </label>
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq1"
+                          value="C"
+                        >
+                        <span>
+                          C. The peer continued the conversation and learned
+                          the student wanted more resources outside of the
+                          textbook.
+                        </span>
+                      </label>
+
+                    </div>
+                  </fieldset>
+
+                </div>
+
+                <div class="audio-nav">
+
+                  <button
+                    class="secondary-button audio-back"
+                    type="button"
+                  >
+                    Back
+                  </button>
+
+                  <span class="nav-spacer"></span>
+
+                  <button
+                    class="primary-button audio-next"
+                    type="button"
+                  >
+                    Next: Question 2
+                  </button>
+
+                </div>
+              </section>
+
+              <!-- KARI QUESTION 2 -->
+
+              <section
+                class="audio-screen"
+                data-screen-type="question"
+                data-question-name="aq2"
+                data-screen-label="Question 2 of 10"
+              >
+                <div class="audio-screen-header">
+
+                  <p class="eyebrow">
+                    Question 2 of 10
+                  </p>
+
+                  <h3>
+                    Kari B – C722 Outreach
+                  </h3>
+
+                </div>
+
+                <div class="audio-question-body">
+
+                  <fieldset
+                    class="quiz-question"
+                    data-correct="C"
+                  >
+                    <legend>
+                      How did the peer transition from hearing about the
+                      student’s studying challenge to offering support?
+                    </legend>
+
+                    <div class="option-list">
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq2"
+                          value="A"
+                        >
+                        <span>
+                          A. She told the student they needed to set aside some
+                          time for intentional studying.
+                        </span>
+                      </label>
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq2"
+                          value="B"
+                        >
+                        <span>
+                          B. She suggested dropping the course until the
+                          student had more time.
+                        </span>
+                      </label>
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq2"
+                          value="C"
+                        >
+                        <span>
+                          C. She introduced a relevant resource to the student
+                          to make studying more manageable.
+                        </span>
+                      </label>
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq2"
+                          value="D"
+                        >
+                        <span>
+                          D. She recommended that the student take more
+                          detailed notes since the reading is so dense.
+                        </span>
+                      </label>
+
+                    </div>
+                  </fieldset>
+
+                </div>
+
+                <div class="audio-nav">
+
+                  <button
+                    class="secondary-button audio-back"
+                    type="button"
+                  >
+                    Back
+                  </button>
+
+                  <span class="nav-spacer"></span>
+
+                  <button
+                    class="primary-button audio-next"
+                    type="button"
+                  >
+                    Next: Question 3
+                  </button>
+
+                </div>
+              </section>
+
+              <!-- KARI QUESTION 3 -->
+
+              <section
+                class="audio-screen"
+                data-screen-type="question"
+                data-question-name="aq3"
+                data-screen-label="Question 3 of 10"
+              >
+                <div class="audio-screen-header">
+
+                  <p class="eyebrow">
+                    Question 3 of 10
+                  </p>
+
+                  <h3>
+                    Kari B – C722 Outreach
+                  </h3>
+
+                </div>
+
+                <div class="audio-question-body">
+
+                  <fieldset
+                    class="quiz-question"
+                    data-correct="C"
+                  >
+                    <legend>
+                      How did the peer make it easier for the student to take
+                      action after the call?
+                    </legend>
+
+                    <div class="option-list">
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq3"
+                          value="A"
+                        >
+                        <span>
+                          A. She told the student to go on WGU Connect right
+                          after their call.
+                        </span>
+                      </label>
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq3"
+                          value="B"
+                        >
+                        <span>
+                          B. She told the student to email their course
+                          instructor for the resource.
+                        </span>
+                      </label>
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq3"
+                          value="C"
+                        >
+                        <span>
+                          C. She offered to send a follow-up email containing
+                          the link to the study resource.
+                        </span>
+                      </label>
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq3"
+                          value="D"
+                        >
+                        <span>
+                          D. She provided affirmations to make the student feel
+                          better.
+                        </span>
+                      </label>
+
+                    </div>
+                  </fieldset>
+
+                </div>
+
+                <div class="audio-nav">
+
+                  <button
+                    class="secondary-button audio-back"
+                    type="button"
+                  >
+                    Back
+                  </button>
+
+                  <span class="nav-spacer"></span>
+
+                  <button
+                    class="primary-button audio-next"
+                    type="button"
+                  >
+                    Next: Outreach Example
+                  </button>
+
+                </div>
+              </section>
+
+              <!-- =====================================================
+                   MITCHELL VIDEO
+              ====================================================== -->
+
+              <section
+                class="audio-screen"
+                data-screen-type="video"
+                data-screen-label="Mitchell I – D322 Outreach"
+              >
+                <div class="audio-screen-header">
+
+                  <p class="eyebrow">
+                    Outreach Example
+                  </p>
+
+                  <h3>
+                    Mitchell I – D322 Outreach
+                  </h3>
+
+                </div>
+
+                <div class="video-wrap">
+
+                  <video
+                    controls
+                    preload="metadata"
+                    playsinline
+                    aria-label="Mitchell I D322 outreach example"
+                  >
+                    <source
+                      src="Mitchell%20I%20-%20D322%20Outreach(1).mp4"
+                      type="video/mp4"
+                    >
+
+                    Your browser does not support HTML5 video.
+                  </video>
+
+                </div>
+
+                <div class="audio-nav">
+
+                  <button
+                    class="secondary-button audio-back"
+                    type="button"
+                  >
+                    Back
+                  </button>
+
+                  <span class="nav-spacer"></span>
+
+                  <button
+                    class="primary-button audio-next"
+                    type="button"
+                  >
+                    Next: Question 4
+                  </button>
+
+                </div>
+              </section>
+
+              <!-- MITCHELL QUESTION 4 -->
+
+              <section
+                class="audio-screen"
+                data-screen-type="question"
+                data-question-name="aq4"
+                data-screen-label="Question 4 of 10"
+              >
+                <div class="audio-screen-header">
+
+                  <p class="eyebrow">
+                    Question 4 of 10
+                  </p>
+
+                  <h3>
+                    Mitchell I – D322 Outreach
+                  </h3>
+
+                </div>
+
+                <div class="audio-question-body">
+
+                  <fieldset
+                    class="quiz-question"
+                    data-correct="B"
+                  >
+                    <legend>
+                      How did the peer validate the student’s challenge of
+                      being busy while working through school?
+                    </legend>
+
+                    <div class="option-list">
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq4"
+                          value="A"
+                        >
+                        <span>
+                          A. The peer suggested the student wait to test until
+                          life was less busy.
+                        </span>
+                      </label>
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq4"
+                          value="B"
+                        >
+                        <span>
+                          B. The peer acknowledged that balancing work, school,
+                          family, and other responsibilities can be
+                          challenging.
+                        </span>
+                      </label>
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq4"
+                          value="C"
+                        >
+                        <span>
+                          C. The peer told the student to create a stricter
+                          study schedule.
+                        </span>
+                      </label>
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq4"
+                          value="D"
+                        >
+                        <span>
+                          D. The peer recommended contacting the program mentor
+                          about an extension.
+                        </span>
+                      </label>
+
+                    </div>
+                  </fieldset>
+
+                </div>
+
+                <div class="audio-nav">
+
+                  <button
+                    class="secondary-button audio-back"
+                    type="button"
+                  >
+                    Back
+                  </button>
+
+                  <span class="nav-spacer"></span>
+
+                  <button
+                    class="primary-button audio-next"
+                    type="button"
+                  >
+                    Next: Question 5
+                  </button>
+
+                </div>
+              </section>
+
+              <!-- MITCHELL QUESTION 5 -->
+
+              <section
+                class="audio-screen"
+                data-screen-type="question"
+                data-question-name="aq5"
+                data-screen-label="Question 5 of 10"
+              >
+                <div class="audio-screen-header">
+
+                  <p class="eyebrow">
+                    Question 5 of 10
+                  </p>
+
+                  <h3>
+                    Mitchell I – D322 Outreach
+                  </h3>
+
+                </div>
+
+                <div class="audio-question-body">
+
+                  <fieldset
+                    class="quiz-question"
+                    data-correct="B"
+                  >
+                    <legend>
+                      How did the peer keep the outreach supportive rather than
+                      pressuring the student to use peer coaching?
+                    </legend>
+
+                    <div class="option-list">
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq5"
+                          value="A"
+                        >
+                        <span>
+                          A. The peer scheduled an appointment for the student
+                          during the call.
+                        </span>
+                      </label>
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq5"
+                          value="B"
+                        >
+                        <span>
+                          B. The peer presented peer coaching as an available
+                          option the student could use if needed.
+                        </span>
+                      </label>
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq5"
+                          value="C"
+                        >
+                        <span>
+                          C. The peer asked the student to commit to attending
+                          a live event.
+                        </span>
+                      </label>
+
+                    </div>
+                  </fieldset>
+
+                </div>
+
+                <div class="audio-nav">
+
+                  <button
+                    class="secondary-button audio-back"
+                    type="button"
+                  >
+                    Back
+                  </button>
+
+                  <span class="nav-spacer"></span>
+
+                  <button
+                    class="primary-button audio-next"
+                    type="button"
+                  >
+                    Next: Outreach Example
+                  </button>
+
+                </div>
+              </section>
+
+              <!-- =====================================================
+                   WINTER VIDEO
+              ====================================================== -->
+
+              <section
+                class="audio-screen"
+                data-screen-type="video"
+                data-screen-label="Winter M – D216 Outreach"
+              >
+                <div class="audio-screen-header">
+
+                  <p class="eyebrow">
+                    Outreach Example
+                  </p>
+
+                  <h3>
+                    Winter M – D216 Outreach
+                  </h3>
+
+                </div>
+
+                <div class="video-wrap">
+
+                  <video
+                    controls
+                    preload="metadata"
+                    playsinline
+                    aria-label="Winter M D216 outreach example"
+                  >
+                    <source
+                      src="Winter%20M%20-%20D216%20Outreach(1).mp4"
+                      type="video/mp4"
+                    >
+
+                    Your browser does not support HTML5 video.
+                  </video>
+
+                </div>
+
+                <div class="audio-nav">
+
+                  <button
+                    class="secondary-button audio-back"
+                    type="button"
+                  >
+                    Back
+                  </button>
+
+                  <span class="nav-spacer"></span>
+
+                  <button
+                    class="primary-button audio-next"
+                    type="button"
+                  >
+                    Next: Question 6
+                  </button>
+
+                </div>
+              </section>
+
+              <!-- WINTER QUESTION 6 -->
+
+              <section
+                class="audio-screen"
+                data-screen-type="question"
+                data-question-name="aq6"
+                data-screen-label="Question 6 of 10"
+              >
+                <div class="audio-screen-header">
+
+                  <p class="eyebrow">
+                    Question 6 of 10
+                  </p>
+
+                  <h3>
+                    Winter M – D216 Outreach
+                  </h3>
+
+                </div>
+
+                <div class="audio-question-body">
+
+                  <fieldset
+                    class="quiz-question"
+                    data-correct="B"
+                  >
+                    <legend>
+                      How did the peer normalize the student’s experience with
+                      the course material?
+                    </legend>
+
+                    <div class="option-list">
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq6"
+                          value="A"
+                        >
+                        <span>
+                          A. The peer explained that most students fail the
+                          course the first time.
+                        </span>
+                      </label>
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq6"
+                          value="B"
+                        >
+                        <span>
+                          B. The peer shared that she had taken the course
+                          herself and also found the terminology new to learn.
+                        </span>
+                      </label>
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq6"
+                          value="C"
+                        >
+                        <span>
+                          C. The peer told the student that the terminology was
+                          not important for the assessment.
+                        </span>
+                      </label>
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq6"
+                          value="D"
+                        >
+                        <span>
+                          D. The peer recommended skipping difficult
+                          terminology until later.
+                        </span>
+                      </label>
+
+                    </div>
+                  </fieldset>
+
+                </div>
+
+                <div class="audio-nav">
+
+                  <button
+                    class="secondary-button audio-back"
+                    type="button"
+                  >
+                    Back
+                  </button>
+
+                  <span class="nav-spacer"></span>
+
+                  <button
+                    class="primary-button audio-next"
+                    type="button"
+                  >
+                    Next: Question 7
+                  </button>
+
+                </div>
+              </section>
+
+              <!-- WINTER QUESTION 7 -->
+
+              <section
+                class="audio-screen"
+                data-screen-type="question"
+                data-question-name="aq7"
+                data-screen-label="Question 7 of 10"
+              >
+                <div class="audio-screen-header">
+
+                  <p class="eyebrow">
+                    Question 7 of 10
+                  </p>
+
+                  <h3>
+                    Winter M – D216 Outreach
+                  </h3>
+
+                </div>
+
+                <div class="audio-question-body">
+
+                  <fieldset
+                    class="quiz-question"
+                    data-correct="B"
+                  >
+                    <legend>
+                      How did the peer match a resource to the student’s need
+                      for additional help understanding course terminology and
+                      concepts?
+                    </legend>
+
+                    <div class="option-list">
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq7"
+                          value="A"
+                        >
+                        <span>
+                          A. She recommended that the student reread the
+                          textbook.
+                        </span>
+                      </label>
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq7"
+                          value="B"
+                        >
+                        <span>
+                          B. She recommended specific videos as an additional
+                          way to review the material.
+                        </span>
+                      </label>
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq7"
+                          value="C"
+                        >
+                        <span>
+                          C. She told the student they should schedule an
+                          appointment with their course instructor.
+                        </span>
+                      </label>
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq7"
+                          value="D"
+                        >
+                        <span>
+                          D. She suggested using flashcards.
+                        </span>
+                      </label>
+
+                    </div>
+                  </fieldset>
+
+                </div>
+
+                <div class="audio-nav">
+
+                  <button
+                    class="secondary-button audio-back"
+                    type="button"
+                  >
+                    Back
+                  </button>
+
+                  <span class="nav-spacer"></span>
+
+                  <button
+                    class="primary-button audio-next"
+                    type="button"
+                  >
+                    Next: Question 8
+                  </button>
+
+                </div>
+              </section>
+
+              <!-- WINTER QUESTION 8 -->
+
+              <section
+                class="audio-screen"
+                data-screen-type="question"
+                data-question-name="aq8"
+                data-screen-label="Question 8 of 10"
+              >
+                <div class="audio-screen-header">
+
+                  <p class="eyebrow">
+                    Question 8 of 10
+                  </p>
+
+                  <h3>
+                    Winter M – D216 Outreach
+                  </h3>
+
+                </div>
+
+                <div class="audio-question-body">
+
+                  <fieldset
+                    class="quiz-question"
+                    data-correct="C"
+                  >
+                    <legend>
+                      How did the peer offer an opportunity for more active
+                      support beyond independent studying?
+                    </legend>
+
+                    <div class="option-list">
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq8"
+                          value="A"
+                        >
+                        <span>
+                          A. She offered to provide practice questions for the
+                          student.
+                        </span>
+                      </label>
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq8"
+                          value="B"
+                        >
+                        <span>
+                          B. She told the student to attend a course instructor
+                          cohort.
+                        </span>
+                      </label>
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq8"
+                          value="C"
+                        >
+                        <span>
+                          C. She told the student about a peer-led live event
+                          happening later that same day.
+                        </span>
+                      </label>
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq8"
+                          value="D"
+                        >
+                        <span>
+                          D. She told the student she would send them a
+                          template for Cornell Notes.
+                        </span>
+                      </label>
+
+                    </div>
+                  </fieldset>
+
+                </div>
+
+                <div class="audio-nav">
+
+                  <button
+                    class="secondary-button audio-back"
+                    type="button"
+                  >
+                    Back
+                  </button>
+
+                  <span class="nav-spacer"></span>
+
+                  <button
+                    class="primary-button audio-next"
+                    type="button"
+                  >
+                    Next: Outreach Example
+                  </button>
+
+                </div>
+              </section>
+
+              <!-- =====================================================
+                   AMANDA VIDEO
+              ====================================================== -->
+
+              <section
+                class="audio-screen"
+                data-screen-type="video"
+                data-screen-label="Amanda A – D325 Outreach"
+              >
+                <div class="audio-screen-header">
+
+                  <p class="eyebrow">
+                    Outreach Example
+                  </p>
+
+                  <h3>
+                    Amanda A – D325 Outreach
+                  </h3>
+
+                </div>
+
+                <div class="video-wrap">
+
+                  <video
+                    controls
+                    preload="metadata"
+                    playsinline
+                    aria-label="Amanda A D325 outreach example"
+                  >
+                    <source
+                      src="Amanda%20A%20-%20D325%20Outreach(1).mp4"
+                      type="video/mp4"
+                    >
+
+                    Your browser does not support HTML5 video.
+                  </video>
+
+                </div>
+
+                <div class="audio-nav">
+
+                  <button
+                    class="secondary-button audio-back"
+                    type="button"
+                  >
+                    Back
+                  </button>
+
+                  <span class="nav-spacer"></span>
+
+                  <button
+                    class="primary-button audio-next"
+                    type="button"
+                  >
+                    Next: Question 9
+                  </button>
+
+                </div>
+              </section>
+
+              <!-- AMANDA QUESTION 9 -->
+
+              <section
+                class="audio-screen"
+                data-screen-type="question"
+                data-question-name="aq9"
+                data-screen-label="Question 9 of 10"
+              >
+                <div class="audio-screen-header">
+
+                  <p class="eyebrow">
+                    Question 9 of 10
+                  </p>
+
+                  <h3>
+                    Amanda A – D325 Outreach
+                  </h3>
+
+                </div>
+
+                <div class="audio-question-body">
+
+                  <fieldset
+                    class="quiz-question"
+                    data-correct="C"
+                  >
+                    <legend>
+                      How did the peer identify where the student needed the
+                      most support after an unsuccessful assessment attempt?
+                    </legend>
+
+                    <div class="option-list">
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq9"
+                          value="A"
+                        >
+                        <span>
+                          A. The peer was familiar with this course and already
+                          knew most students struggle with PBQs.
+                        </span>
+                      </label>
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq9"
+                          value="B"
+                        >
+                        <span>
+                          B. The peer told the student the biggest part of the
+                          test was on modules 6–8, and that’s what they should
+                          focus on.
+                        </span>
+                      </label>
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq9"
+                          value="C"
+                        >
+                        <span>
+                          C. The peer asked the student about what they found to
+                          be the most challenging on the OA.
+                        </span>
+                      </label>
+
+                    </div>
+                  </fieldset>
+
+                </div>
+
+                <div class="audio-nav">
+
+                  <button
+                    class="secondary-button audio-back"
+                    type="button"
+                  >
+                    Back
+                  </button>
+
+                  <span class="nav-spacer"></span>
+
+                  <button
+                    class="primary-button audio-next"
+                    type="button"
+                  >
+                    Next: Question 10
+                  </button>
+
+                </div>
+              </section>
+
+              <!-- AMANDA QUESTION 10 -->
+
+              <section
+                class="audio-screen"
+                data-screen-type="question"
+                data-question-name="aq10"
+                data-screen-label="Question 10 of 10"
+              >
+                <div class="audio-screen-header">
+
+                  <p class="eyebrow">
+                    Question 10 of 10
+                  </p>
+
+                  <h3>
+                    Amanda A – D325 Outreach
+                  </h3>
+
+                </div>
+
+                <div class="audio-question-body">
+
+                  <fieldset
+                    class="quiz-question"
+                    data-correct="C"
+                  >
+                    <legend>
+                      How did the peer reduce the effort required for the
+                      student to access the resources she recommended?
+                    </legend>
+
+                    <div class="option-list">
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq10"
+                          value="A"
+                        >
+                        <span>
+                          A. She said if they scheduled an appointment, she
+                          could share her screen on Webex and show them.
+                        </span>
+                      </label>
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq10"
+                          value="B"
+                        >
+                        <span>
+                          B. She told the student the course instructor would
+                          have the most up-to-date knowledge of the resources
+                          available.
+                        </span>
+                      </label>
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="aq10"
+                          value="C"
+                        >
+                        <span>
+                          C. She offered to send an email with the links and
+                          verbally explained where the resources could be
+                          found.
+                        </span>
+                      </label>
+
+                    </div>
+                  </fieldset>
+
+                </div>
+
+                <div class="audio-nav">
+
+                  <button
+                    class="secondary-button audio-back"
+                    type="button"
+                  >
+                    Back
+                  </button>
+
+                  <span class="nav-spacer"></span>
+
+                  <button
+                    class="primary-button audio-submit"
+                    type="submit"
+                  >
+                    Submit What Did You Hear?
+                  </button>
+
+                </div>
+              </section>
+
+              <p
+                id="audio-status"
+                class="audio-inline-status"
+                aria-live="polite"
+              ></p>
+
+            </div>
+          </form>
+
+          <div
+            class="completion-banner"
+            id="step-two-complete"
+          >
+            Step Two complete. Resource Matching is now unlocked.
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================
+       STEP THREE: RESOURCE MATCHING
+  ========================================================== -->
+
+  <section
+    class="section section-white"
+    id="step-three"
+  >
+    <div class="section-inner">
+
+      <p class="step-label">
+        Step Three
+      </p>
+
+      <h2 class="section-heading">
+        Match the Need to the Resource
+      </h2>
+
+      <div
+        class="locked-content is-locked"
+        id="matching-lock-wrap"
+      >
+
+        <div class="lock-message">
+          Complete the What Did You Hear? activity to unlock Resource Matching.
+        </div>
+
+        <div class="unlockable">
+
+          <div class="reading-card">
+
+            <h3>
+              Resource Matching vs. Resource Dumping
+            </h3>
+
+            <p>
+              When we connect students to resources, the goal is to recommend
+              the <strong>right support for what the student actually
+              needs</strong>. It can be easy to fall back on a familiar
+              “go-to” resource, especially when we know that resource is
+              helpful. But a resource that works well for one student may not
+              address the challenge another student is experiencing.
+            </p>
+
+            <p>
+              Strong outreach requires us to listen closely to what the
+              student is telling us before deciding what to recommend. A
+              student who is confused by a specific course concept may need a
+              Course Instructor resource, while a student who understands the
+              content but is struggling with how to study it may benefit more
+              from Peer Coaching. The more clearly we understand the need, the
+              more intentionally we can match the student to the support that
+              is most likely to help.
+            </p>
+
+            <p>
+              Matching resources thoughtfully also helps prevent
+              <strong>resource dumping</strong> — giving a student several
+              links, services, or suggestions all at once in hopes that
+              something will be useful. More information is not always more
+              helpful. Too many options can feel overwhelming and may make it
+              less likely that the student uses any of them. Instead, focus on
+              one or two resources that directly connect to what the student
+              shared, briefly explain <strong>why</strong> you think they could
+              help, and make the next step easy to understand.
+            </p>
+
+            <p>
+              The goal is not to tell the student about everything WGU has
+              available. The goal is to listen, identify the need, and connect
+              the student with support that makes sense for them.
+            </p>
+
+          </div>
+
+          <div class="matching-shell">
+
+            <h3>
+              Resource Matching Game
+            </h3>
+
+            <p class="matching-instructions">
+              Drag a resource to the matching student scenario. You can also
+              select a resource and then select a scenario drop zone for
+              keyboard or touch use.
+            </p>
+
+            <div
+              class="resource-bank"
+              id="resource-bank"
+              aria-label="Resource bank"
+            ></div>
+
+            <div class="scenario-list">
+
+              <div class="scenario-card">
+
+                <p class="scenario-text">
+                  “I’m reading through the material, but it feels like there’s
+                  so much information that I don’t know what I’m supposed to
+                  focus on.”
+                </p>
+
+                <button
+                  type="button"
+                  class="drop-zone"
+                  data-scenario="s1"
+                  aria-label="Match a resource to scenario 1"
+                >
+                  Drop resource here
+                </button>
+
+              </div>
+
+              <div class="scenario-card">
+
+                <p class="scenario-text">
+                  “I understand most of the course, but there’s one section
+                  that I just cannot figure out.”
+                </p>
+
+                <button
+                  type="button"
+                  class="drop-zone"
+                  data-scenario="s2"
+                  aria-label="Match a resource to scenario 2"
+                >
+                  Drop resource here
+                </button>
+
+              </div>
+
+              <div class="scenario-card">
+
+                <p class="scenario-text">
+                  “I learn better when somebody explains things out loud
+                  instead of just reading them.”
+                </p>
+
+                <button
+                  type="button"
+                  class="drop-zone"
+                  data-scenario="s3"
+                  aria-label="Match a resource to scenario 3"
+                >
+                  Drop resource here
+                </button>
+
+              </div>
+
+              <div class="scenario-card">
+
+                <p class="scenario-text">
+                  “I’ve had some personal things happen recently and I’m
+                  having a really hard time focusing on school.”
+                </p>
+
+                <button
+                  type="button"
+                  class="drop-zone"
+                  data-scenario="s4"
+                  aria-label="Match a resource to scenario 4"
+                >
+                  Drop resource here
+                </button>
+
+              </div>
+
+              <div class="scenario-card">
+
+                <p class="scenario-text">
+                  “The terminology in this course is killing me. There are so
+                  many terms that they all start blending together.”
+                </p>
+
+                <button
+                  type="button"
+                  class="drop-zone"
+                  data-scenario="s5"
+                  aria-label="Match a resource to scenario 5"
+                >
+                  Drop resource here
+                </button>
+
+              </div>
+
+            </div>
+
+            <div class="matching-actions">
+
+              <button
+                type="button"
+                class="primary-button"
+                id="check-matches"
+              >
+                Check Matches
+              </button>
+
+              <button
+                type="button"
+                class="secondary-button"
+                id="reset-matches"
+              >
+                Reset Game
+              </button>
+
+            </div>
+
+            <p
+              id="matching-status"
+              class="status-line"
+              aria-live="polite"
+            ></p>
+
+          </div>
+
+          <div
+            class="completion-banner"
+            id="step-three-complete"
+          >
+            Step Three complete. The Final Exam is now unlocked.
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================
+       STEP FOUR: FINAL EXAM
+  ========================================================== -->
+
+  <section
+    class="section section-light"
+    id="step-four"
+  >
+    <div class="section-inner">
+
+      <p class="step-label">
+        Step Four
+      </p>
+
+      <h2 class="section-heading">
+        Final Exam
+      </h2>
+
+      <p class="lead step-intro">
+        Answer each question, then submit your final exam.
+      </p>
+
+      <div
+        class="locked-content is-locked"
+        id="exam-lock-wrap"
+      >
+
+        <div class="lock-message">
+          Successfully complete the Resource Matching Game to unlock the Final
+          Exam.
+        </div>
+
+        <div class="unlockable">
+
+          <form
+            id="final-exam-form"
+            class="exam-shell"
+          >
+
+            <!-- QUESTION 1 -->
+
+            <fieldset
+              class="quiz-question"
+              data-correct="C"
+            >
+              <legend>
+                Which mindset best reflects the purpose of outreach in peer
+                coaching?
+              </legend>
+
+              <div class="option-list">
+
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    name="fe1"
+                    value="A"
+                  >
+                  <span>
+                    A. Completing required calls as efficiently as possible.
+                  </span>
+                </label>
+
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    name="fe1"
+                    value="B"
+                  >
+                  <span>
+                    B. Getting as many students as possible to schedule a peer
+                    appointment.
+                  </span>
+                </label>
+
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    name="fe1"
+                    value="C"
+                  >
+                  <span>
+                    C. Reaching out to offer care, support, and connection
+                    based on the student’s needs.
+                  </span>
+                </label>
+
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    name="fe1"
+                    value="D"
+                  >
+                  <span>
+                    D. Delivering the same information to every student so
+                    outreach stays consistent.
+                  </span>
+                </label>
+
+              </div>
+            </fieldset>
+
+            <!-- QUESTION 2 -->
+
+            <fieldset
+              class="quiz-question"
+              data-correct="B"
+            >
+              <legend>
+                What is the main purpose of a bite-sized coaching conversation
+                during outreach?
+              </legend>
+
+              <div class="option-list">
+
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    name="fe2"
+                    value="A"
+                  >
+                  <span>
+                    A. To complete a full coaching appointment during the
+                    shorter outreach call.
+                  </span>
+                </label>
+
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    name="fe2"
+                    value="B"
+                  >
+                  <span>
+                    B. To briefly understand the student’s need and connect
+                    them with useful support.
+                  </span>
+                </label>
+
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    name="fe2"
+                    value="C"
+                  >
+                  <span>
+                    C. To provide all the resources the student will need to be
+                    successful.
+                  </span>
+                </label>
+
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    name="fe2"
+                    value="D"
+                  >
+                  <span>
+                    D. To give the student detailed instructions on how to pass
+                    the course.
+                  </span>
+                </label>
+
+              </div>
+            </fieldset>
+
+            <!-- QUESTION 3 -->
+
+            <fieldset
+              class="quiz-question"
+              data-correct="C"
+            >
+              <legend>
+                A student says, “I’m doing okay. I don’t really have any
+                questions.” Which response best demonstrates curiosity during
+                outreach?
+              </legend>
+
+              <div class="option-list">
+
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    name="fe3"
+                    value="A"
+                  >
+                  <span>
+                    A. “Okay, sounds good. Have a great day.”
+                  </span>
+                </label>
+
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    name="fe3"
+                    value="B"
+                  >
+                  <span>
+                    B. “Great! While I’ve got you here, let me tell you about
+                    all of the resources we have available.”
+                  </span>
+                </label>
+
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    name="fe3"
+                    value="C"
+                  >
+                  <span>
+                    C. “That’s great to hear. How has studying for the course
+                    been going for you so far?”
+                  </span>
+                </label>
+
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    name="fe3"
+                    value="D"
+                  >
+                  <span>
+                    D. “Let’s get you an appointment scheduled anyway, just in
+                    case you end up needing it.”
+                  </span>
+                </label>
+
+              </div>
+            </fieldset>
+
+            <!-- QUESTION 4 -->
+
+            <fieldset
+              class="quiz-question"
+              data-correct="A"
+            >
+              <legend>
+                A student says, “I understand most of the course, but one topic
+                just isn’t clicking for me.” What is the best
+                resource-matching approach?
+              </legend>
+
+              <div class="option-list">
+
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    name="fe4"
+                    value="A"
+                  >
+                  <span>
+                    A. Recommend a course instructor video focused on that
+                    specific topic.
+                  </span>
+                </label>
+
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    name="fe4"
+                    value="B"
+                  >
+                  <span>
+                    B. Give them a walkthrough of all the resources in WGU
+                    Connect for the course.
+                  </span>
+                </label>
+
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    name="fe4"
+                    value="C"
+                  >
+                  <span>
+                    C. Recommend starting the course over with a new strategy
+                    that helps with comprehension.
+                  </span>
+                </label>
+
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    name="fe4"
+                    value="D"
+                  >
+                  <span>
+                    D. Tell the student to keep studying because repetition is
+                    the best way to get the information to stick.
+                  </span>
+                </label>
+
+              </div>
+            </fieldset>
+
+            <!-- QUESTION 5 -->
+
+            <fieldset
+              class="quiz-question"
+              data-correct="B"
+            >
+              <legend>
+                Why is it important to avoid relying on the same “go-to”
+                resource for every student?
+              </legend>
+
+              <div class="option-list">
+
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    name="fe5"
+                    value="A"
+                  >
+                  <span>
+                    A. Because course instructors remove resources often and
+                    we can only recommend approved resources.
+                  </span>
+                </label>
+
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    name="fe5"
+                    value="B"
+                  >
+                  <span>
+                    B. Because effective support should be matched to the
+                    student’s specific challenge.
+                  </span>
+                </label>
+
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    name="fe5"
+                    value="C"
+                  >
+                  <span>
+                    C. Because they have probably already heard about it.
+                  </span>
+                </label>
+
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    name="fe5"
+                    value="D"
+                  >
+                  <span>
+                    D. Because students should always choose resources without
+                    peer input.
+                  </span>
+                </label>
+
+              </div>
+            </fieldset>
+
+            <!-- QUESTION 6 -->
+
+            <fieldset
+              class="quiz-question"
+              data-correct="C"
+            >
+              <legend>
+                Which outreach response is most likely to feel scripted or
+                like the peer is simply checking a box?
+              </legend>
+
+              <div class="option-list">
+
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    name="fe6"
+                    value="A"
+                  >
+                  <span>
+                    A. Asking a follow-up question based on something the
+                    student just shared.
+                  </span>
+                </label>
+
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    name="fe6"
+                    value="B"
+                  >
+                  <span>
+                    B. Acknowledging the student’s challenge before offering
+                    support.
+                  </span>
+                </label>
+
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    name="fe6"
+                    value="C"
+                  >
+                  <span>
+                    C. Reciting the same list of resources regardless of what
+                    the student says.
+                  </span>
+                </label>
+
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    name="fe6"
+                    value="D"
+                  >
+                  <span>
+                    D. Offering a resource that directly addresses the
+                    student’s stated difficulty.
+                  </span>
+                </label>
+
+              </div>
+            </fieldset>
+
+            <!-- QUESTION 7 -->
+
+            <fieldset
+              class="quiz-question"
+              data-correct="A"
+            >
+              <legend>
+                Which statement best reflects the role of encouragement in an
+                outreach conversation?
+              </legend>
+
+              <div class="option-list">
+
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    name="fe7"
+                    value="A"
+                  >
+                  <span>
+                    A. Encouragement should recognize effort or progress while
+                    still allowing space for support.
+                  </span>
+                </label>
+
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    name="fe7"
+                    value="B"
+                  >
+                  <span>
+                    B. Encouragement means telling the student everything will
+                    definitely work out.
+                  </span>
+                </label>
+
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    name="fe7"
+                    value="C"
+                  >
+                  <span>
+                    C. Since outreach calls are so short, encouragement should
+                    take up most of the call so the conversation stays
+                    positive.
+                  </span>
+                </label>
+
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    name="fe7"
+                    value="D"
+                  >
+                  <span>
+                    D. Encouragement is only appropriate if a student is
+                    actually putting in effort.
+                  </span>
+                </label>
+
+              </div>
+            </fieldset>
+
+            <!-- QUESTION 8 -->
+
+            <fieldset
+              class="quiz-question"
+              data-correct="A"
+            >
+              <legend>
+                Which description best captures what “good” outreach should
+                sound like overall?
+              </legend>
+
+              <div class="option-list">
+
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    name="fe8"
+                    value="A"
+                  >
+                  <span>
+                    A. Friendly, curious, responsive to the student, and
+                    focused on connecting them with relevant support.
+                  </span>
+                </label>
+
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    name="fe8"
+                    value="B"
+                  >
+                  <span>
+                    B. Highly scripted so every student receives exactly the
+                    same conversation and to maintain quality control.
+                  </span>
+                </label>
+
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    name="fe8"
+                    value="C"
+                  >
+                  <span>
+                    C. Focused primarily on persuading the student to book an
+                    appointment so we can meet our department goals.
+                  </span>
+                </label>
+
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    name="fe8"
+                    value="D"
+                  >
+                  <span>
+                    D. As detailed as possible so every available resource is
+                    discussed.
+                  </span>
+                </label>
+
+              </div>
+            </fieldset>
+
+            <button
+              class="primary-button wide-button"
+              type="submit"
+            >
+              Submit Final Exam
+            </button>
+
+            <p
+              id="exam-status"
+              class="status-line"
+              aria-live="polite"
+            ></p>
+
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================
+       CONGRATULATIONS
+  ========================================================== -->
+
+  <section
+    id="congratulations"
+    aria-live="polite"
+  >
+    <h2>
+      Congratulations!
+    </h2>
+
+    <p>
+      You have completed the Outreach learning path.
+    </p>
+
+    <div
+      class="score-pill"
+      id="final-score-pill"
+    >
+      Final Exam Score: —
+    </div>
+  </section>
+
+  <script>
+    /* =========================================================
+       CLOUDFLARE ENDPOINTS
+
+       Paste your Worker URL(s) between the quotation marks.
+       You can use one Worker for all three activities or separate
+       Workers. Payloads include an "activity" field so one Worker
+       can route them if desired.
+    ========================================================== */
+
+    const AUDIO_QUIZ_ENDPOINT = "";
+    const MATCHING_GAME_ENDPOINT = "";
+    const FINAL_EXAM_ENDPOINT = "";
+
+    /* =========================================================
+       LOCAL STORAGE
+    ========================================================== */
+
+    const STORAGE = {
+      coachName: "outreach_coach_name",
+      startedAt: "outreach_started_at",
+      stepOneComplete: "outreach_step_one_complete",
+      audioComplete: "outreach_audio_quiz_complete",
+      audioSubmission: "outreach_audio_quiz_submission",
+      matchingComplete: "outreach_matching_complete",
+      matchingSubmission: "outreach_matching_submission",
+      matchingAttempts: "outreach_matching_attempts",
+      examComplete: "outreach_exam_complete",
+      examSubmission: "outreach_exam_submission"
+    };
+
+    /* =========================================================
+       GENERAL HELPERS
+    ========================================================== */
+
+    function getCoachName() {
+      return (
+        localStorage.getItem(STORAGE.coachName) || ""
+      ).trim();
+    }
+
+    function requireCoachName(statusElement) {
+      const name = getCoachName();
+
+      if (name) {
+        return name;
+      }
+
+      if (statusElement) {
+        statusElement.textContent =
+          "Enter your first and last name at the top of the page before continuing.";
+
+        statusElement.className =
+          "status-line error-text";
+      }
+
+      document
+        .getElementById("start")
+        .scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+      document
+        .getElementById("start-name")
+        .focus();
+
+      return "";
+    }
+
+    function saveJSON(key, value) {
+      localStorage.setItem(
+        key,
+        JSON.stringify(value)
+      );
+    }
+
+    function readJSON(key) {
+      const raw =
+        localStorage.getItem(key);
+
+      if (!raw) {
+        return null;
+      }
+
+      try {
+        return JSON.parse(raw);
+      } catch {
+        return null;
+      }
+    }
+
+    async function sendToEndpoint(
+      endpoint,
+      payload
+    ) {
+      if (!endpoint) {
+        return {
+          sent: false,
+          reason: "endpoint-not-configured"
+        };
+      }
+
+      const response =
+        await fetch(
+          endpoint,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type":
+                "application/json"
+            },
+            body: JSON.stringify(payload)
+          }
+        );
+
+      if (!response.ok) {
+        throw new Error(
+          `Request failed with status ${response.status}`
+        );
+      }
+
+      return {
+        sent: true
+      };
+    }
+
+    function setLocked(
+      wrapper,
+      locked
+    ) {
+      wrapper.classList.toggle(
+        "is-locked",
+        locked
+      );
+
+      wrapper.setAttribute(
+        "aria-disabled",
+        locked ? "true" : "false"
+      );
+    }
+
+    function countCompletedSteps() {
+      return [
+        STORAGE.stepOneComplete,
+        STORAGE.audioComplete,
+        STORAGE.matchingComplete,
+        STORAGE.examComplete
+      ].filter(
+        key =>
+          localStorage.getItem(key) ===
+          "true"
+      ).length;
+    }
+
+    function updateProgress() {
+      const completed =
+        countCompletedSteps();
+
+      document
+        .getElementById(
+          "overall-progress-text"
+        )
+        .textContent =
+        `${completed} of 4 steps complete`;
+
+      document
+        .getElementById(
+          "overall-progress-bar"
+        )
+        .style.width =
+        `${(completed / 4) * 100}%`;
+    }
+
+    function updateLocks() {
+
+      const stepOneComplete =
+        localStorage.getItem(
+          STORAGE.stepOneComplete
+        ) === "true";
+
+      const audioComplete =
+        localStorage.getItem(
+          STORAGE.audioComplete
+        ) === "true";
+
+      const matchingComplete =
+        localStorage.getItem(
+          STORAGE.matchingComplete
+        ) === "true";
+
+      const examComplete =
+        localStorage.getItem(
+          STORAGE.examComplete
+        ) === "true";
+
+      setLocked(
+        document.getElementById(
+          "audio-lock-wrap"
+        ),
+        !stepOneComplete
+      );
+
+      setLocked(
+        document.getElementById(
+          "matching-lock-wrap"
+        ),
+        !audioComplete
+      );
+
+      setLocked(
+        document.getElementById(
+          "exam-lock-wrap"
+        ),
+        !matchingComplete
+      );
+
+      document
+        .getElementById(
+          "step-one-complete"
+        )
+        .classList.toggle(
+          "visible",
+          stepOneComplete
+        );
+
+      const completeStepOneButton =
+        document.getElementById(
+          "complete-step-one-button"
+        );
+
+      if (completeStepOneButton) {
+
+        completeStepOneButton.disabled =
+          stepOneComplete;
+
+        completeStepOneButton.textContent =
+          stepOneComplete
+            ? "Video Completed"
+            : "I’ve Finished the Video";
+      }
+
+      document
+        .getElementById(
+          "step-two-complete"
+        )
+        .classList.toggle(
+          "visible",
+          audioComplete
+        );
+
+      document
+        .getElementById(
+          "step-three-complete"
+        )
+        .classList.toggle(
+          "visible",
+          matchingComplete
+        );
+
+      if (examComplete) {
+
+        const savedExam =
+          readJSON(
+            STORAGE.examSubmission
+          );
+
+        if (
+          savedExam &&
+          typeof savedExam.score ===
+            "number"
+        ) {
+          document
+            .getElementById(
+              "final-score-pill"
+            )
+            .textContent =
+            `Final Exam Score: ${savedExam.score}/${savedExam.total} (${savedExam.percent}%)`;
+        }
+
+        document
+          .getElementById(
+            "congratulations"
+          )
+          .classList.add("visible");
+      }
+
+      updateProgress();
+    }
+
+    /* =========================================================
+       START / NAME
+    ========================================================== */
+
+    const startNameInput =
+      document.getElementById(
+        "start-name"
+      );
+
+    const startStatus =
+      document.getElementById(
+        "start-status"
+      );
+
+    document
+      .getElementById(
+        "confirm-start"
+      )
+      .addEventListener(
+        "click",
+        () => {
+
+          const name =
+            startNameInput
+              .value
+              .trim();
+
+          if (
+            !name ||
+            name
+              .split(/\s+/)
+              .length < 2
+          ) {
+            startStatus.textContent =
+              "Please enter your first and last name.";
+
+            startStatus.className =
+              "error-text";
+
+            return;
+          }
+
+          localStorage.setItem(
+            STORAGE.coachName,
+            name
+          );
+
+          if (
+            !localStorage.getItem(
+              STORAGE.startedAt
+            )
+          ) {
+            localStorage.setItem(
+              STORAGE.startedAt,
+              new Date().toISOString()
+            );
+          }
+
+          startStatus.textContent =
+            `Learning path started for ${name}.`;
+
+          startStatus.className =
+            "success-text";
+        }
+      );
+
+    /* =========================================================
+       STEP ONE
+    ========================================================== */
+
+    function completeStepOne() {
+
+      const name =
+        requireCoachName(
+          startStatus
+        );
+
+      if (!name) {
+        return;
+      }
+
+      localStorage.setItem(
+        STORAGE.stepOneComplete,
+        "true"
+      );
+
+      updateLocks();
+
+      document
+        .getElementById(
+          "step-one-complete"
+        )
+        .classList.add(
+          "visible"
+        );
+    }
+
+    const completeStepOneButton =
+      document.getElementById(
+        "complete-step-one-button"
+      );
+
+    if (completeStepOneButton) {
+
+      completeStepOneButton
+        .addEventListener(
+          "click",
+          completeStepOne
+        );
+    }
+
+    /* =========================================================
+       STEP TWO: WHAT DID YOU HEAR?
+    ========================================================== */
+
+    const audioQuizForm =
+      document.getElementById(
+        "audio-quiz-form"
+      );
+
+    const audioStatus =
+      document.getElementById(
+        "audio-status"
+      );
+
+    function collectQuiz(
+      form,
+      prefix
+    ) {
+
+      const questions =
+        [
+          ...form.querySelectorAll(
+            "fieldset.quiz-question"
+          )
+        ];
+
+      const responses = [];
+
+      let score = 0;
+
+      let firstUnanswered =
+        null;
+
+      questions.forEach(
+        (
+          fieldset,
+          index
+        ) => {
+
+          const inputName =
+            `${prefix}${index + 1}`;
+
+          const selected =
+            form.querySelector(
+              `input[name="${inputName}"]:checked`
+            );
+
+          const correct =
+            fieldset.dataset.correct;
+
+          const legend =
+            fieldset
+              .querySelector("legend")
+              .textContent
+              .trim();
+
+          fieldset.classList.remove(
+            "review-correct",
+            "review-incorrect"
+          );
+
+          if (!selected) {
+
+            if (!firstUnanswered) {
+              firstUnanswered =
+                fieldset;
+            }
+
+            responses.push({
+              questionNumber:
+                index + 1,
+              question: legend,
+              selected: "",
+              correctAnswer:
+                correct,
+              isCorrect: false
+            });
+
+            return;
+          }
+
+          const isCorrect =
+            selected.value ===
+            correct;
+
+          if (isCorrect) {
+            score += 1;
+          }
+
+          responses.push({
+            questionNumber:
+              index + 1,
+            question: legend,
+            selected:
+              selected.value,
+            selectedText:
+              selected
+                .nextElementSibling
+                .textContent
+                .trim(),
+            correctAnswer:
+              correct,
+            isCorrect
+          });
+        }
+      );
+
+      return {
+        questions,
+        responses,
+        score,
+        total:
+          questions.length,
+        firstUnanswered
+      };
+    }
+
+    /* One-screen-at-a-time navigation */
+
+    const audioScreens =
+      [
+        ...audioQuizForm
+          .querySelectorAll(
+            ".audio-screen"
+          )
+      ];
+
+    const audioProgressBar =
+      document.getElementById(
+        "audio-progress-bar"
+      );
+
+    const audioProgressText =
+      document.getElementById(
+        "audio-progress-text"
+      );
+
+    const audioScreenCount =
+      document.getElementById(
+        "audio-screen-count"
+      );
+
+    let audioScreenIndex = 0;
+
+    function pauseOtherOutreachVideos(
+      activeScreen
+    ) {
+
+      audioQuizForm
+        .querySelectorAll("video")
+        .forEach(
+          video => {
+
+            if (
+              !activeScreen ||
+              !activeScreen.contains(
+                video
+              )
+            ) {
+              video.pause();
+            }
+          }
+        );
+    }
+
+    function showAudioScreen(
+      index,
+      moveFocus = true
+    ) {
+
+      audioScreenIndex =
+        Math.max(
+          0,
+          Math.min(
+            index,
+            audioScreens.length - 1
+          )
+        );
+
+      audioScreens.forEach(
+        (
+          screen,
+          i
+        ) =>
+          screen
+            .classList
+            .toggle(
+              "active",
+              i ===
+                audioScreenIndex
+            )
+      );
+
+      const active =
+        audioScreens[
+          audioScreenIndex
+        ];
+
+      pauseOtherOutreachVideos(
+        active
+      );
+
+      const percent =
+        (
+          (
+            audioScreenIndex + 1
+          ) /
+          audioScreens.length
+        ) *
+        100;
+
+      audioProgressBar
+        .style.width =
+        `${percent}%`;
+
+      audioScreenCount
+        .textContent =
+        `${audioScreenIndex + 1} of ${audioScreens.length}`;
+
+      if (
+        active.dataset
+          .screenType ===
+        "video"
+      ) {
+
+        const videoNumber =
+          audioScreens
+            .slice(
+              0,
+              audioScreenIndex + 1
+            )
+            .filter(
+              screen =>
+                screen.dataset
+                  .screenType ===
+                "video"
+            )
+            .length;
+
+        audioProgressText
+          .textContent =
+          `Outreach Example ${videoNumber} of 4`;
+
+      } else {
+
+        audioProgressText
+          .textContent =
+          active.dataset
+            .screenLabel ||
+          "Question";
+      }
+
+      const back =
+        active.querySelector(
+          ".audio-back"
+        );
+
+      if (back) {
+        back.disabled =
+          audioScreenIndex === 0;
+      }
+
+      audioStatus.textContent =
+        "";
+
+      audioStatus.className =
+        "audio-inline-status";
+
+      if (moveFocus) {
+
+        const heading =
+          active.querySelector(
+            "h3, legend"
+          );
+
+        if (heading) {
+
+          heading.setAttribute(
+            "tabindex",
+            "-1"
+          );
+
+          heading.focus({
+            preventScroll: true
+          });
+        }
+      }
+    }
+
+    audioQuizForm
+      .addEventListener(
+        "click",
+        event => {
+
+          const nextButton =
+            event.target.closest(
+              ".audio-next"
+            );
+
+          const backButton =
+            event.target.closest(
+              ".audio-back"
+            );
+
+          if (backButton) {
+
+            showAudioScreen(
+              audioScreenIndex - 1
+            );
+
+            return;
+          }
+
+          if (!nextButton) {
+            return;
+          }
+
+          const active =
+            audioScreens[
+              audioScreenIndex
+            ];
+
+          if (
+            active.dataset
+              .screenType ===
+            "question"
+          ) {
+
+            const questionName =
+              active.dataset
+                .questionName;
+
+            const selected =
+              audioQuizForm
+                .querySelector(
+                  `input[name="${questionName}"]:checked`
+                );
+
+            if (!selected) {
+
+              audioStatus
+                .textContent =
+                "Choose an answer before continuing.";
+
+              audioStatus
+                .className =
+                "audio-inline-status error-text";
+
+              const firstOption =
+                active.querySelector(
+                  `input[name="${questionName}"]`
+                );
+
+              if (firstOption) {
+                firstOption.focus();
+              }
+
+              return;
+            }
+          }
+
+          showAudioScreen(
+            audioScreenIndex + 1
+          );
+        }
+      );
+
+    audioQuizForm
+      .addEventListener(
+        "change",
+        event => {
+
+          if (
+            event.target.matches(
+              'input[type="radio"]'
+            )
+          ) {
+            audioStatus.textContent =
+              "";
+
+            audioStatus.className =
+              "audio-inline-status";
+          }
+        }
+      );
+
+    showAudioScreen(
+      0,
+      false
+    );
+
+    audioQuizForm
+      .addEventListener(
+        "submit",
+        async event => {
+
+          event.preventDefault();
+
+          const name =
+            requireCoachName(
+              audioStatus
+            );
+
+          if (!name) {
+            return;
+          }
+
+          const result =
+            collectQuiz(
+              audioQuizForm,
+              "aq"
+            );
+
+          if (
+            result.firstUnanswered
+          ) {
+
+            audioStatus
+              .textContent =
+              "Answer all 10 questions before submitting.";
+
+            audioStatus
+              .className =
+              "audio-inline-status error-text";
+
+            const unansweredScreen =
+              result
+                .firstUnanswered
+                .closest(
+                  ".audio-screen"
+                );
+
+            const targetIndex =
+              audioScreens
+                .indexOf(
+                  unansweredScreen
+                );
+
+            if (
+              targetIndex >= 0
+            ) {
+              showAudioScreen(
+                targetIndex
+              );
+            }
+
+            const firstRadio =
+              result
+                .firstUnanswered
+                .querySelector(
+                  "input[type='radio']"
+                );
+
+            if (firstRadio) {
+              firstRadio.focus();
+            }
+
+            return;
+          }
+
+          result.questions.forEach(
+            (
+              fieldset,
+              index
+            ) => {
+
+              fieldset
+                .classList
+                .add(
+                  result
+                    .responses[
+                      index
+                    ]
+                    .isCorrect
+                    ? "review-correct"
+                    : "review-incorrect"
+                );
+            }
+          );
+
+          const payload = {
+
+            learningPath:
+              "Outreach",
+
+            activity:
+              "Audio Quiz - What Did You Hear?",
+
+            coachName:
+              name,
+
+            startedAt:
+              localStorage
+                .getItem(
+                  STORAGE.startedAt
+                ) || "",
+
+            submittedAt:
+              new Date()
+                .toISOString(),
+
+            score:
+              result.score,
+
+            total:
+              result.total,
+
+            percent:
+              Math.round(
+                (
+                  result.score /
+                  result.total
+                ) *
+                100
+              ),
+
+            responses:
+              result.responses
+          };
+
+          saveJSON(
+            STORAGE.audioSubmission,
+            payload
+          );
+
+          localStorage.setItem(
+            STORAGE.audioComplete,
+            "true"
+          );
+
+          updateLocks();
+
+          try {
+
+            const sync =
+              await sendToEndpoint(
+                AUDIO_QUIZ_ENDPOINT,
+                payload
+              );
+
+            audioStatus.textContent =
+              sync.sent
+                ? `Submitted: ${payload.score}/${payload.total}. Step Three is now unlocked.`
+                : `Completed: ${payload.score}/${payload.total}. Results are saved in this browser. Add your Cloudflare Worker URL to send them to Excel.`;
+
+            audioStatus.className =
+              "audio-inline-status success-text";
+
+          } catch (error) {
+
+            console.error(
+              "Audio quiz submission failed:",
+              error
+            );
+
+            audioStatus.textContent =
+              `Completed: ${payload.score}/${payload.total}. Step Three is unlocked, but the Cloudflare submission failed. Your responses are saved in this browser so you can resubmit.`;
+
+            audioStatus.className =
+              "audio-inline-status error-text";
+          }
+
+          document
+            .getElementById(
+              "step-two-complete"
+            )
+            .classList.add(
+              "visible"
+            );
+        }
+      );
+
+    /* =========================================================
+       STEP THREE: MATCHING GAME
+    ========================================================== */
+
+    const resources = [
+      {
+        id: "study-guide",
+        label: "Course Study Guide"
+      },
+      {
+        id: "ci-video",
+        label:
+          "Course Instructor Topic Video"
+      },
+      {
+        id: "live-cohort",
+        label: "Live Cohort"
+      },
+      {
+        id: "wellbeing",
+        label:
+          "Student Wellbeing Services"
+      },
+      {
+        id: "peer-strategy",
+        label:
+          "Peer Appointment for Study Strategy"
+      }
+    ];
+
+    const correctMatches = {
+      s1: "study-guide",
+      s2: "ci-video",
+      s3: "live-cohort",
+      s4: "wellbeing",
+      s5: "peer-strategy"
+    };
+
+    let currentMatches = {};
+
+    let selectedResourceId =
+      "";
+
+    const resourceBank =
+      document.getElementById(
+        "resource-bank"
+      );
+
+    const dropZones =
+      [
+        ...document
+          .querySelectorAll(
+            ".drop-zone"
+          )
+      ];
+
+    const matchingStatus =
+      document.getElementById(
+        "matching-status"
+      );
+
+    function getResourceLabel(
+      resourceId
+    ) {
+
+      const found =
+        resources.find(
+          resource =>
+            resource.id ===
+            resourceId
+        );
+
+      return found
+        ? found.label
+        : "";
+    }
+
+    function renderResourceBank() {
+
+      resourceBank.innerHTML =
+        "";
+
+      resources.forEach(
+        resource => {
+
+          const button =
+            document.createElement(
+              "button"
+            );
+
+          button.type =
+            "button";
+
+          button.className =
+            "resource-chip";
+
+          button.textContent =
+            resource.label;
+
+          button.draggable =
+            true;
+
+          button.dataset
+            .resourceId =
+            resource.id;
+
+          const isUsed =
+            Object
+              .values(
+                currentMatches
+              )
+              .includes(
+                resource.id
+              );
+
+          if (isUsed) {
+            button.classList
+              .add("used");
+          }
+
+          if (
+            selectedResourceId ===
+            resource.id
+          ) {
+            button.classList
+              .add("selected");
+          }
+
+          button.addEventListener(
+            "click",
+            () => {
+
+              selectedResourceId =
+                selectedResourceId ===
+                resource.id
+                  ? ""
+                  : resource.id;
+
+              renderResourceBank();
+            }
+          );
+
+          button.addEventListener(
+            "dragstart",
+            event => {
+
+              event.dataTransfer
+                .setData(
+                  "text/plain",
+                  resource.id
+                );
+
+              event.dataTransfer
+                .effectAllowed =
+                "move";
+            }
+          );
+
+          resourceBank
+            .appendChild(
+              button
+            );
+        }
+      );
+    }
+
+    function assignResource(
+      scenarioId,
+      resourceId
+    ) {
+
+      Object
+        .keys(
+          currentMatches
+        )
+        .forEach(
+          key => {
+
+            if (
+              currentMatches[
+                key
+              ] ===
+              resourceId
+            ) {
+              delete currentMatches[
+                key
+              ];
+            }
+          }
+        );
+
+      currentMatches[
+        scenarioId
+      ] =
+        resourceId;
+
+      selectedResourceId =
+        "";
+
+      renderMatches();
+
+      renderResourceBank();
+    }
+
+    function renderMatches() {
+
+      dropZones.forEach(
+        zone => {
+
+          const scenarioId =
+            zone.dataset
+              .scenario;
+
+          const resourceId =
+            currentMatches[
+              scenarioId
+            ];
+
+          zone.classList
+            .remove(
+              "correct",
+              "incorrect"
+            );
+
+          if (resourceId) {
+
+            zone.textContent =
+              getResourceLabel(
+                resourceId
+              );
+
+            zone.classList
+              .add(
+                "has-match"
+              );
+
+          } else {
+
+            zone.textContent =
+              "Drop resource here";
+
+            zone.classList
+              .remove(
+                "has-match"
+              );
+          }
+        }
+      );
+    }
+
+    dropZones.forEach(
+      zone => {
+
+        zone.addEventListener(
+          "dragover",
+          event => {
+
+            event.preventDefault();
+
+            zone.classList
+              .add(
+                "drag-over"
+              );
+          }
+        );
+
+        zone.addEventListener(
+          "dragleave",
+          () => {
+
+            zone.classList
+              .remove(
+                "drag-over"
+              );
+          }
+        );
+
+        zone.addEventListener(
+          "drop",
+          event => {
+
+            event.preventDefault();
+
+            zone.classList
+              .remove(
+                "drag-over"
+              );
+
+            const resourceId =
+              event.dataTransfer
+                .getData(
+                  "text/plain"
+                );
+
+            if (resourceId) {
+
+              assignResource(
+                zone.dataset
+                  .scenario,
+                resourceId
+              );
+            }
+          }
+        );
+
+        zone.addEventListener(
+          "click",
+          () => {
+
+            if (
+              selectedResourceId
+            ) {
+
+              assignResource(
+                zone.dataset
+                  .scenario,
+                selectedResourceId
+              );
+            }
+          }
+        );
+      }
+    );
+
+    document
+      .getElementById(
+        "reset-matches"
+      )
+      .addEventListener(
+        "click",
+        () => {
+
+          currentMatches = {};
+
+          selectedResourceId =
+            "";
+
+          renderMatches();
+
+          renderResourceBank();
+
+          matchingStatus
+            .textContent =
+            "Game reset.";
+
+          matchingStatus
+            .className =
+            "status-line";
+        }
+      );
+
+    document
+      .getElementById(
+        "check-matches"
+      )
+      .addEventListener(
+        "click",
+        async () => {
+
+          const name =
+            requireCoachName(
+              matchingStatus
+            );
+
+          if (!name) {
+            return;
+          }
+
+          const scenarioIds =
+            Object.keys(
+              correctMatches
+            );
+
+          const answeredCount =
+            scenarioIds.filter(
+              id =>
+                currentMatches[
+                  id
+                ]
+            ).length;
+
+          if (
+            answeredCount <
+            scenarioIds.length
+          ) {
+
+            matchingStatus
+              .textContent =
+              `Match all 5 scenarios before checking your answers. You have matched ${answeredCount} of 5.`;
+
+            matchingStatus
+              .className =
+              "status-line error-text";
+
+            return;
+          }
+
+          let correctCount = 0;
+
+          const results = [];
+
+          scenarioIds.forEach(
+            id => {
+
+              const isCorrect =
+                currentMatches[
+                  id
+                ] ===
+                correctMatches[
+                  id
+                ];
+
+              if (isCorrect) {
+                correctCount += 1;
+              }
+
+              const zone =
+                document
+                  .querySelector(
+                    `.drop-zone[data-scenario="${id}"]`
+                  );
+
+              zone.classList
+                .remove(
+                  "correct",
+                  "incorrect"
+                );
+
+              zone.classList
+                .add(
+                  isCorrect
+                    ? "correct"
+                    : "incorrect"
+                );
+
+              results.push({
+                scenario: id,
+                selectedResource:
+                  getResourceLabel(
+                    currentMatches[
+                      id
+                    ]
+                  ),
+                correctResource:
+                  getResourceLabel(
+                    correctMatches[
+                      id
+                    ]
+                  ),
+                isCorrect
+              });
+            }
+          );
+
+          const attempts =
+            Number(
+              localStorage
+                .getItem(
+                  STORAGE
+                    .matchingAttempts
+                ) ||
+              "0"
+            ) + 1;
+
+          localStorage.setItem(
+            STORAGE
+              .matchingAttempts,
+            String(attempts)
+          );
+
+          if (
+            correctCount !==
+            scenarioIds.length
+          ) {
+
+            matchingStatus
+              .textContent =
+              `${correctCount} of 5 matches are correct. Adjust the highlighted matches and try again.`;
+
+            matchingStatus
+              .className =
+              "status-line error-text";
+
+            return;
+          }
+
+          const payload = {
+
+            learningPath:
+              "Outreach",
+
+            activity:
+              "Resource Matching Game",
+
+            coachName:
+              name,
+
+            submittedAt:
+              new Date()
+                .toISOString(),
+
+            attempts,
+
+            score:
+              correctCount,
+
+            total:
+              scenarioIds.length,
+
+            percent: 100,
+
+            matches:
+              results
+          };
+
+          saveJSON(
+            STORAGE
+              .matchingSubmission,
+            payload
+          );
+
+          localStorage.setItem(
+            STORAGE
+              .matchingComplete,
+            "true"
+          );
+
+          updateLocks();
+
+          try {
+
+            const sync =
+              await sendToEndpoint(
+                MATCHING_GAME_ENDPOINT,
+                payload
+              );
+
+            matchingStatus
+              .textContent =
+              sync.sent
+                ? "5 of 5 correct. Your results were submitted and the Final Exam is now unlocked."
+                : "5 of 5 correct. The Final Exam is unlocked. Results are saved in this browser until your Cloudflare Worker URL is added.";
+
+            matchingStatus
+              .className =
+              "status-line success-text";
+
+          } catch (error) {
+
+            console.error(
+              "Matching submission failed:",
+              error
+            );
+
+            matchingStatus
+              .textContent =
+              "5 of 5 correct. The Final Exam is unlocked, but the Cloudflare submission failed. Your results are saved in this browser.";
+
+            matchingStatus
+              .className =
+              "status-line error-text";
+          }
+
+          document
+            .getElementById(
+              "step-three-complete"
+            )
+            .classList.add(
+              "visible"
+            );
+        }
+      );
+
+    /* =========================================================
+       STEP FOUR: FINAL EXAM
+    ========================================================== */
+
+    const finalExamForm =
+      document.getElementById(
+        "final-exam-form"
+      );
+
+    const examStatus =
+      document.getElementById(
+        "exam-status"
+      );
+
+    finalExamForm
+      .addEventListener(
+        "submit",
+        async event => {
+
+          event.preventDefault();
+
+          const name =
+            requireCoachName(
+              examStatus
+            );
+
+          if (!name) {
+            return;
+          }
+
+          const result =
+            collectQuiz(
+              finalExamForm,
+              "fe"
+            );
+
+          if (
+            result.firstUnanswered
+          ) {
+
+            examStatus
+              .textContent =
+              "Answer all 8 questions before submitting your final exam.";
+
+            examStatus
+              .className =
+              "status-line error-text";
+
+            result
+              .firstUnanswered
+              .scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+              });
+
+            const firstRadio =
+              result
+                .firstUnanswered
+                .querySelector(
+                  "input[type='radio']"
+                );
+
+            if (firstRadio) {
+              firstRadio.focus();
+            }
+
+            return;
+          }
+
+          const payload = {
+
+            learningPath:
+              "Outreach",
+
+            activity:
+              "Final Exam",
+
+            coachName:
+              name,
+
+            startedAt:
+              localStorage
+                .getItem(
+                  STORAGE.startedAt
+                ) || "",
+
+            submittedAt:
+              new Date()
+                .toISOString(),
+
+            score:
+              result.score,
+
+            total:
+              result.total,
+
+            percent:
+              Math.round(
+                (
+                  result.score /
+                  result.total
+                ) *
+                100
+              ),
+
+            responses:
+              result.responses
+          };
+
+          saveJSON(
+            STORAGE.examSubmission,
+            payload
+          );
+
+          localStorage.setItem(
+            STORAGE.examComplete,
+            "true"
+          );
+
+          updateLocks();
+
+          try {
+
+            const sync =
+              await sendToEndpoint(
+                FINAL_EXAM_ENDPOINT,
+                payload
+              );
+
+            examStatus.textContent =
+              sync.sent
+                ? `Final Exam submitted: ${payload.score}/${payload.total} (${payload.percent}%).`
+                : `Final Exam completed: ${payload.score}/${payload.total} (${payload.percent}%). Results are saved in this browser until your Cloudflare Worker URL is added.`;
+
+            examStatus.className =
+              "status-line success-text";
+
+          } catch (error) {
+
+            console.error(
+              "Final exam submission failed:",
+              error
+            );
+
+            examStatus.textContent =
+              `Final Exam completed: ${payload.score}/${payload.total} (${payload.percent}%). The Cloudflare submission failed, but your results are saved in this browser.`;
+
+            examStatus.className =
+              "status-line error-text";
+          }
+
+          document
+            .getElementById(
+              "final-score-pill"
+            )
+            .textContent =
+            `Final Exam Score: ${payload.score}/${payload.total} (${payload.percent}%)`;
+
+          document
+            .getElementById(
+              "congratulations"
+            )
+            .classList.add(
+              "visible"
+            );
+
+          document
+            .getElementById(
+              "congratulations"
+            )
+            .scrollIntoView({
+              behavior: "smooth",
+              block: "start"
+            });
+        }
+      );
+
+    /* =========================================================
+       RESTORE SAVED STATE
+    ========================================================== */
+
+    window.addEventListener(
+      "DOMContentLoaded",
+      () => {
+
+        const savedName =
+          getCoachName();
+
+        if (savedName) {
+
+          startNameInput.value =
+            savedName;
+
+          startStatus.textContent =
+            `Learning path started for ${savedName}.`;
+
+          startStatus.className =
+            "success-text";
+        }
+
+        renderResourceBank();
+
+        renderMatches();
+
+        updateLocks();
+
+        const savedAudio =
+          readJSON(
+            STORAGE
+              .audioSubmission
+          );
+
+        if (savedAudio) {
+
+          audioStatus.textContent =
+            `Previous Audio Quiz score on this browser: ${savedAudio.score}/${savedAudio.total}.`;
+
+          audioStatus.className =
+            "audio-inline-status success-text";
+        }
+
+        const savedMatching =
+          readJSON(
+            STORAGE
+              .matchingSubmission
+          );
+
+        if (savedMatching) {
+
+          matchingStatus
+            .textContent =
+            "Resource Matching was previously completed successfully on this browser.";
+
+          matchingStatus
+            .className =
+            "status-line success-text";
+        }
+
+        const savedExam =
+          readJSON(
+            STORAGE
+              .examSubmission
+          );
+
+        if (savedExam) {
+
+          examStatus.textContent =
+            `Previous Final Exam score on this browser: ${savedExam.score}/${savedExam.total} (${savedExam.percent}%).`;
+
+          examStatus.className =
+            "status-line success-text";
+        }
+      }
+    );
+  </script>
+
+</body>
+</html>
