@@ -403,13 +403,15 @@
       overflow: hidden;
     }
 
-    .video-wrap video {
+    .video-wrap video,
+    .video-wrap iframe {
       display: block;
       width: 100%;
       height: 100%;
       aspect-ratio: 16 / 9;
       object-fit: contain;
       background: #000;
+      border: 0;
     }
 
     /* =========================================================
@@ -1237,19 +1239,16 @@
                 </div>
 
                 <div class="video-wrap">
-                  <video
-                    controls
-                    preload="metadata"
-                    playsinline
-                    aria-label="Kari B C722 outreach example"
-                  >
-                   <source
-  src="Kari B - C722 Outreach.mp4"
-  type="video/mp4"
->
-
-                    Your browser does not support HTML5 video.
-                  </video>
+                  <iframe
+                    class="panopto-quiz-frame"
+                    src="https://wgu.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=499b4dcf-1a06-4d44-a944-b4bd017df8fe&amp;autoplay=false&amp;offerviewer=true&amp;showtitle=true&amp;showbrand=true&amp;captions=true&amp;interactivity=all"
+                    data-src="https://wgu.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=499b4dcf-1a06-4d44-a944-b4bd017df8fe&amp;autoplay=false&amp;offerviewer=true&amp;showtitle=true&amp;showbrand=true&amp;captions=true&amp;interactivity=all"
+                    allowfullscreen
+                    allow="autoplay"
+                    title="Kari B - C722 Outreach"
+                    aria-label="Panopto Embedded Video Player"
+                    aria-description="Kari B - C722 Outreach"
+                  ></iframe>
                 </div>
 
                 <div class="audio-nav">
@@ -1606,21 +1605,16 @@
                 </div>
 
                 <div class="video-wrap">
-
-                  <video
-                    controls
-                    preload="metadata"
-                    playsinline
-                    aria-label="Mitchell I D322 outreach example"
-                  >
-                    <source
-  src="Mitchell I - D322 Outreach.mp4"
-  type="video/mp4"
->
-
-                    Your browser does not support HTML5 video.
-                  </video>
-
+                  <iframe
+                    class="panopto-quiz-frame"
+                    src="https://wgu.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=f667088b-b3fb-40ef-8d06-b4bd017df970&amp;autoplay=false&amp;offerviewer=true&amp;showtitle=true&amp;showbrand=true&amp;captions=true&amp;interactivity=all"
+                    data-src="https://wgu.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=f667088b-b3fb-40ef-8d06-b4bd017df970&amp;autoplay=false&amp;offerviewer=true&amp;showtitle=true&amp;showbrand=true&amp;captions=true&amp;interactivity=all"
+                    allowfullscreen
+                    allow="autoplay"
+                    title="Mitchell I - D322 Outreach"
+                    aria-label="Panopto Embedded Video Player"
+                    aria-description="Mitchell I - D322 Outreach"
+                  ></iframe>
                 </div>
 
                 <div class="audio-nav">
@@ -1869,21 +1863,16 @@
                 </div>
 
                 <div class="video-wrap">
-
-                  <video
-                    controls
-                    preload="metadata"
-                    playsinline
-                    aria-label="Winter M D216 outreach example"
-                  >
-                  <source
-  src="Winter M - D216 Outreach.mp4"
-  type="video/mp4"
->
-
-                    Your browser does not support HTML5 video.
-                  </video>
-
+                  <iframe
+                    class="panopto-quiz-frame"
+                    src="https://wgu.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=fc86016d-d400-4224-872b-b4bd017df955&amp;autoplay=false&amp;offerviewer=true&amp;showtitle=true&amp;showbrand=true&amp;captions=true&amp;interactivity=all"
+                    data-src="https://wgu.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=fc86016d-d400-4224-872b-b4bd017df955&amp;autoplay=false&amp;offerviewer=true&amp;showtitle=true&amp;showbrand=true&amp;captions=true&amp;interactivity=all"
+                    allowfullscreen
+                    allow="autoplay"
+                    title="Winter M - D216 Outreach"
+                    aria-label="Panopto Embedded Video Player"
+                    aria-description="Winter M - D216 Outreach"
+                  ></iframe>
                 </div>
 
                 <div class="audio-nav">
@@ -2250,21 +2239,16 @@
                 </div>
 
                 <div class="video-wrap">
-
-                  <video
-                    controls
-                    preload="metadata"
-                    playsinline
-                    aria-label="Amanda A D325 outreach example"
-                  >
-                    <source
-  src="Amanda A - D325 Outreach.mp4"
-  type="video/mp4"
->
-
-                    Your browser does not support HTML5 video.
-                  </video>
-
+                  <iframe
+                    class="panopto-quiz-frame"
+                    src="https://wgu.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=020ef5ab-a037-4cd2-8b83-b4bd017df922&amp;autoplay=false&amp;offerviewer=true&amp;showtitle=true&amp;showbrand=true&amp;captions=true&amp;interactivity=all"
+                    data-src="https://wgu.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=020ef5ab-a037-4cd2-8b83-b4bd017df922&amp;autoplay=false&amp;offerviewer=true&amp;showtitle=true&amp;showbrand=true&amp;captions=true&amp;interactivity=all"
+                    allowfullscreen
+                    allow="autoplay"
+                    title="Amanda A - D325 Outreach"
+                    aria-label="Panopto Embedded Video Player"
+                    aria-description="Amanda A - D325 Outreach"
+                  ></iframe>
                 </div>
 
                 <div class="audio-nav">
@@ -3878,17 +3862,38 @@
     ) {
 
       audioQuizForm
-        .querySelectorAll("video")
+        .querySelectorAll(".panopto-quiz-frame")
         .forEach(
-          video => {
+          iframe => {
+
+            const panoptoSrc =
+              iframe.dataset.src;
 
             if (
-              !activeScreen ||
-              !activeScreen.contains(
-                video
+              activeScreen &&
+              activeScreen.contains(
+                iframe
               )
             ) {
-              video.pause();
+              if (
+                iframe.getAttribute("src") !==
+                panoptoSrc
+              ) {
+                iframe.setAttribute(
+                  "src",
+                  panoptoSrc
+                );
+              }
+            } else {
+              if (
+                iframe.getAttribute("src") !==
+                "about:blank"
+              ) {
+                iframe.setAttribute(
+                  "src",
+                  "about:blank"
+                );
+              }
             }
           }
         );
