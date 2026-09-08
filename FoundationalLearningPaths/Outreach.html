@@ -3328,7 +3328,7 @@
     const AUDIO_QUIZ_ENDPOINT =
       "https://outreach-audio-quiz.breanna-evenson.workers.dev/";
     const MATCHING_GAME_ENDPOINT = "https://outreach-resource-matching.breanna-evenson.workers.dev/";
-    const FINAL_EXAM_ENDPOINT = "";
+    const FINAL_EXAM_ENDPOINT = "https://outreach-final-exam.breanna-evenson.workers.dev/";
 
     /* =========================================================
        LOCAL STORAGE
@@ -5040,6 +5040,12 @@
 
             activity:
               "Final Exam",
+
+            record_id:
+              localStorage
+                .getItem(
+                  STORAGE.recordId
+                ) || "",
 
             coachName:
               name,
