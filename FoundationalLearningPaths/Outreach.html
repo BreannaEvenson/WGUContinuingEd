@@ -3322,6 +3322,9 @@
        can route them if desired.
     ========================================================== */
 
+    const START_ENDPOINT =
+      "https://outreach-start.breanna-evenson.workers.dev/";
+
     const AUDIO_QUIZ_ENDPOINT = "";
     const MATCHING_GAME_ENDPOINT = "";
     const FINAL_EXAM_ENDPOINT = "";
@@ -3332,6 +3335,7 @@
 
     const STORAGE = {
       coachName: "outreach_coach_name",
+      recordId: "outreach_record_id",
       startedAt: "outreach_started_at",
       stepOneComplete: "outreach_step_one_complete",
       audioComplete: "outreach_audio_quiz_complete",
@@ -3616,13 +3620,15 @@
         "start-status"
       );
 
-    document
-      .getElementById(
+    const confirmStartButton =
+      document.getElementById(
         "confirm-start"
-      )
+      );
+
+    confirmStartButton
       .addEventListener(
         "click",
-        () => {
+        async () => {
 
           const name =
             startNameInput
@@ -3644,6 +3650,37 @@
             return;
           }
 
+          confirmStartButton.disabled =
+            true;
+
+          confirmStartButton.textContent =
+            "Starting...";
+
+          const previousName =
+            (
+              localStorage.getItem(
+                STORAGE.coachName
+              ) || ""
+            ).trim();
+
+          let recordId =
+            localStorage.getItem(
+              STORAGE.recordId
+            );
+
+          if (
+            !recordId ||
+            previousName !== name
+          ) {
+            recordId =
+              crypto.randomUUID();
+
+            localStorage.setItem(
+              STORAGE.recordId,
+              recordId
+            );
+          }
+
           localStorage.setItem(
             STORAGE.coachName,
             name
@@ -3652,7 +3689,8 @@
           if (
             !localStorage.getItem(
               STORAGE.startedAt
-            )
+            ) ||
+            previousName !== name
           ) {
             localStorage.setItem(
               STORAGE.startedAt,
@@ -3660,11 +3698,45 @@
             );
           }
 
-          startStatus.textContent =
-            `Learning path started for ${name}.`;
+          try {
 
-          startStatus.className =
-            "success-text";
+            await sendToEndpoint(
+              START_ENDPOINT,
+              {
+                record_id:
+                  recordId,
+                coach_name:
+                  name
+              }
+            );
+
+            startStatus.textContent =
+              `Learning path started for ${name}.`;
+
+            startStatus.className =
+              "success-text";
+
+          } catch (error) {
+
+            console.error(
+              "Outreach start submission failed:",
+              error
+            );
+
+            startStatus.textContent =
+              "Your learning path has started, but the start record could not be synced. Select Confirm again to retry.";
+
+            startStatus.className =
+              "error-text";
+
+          } finally {
+
+            confirmStartButton.disabled =
+              false;
+
+            confirmStartButton.textContent =
+              "Confirm";
+          }
         }
       );
 
