@@ -3325,7 +3325,8 @@
     const START_ENDPOINT =
       "https://outreach-start.breanna-evenson.workers.dev/";
 
-    const AUDIO_QUIZ_ENDPOINT = "";
+    const AUDIO_QUIZ_ENDPOINT =
+      "https://outreach-audio-quiz.breanna-evenson.workers.dev/";
     const MATCHING_GAME_ENDPOINT = "";
     const FINAL_EXAM_ENDPOINT = "";
 
@@ -4293,6 +4294,12 @@
 
             activity:
               "Audio Quiz - What Did You Hear?",
+
+            record_id:
+              localStorage
+                .getItem(
+                  STORAGE.recordId
+                ) || "",
 
             coachName:
               name,
