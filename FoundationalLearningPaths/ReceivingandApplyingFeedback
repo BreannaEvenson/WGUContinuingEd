@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Receiving & Applying Feedback Learning Path</title>
+
+  <style>
+    :root {
+      --navy-dark: #001731;
+      --navy: #002855;
+      --light-blue: #EEF6F9;
+      --light-gray: #F1F1F1;
+      --gray: #A7A7A7;
+      --blue: #0070F0;
+      --sky-blue: #46B1EF;
+      --green: #97E142;
+      --white: #FFFFFF;
+      --error: #B3261E;
+      --success-dark: #315E00;
+      --shadow: 0 8px 24px rgba(0, 23, 49, 0.10);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--light-blue);
+      color: var(--navy-dark);
+      line-height: 1.6;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    button { cursor: pointer; }
+
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible,
+    select:focus-visible {
+      outline: 4px solid var(--green);
+      outline-offset: 3px;
+    }
+
+    .section {
+      padding: 64px 36px;
+    }
+
+    .section-inner {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+    }
+
+    .section-white { background: var(--white); }
+    .section-light { background: var(--light-blue); }
+    .section-gray { background: var(--light-gray); }
+    .section-navy { background: var(--navy-dark); color: var(--white); }
+
+    .big-heading {
+      margin: 0 0 20px;
+      font-size: clamp(3rem, 7vw, 5.8rem);
+      line-height: 0.98;
+      font-weight: 800;
+      color: var(--blue);
+      letter-spacing: -0.04em;
+    }
+
+    .section-navy .big-heading { color: var(--white); }
+
+    .section-heading {
+      margin: 0 0 14px;
+      color: var(--navy);
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+      font-weight: 800;
+    }
+
+    .subheading {
+      margin: 0 0 16px;
+      color: var(--navy);
+      font-size: clamp(1.55rem, 2.6vw, 2.15rem);
+      line-height: 1.15;
+      font-weight: 800;
+    }
+
+    .lead {
+      margin: 0;
+      max-width: 930px;
+      font-size: 1.1rem;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--blue);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.84rem;
+    }
+
+    .hero-copy {
+      margin: 0 0 28px;
+      max-width: 900px;
+      font-size: 1.18rem;
+    }
+
+    .start-box {
+      margin-top: 32px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: var(--radius);
+      padding: 24px;
+      max-width: 760px;
+    }
+
+    .start-box label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .name-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+    }
+
+    input[type="text"],
+    textarea,
+    select {
+      width: 100%;
+      border: 2px solid #C9D5E3;
+      border-radius: 12px;
+      padding: 12px 14px;
+      color: var(--navy-dark);
+      background: var(--white);
+    }
+
+    textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 12px;
+      padding: 12px 18px;
+      font-weight: 800;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+    }
+
+    .btn:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(0, 23, 49, 0.16);
+    }
+
+    .btn:disabled {
+      cursor: not-allowed;
+      opacity: 0.48;
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: var(--white);
+    }
+
+    .btn-green {
+      background: var(--green);
+      color: var(--navy-dark);
+    }
+
+    .btn-navy {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .btn-secondary {
+      background: var(--light-gray);
+      color: var(--navy);
+      border: 1px solid #D5DCE4;
+    }
+
+    .btn-linklike {
+      background: transparent;
+      color: var(--blue);
+      padding-inline: 4px;
+    }
+
+    .status-text {
+      min-height: 24px;
+      margin: 10px 0 0;
+      font-weight: 700;
+    }
+
+    .objectives-grid {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .objective-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+      border-left: 7px solid var(--sky-blue);
+    }
+
+    .objective-card strong {
+      color: var(--navy);
+    }
+
+    .path-grid {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .path-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+      min-height: 190px;
+      border-top: 8px solid var(--gray);
+      position: relative;
+    }
+
+    .path-card.ready { border-top-color: var(--sky-blue); }
+    .path-card.complete { border-top-color: var(--green); }
+
+    .path-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: var(--white);
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .path-card h3 {
+      margin: 0 0 8px;
+      color: var(--navy);
+      font-size: 1.18rem;
+    }
+
+    .path-card p { margin: 0; }
+
+    .path-status {
+      margin-top: 16px;
+      display: inline-block;
+      font-size: 0.84rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--navy);
+      background: var(--light-gray);
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+
+    .step-shell {
+      margin-top: 26px;
+      background: var(--white);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .step-header {
+      padding: 26px 30px;
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .step-header .eyebrow { color: var(--green); }
+
+    .step-header h2 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+    }
+
+    .step-body { padding: 30px; }
+
+    .locked-panel {
+      padding: 28px;
+      border: 2px dashed #AAB6C3;
+      border-radius: 16px;
+      background: var(--light-gray);
+      text-align: center;
+    }
+
+    .locked-panel strong {
+      display: block;
+      color: var(--navy);
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+    }
+
+    .reading-frame {
+      border: 1px solid #D7E0E9;
+      border-radius: 18px;
+      overflow: hidden;
+      background: var(--white);
+    }
+
+    .reading-topbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      padding: 14px 18px;
+      background: var(--light-gray);
+      border-bottom: 1px solid #D7E0E9;
+    }
+
+    .reading-progress {
+      flex: 1;
+      height: 8px;
+      background: #DCE5ED;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .reading-progress > span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: var(--blue);
+      transition: width 0.25s ease;
+    }
+
+    .slide-counter {
+      white-space: nowrap;
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .reading-slide {
+      display: none;
+      padding: 34px;
+      min-height: 470px;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .reading-slide.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .reading-slide p {
+      margin: 0 0 18px;
+      font-size: 1.03rem;
+    }
+
+    .callout {
+      margin: 26px 0 0;
+      padding: 22px 24px;
+      background: var(--light-blue);
+      border-left: 8px solid var(--green);
+      border-radius: 14px;
+      font-size: 1.16rem;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .thought-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin: 24px 0;
+    }
+
+    .thought-card {
+      border-radius: 16px;
+      padding: 22px;
+      border: 2px solid #D5DCE4;
+    }
+
+    .thought-card.fixed {
+      background: #F7F7F7;
+    }
+
+    .thought-card.growth {
+      background: #F3FAEA;
+      border-color: #B7D986;
+    }
+
+    .thought-card h4 {
+      margin: 0 0 14px;
+      color: var(--navy);
+      font-size: 1.15rem;
+    }
+
+    .thought-card p {
+      margin: 8px 0;
+      font-size: 1rem;
+      font-style: italic;
+    }
+
+    .big-question {
+      margin: 22px 0;
+      padding: 22px;
+      border-radius: 15px;
+      background: var(--navy-dark);
+      color: var(--white);
+      font-size: 1.18rem;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .feedback-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .feedback-card {
+      border-radius: 16px;
+      border: 1px solid #D5DCE4;
+      padding: 22px;
+      background: var(--light-gray);
+    }
+
+    .feedback-card h4 {
+      margin: 0 0 10px;
+      color: var(--navy);
+      font-size: 1.2rem;
+    }
+
+    .feedback-card p { margin: 0; }
+
+    .reading-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      padding: 18px;
+      border-top: 1px solid #D7E0E9;
+      background: var(--light-gray);
+    }
+
+    .reading-nav .right-nav {
+      display: flex;
+      gap: 10px;
+      margin-left: auto;
+    }
+
+    .meeting-card,
+    .form-card,
+    .support-card {
+      padding: 24px;
+      border-radius: 16px;
+      background: var(--light-blue);
+      border: 1px solid #D0E2ED;
+      margin-top: 20px;
+    }
+
+    .meeting-card h3,
+    .form-card h3,
+    .support-card h3 {
+      margin: 0 0 10px;
+      color: var(--navy);
+      font-size: 1.35rem;
+    }
+
+    .meeting-card p,
+    .form-card p,
+    .support-card p {
+      margin-top: 0;
+    }
+
+    .field {
+      margin-bottom: 20px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--navy);
+      font-weight: 800;
+    }
+
+    .field .help {
+      margin: -2px 0 8px;
+      color: #49627B;
+      font-size: 0.92rem;
+    }
+
+    .form-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    .success-message {
+      margin-top: 16px;
+      padding: 14px 16px;
+      background: #F1FAE7;
+      border-left: 6px solid var(--green);
+      border-radius: 12px;
+      color: var(--success-dark);
+      font-weight: 700;
+    }
+
+    .warning-message {
+      margin-top: 16px;
+      padding: 14px 16px;
+      background: #FFF7E8;
+      border-left: 6px solid #F0A63A;
+      border-radius: 12px;
+      color: #6E4600;
+      font-weight: 700;
+    }
+
+    .inline-note {
+      font-size: 0.92rem;
+      color: #4A6077;
+    }
+
+    .goal-preview {
+      padding: 18px;
+      border-radius: 14px;
+      background: var(--white);
+      border: 1px solid #D5DCE4;
+      margin-bottom: 18px;
+    }
+
+    .goal-preview strong {
+      color: var(--navy);
+    }
+
+    .completion-box {
+      margin-top: 24px;
+      padding: 28px;
+      border-radius: 18px;
+      background: var(--navy-dark);
+      color: var(--white);
+      text-align: center;
+    }
+
+    .completion-box h3 {
+      margin: 0 0 10px;
+      font-size: 1.65rem;
+    }
+
+    .completion-box p {
+      margin: 0 auto;
+      max-width: 760px;
+    }
+
+    .footer-tools {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 26px;
+    }
+
+    .hidden { display: none !important; }
+
+    @media (max-width: 900px) {
+      .path-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .objectives-grid,
+      .thought-grid,
+      .feedback-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 650px) {
+      .section { padding: 46px 20px; }
+      .path-grid { grid-template-columns: 1fr; }
+      .name-row { grid-template-columns: 1fr; }
+      .step-body { padding: 22px; }
+      .reading-slide { padding: 24px 20px; min-height: 0; }
+      .reading-nav { align-items: stretch; flex-direction: column; }
+      .reading-nav .right-nav { margin-left: 0; }
+      .reading-nav .btn { width: 100%; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- =========================================================
+       CONFIGURATION
+       Later, paste Cloudflare Worker endpoints into the JS
+       constants near the bottom of this file.
+  ========================================================== -->
+
+  <section class="section section-navy" id="start">
+    <div class="section-inner">
+      <p class="eyebrow">Foundational Learning Path</p>
+      <h1 class="big-heading">Receiving &amp;<br />Applying Feedback</h1>
+      <p class="hero-copy">
+        Learn how to receive feedback with a growth mindset, turn it into a focused
+        development plan, seek out support, and intentionally apply what you learn.
+      </p>
+
+      <div class="start-box">
+        <label for="coach-name">Type your first and last name below to begin this learning path.</label>
+        <div class="name-row">
+          <input id="coach-name" type="text" autocomplete="name" placeholder="First and last name" />
+          <button id="confirm-start" class="btn btn-green" type="button">Confirm</button>
+        </div>
+        <p id="start-status" class="status-text" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light" id="objectives">
+    <div class="section-inner">
+      <p class="eyebrow">What You Will Learn</p>
+      <h2 class="section-heading">Learning Objectives</h2>
+      <p class="lead">
+        By the end of this learning path, you will be able to:
+      </p>
+
+      <div class="objectives-grid">
+        <div class="objective-card"><strong>Explain</strong> how a growth mindset and a focus on 1% improvement support continuous development in coaching practice.</div>
+        <div class="objective-card"><strong>Demonstrate</strong> appropriate responses to constructive feedback by listening openly, seeking clarification, and identifying actionable takeaways.</div>
+        <div class="objective-card"><strong>Create</strong> a self-guided development plan that translates feedback into specific actions, practice opportunities, and measures of progress.</div>
+        <div class="objective-card"><strong>Use</strong> team and leadership support by intentionally asking for guidance, resources, feedback, or additional perspective.</div>
+        <div class="objective-card"><strong>Apply</strong> feedback during coaching practice and reflect on evidence of progress over time.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-white" id="path-overview">
+    <div class="section-inner">
+      <p class="eyebrow">Your Development Journey</p>
+      <h2 class="section-heading">Learning Path</h2>
+      <p class="lead">
+        This learning path is designed to unfold over time. Some steps require a meeting,
+        an observation, practice in real coaching interactions, or follow-up before the next
+        step becomes available.
+      </p>
+
+      <div class="path-grid">
+        <article class="path-card" id="path-card-1">
+          <span class="path-number">1</span>
+          <h3>Embracing Feedback</h3>
+          <p>Work through short, click-through content on 1% improvement, mindset, and feedback responses.</p>
+          <span class="path-status" id="path-status-1">Locked</span>
+        </article>
+        <article class="path-card" id="path-card-2">
+          <span class="path-number">2</span>
+          <h3>Reflection Meeting</h3>
+          <p>Discuss the reading, reflect on your own mindset, and record your key takeaways.</p>
+          <span class="path-status" id="path-status-2">Locked</span>
+        </article>
+        <article class="path-card" id="path-card-3">
+          <span class="path-number">3</span>
+          <h3>Observation &amp; Development Goal</h3>
+          <p>Request an observation, receive feedback, and turn it into a focused self-guided goal.</p>
+          <span class="path-status" id="path-status-3">Locked</span>
+        </article>
+        <article class="path-card" id="path-card-4">
+          <span class="path-number">4</span>
+          <h3>Seek Out Support</h3>
+          <p>Ask someone in the department for additional perspective, suggestions, or support.</p>
+          <span class="path-status" id="path-status-4">Locked</span>
+        </article>
+        <article class="path-card" id="path-card-5">
+          <span class="path-number">5</span>
+          <h3>Self-Evaluation</h3>
+          <p>Request a recording and evaluate whether you can see evidence of at least 1% improvement.</p>
+          <span class="path-status" id="path-status-5">Locked</span>
+        </article>
+        <article class="path-card" id="path-card-6">
+          <span class="path-number">6</span>
+          <h3>Final Observation</h3>
+          <p>Request a final observation so your application of feedback can be reviewed.</p>
+          <span class="path-status" id="path-status-6">Locked</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 1 -->
+  <section class="section section-gray" id="step-1">
+    <div class="section-inner">
+      <div class="step-shell">
+        <div class="step-header">
+          <p class="eyebrow">Step 1</p>
+          <h2>Embracing Feedback</h2>
+        </div>
+        <div class="step-body">
+          <div id="step-1-locked" class="locked-panel">
+            <strong>Enter your name above to begin.</strong>
+            Your learning path will unlock after you confirm your name.
+          </div>
+
+          <div id="step-1-content" class="hidden">
+            <p class="lead">
+              Move through each short section using the arrows below. After you have worked through all of the content,
+              you will be able to complete the reading and move on to your reflection meeting.
+            </p>
+
+            <div class="reading-frame" aria-live="polite">
+              <div class="reading-topbar">
+                <div class="reading-progress" aria-label="Reading progress">
+                  <span id="reading-progress-bar"></span>
+                </div>
+                <span class="slide-counter" id="slide-counter">1 of 6</span>
+              </div>
+
+              <article class="reading-slide active" data-slide="0">
+                <p class="eyebrow">Embracing Feedback</p>
+                <h3 class="subheading">The Power of 1% Improvement</h3>
+                <p>Professional growth does not usually happen through one major breakthrough. More often, it happens through a series of small, intentional adjustments made over time. The idea of <strong>1% improvement</strong> is simple: instead of expecting yourself to become dramatically better all at once, focus on making one small improvement each time you practice a skill.</p>
+                <p>In coaching, that 1% might look like asking one stronger follow-up question, allowing a few more seconds of silence before responding, narrowing an appointment to one strategy instead of several, or checking for understanding more intentionally. None of these changes may feel dramatic in a single appointment or live event, but repeated consistently, small improvements begin to change the quality of your coaching.</p>
+                <p>This approach also changes how we think about feedback. Feedback does not mean that everything you are doing needs to change. Often, feedback is simply helping you identify <strong>the next small adjustment that could make you more effective</strong>. Instead of asking, <em>“Am I good at this or not?”</em> a 1% improvement mindset asks, <em>“What is one thing I can do a little better next time?”</em></p>
+                <p>Trying to improve too many things at once can become overwhelming. When we identify one specific behavior, practice it intentionally, and reflect on what happened, development becomes much more manageable. Once that behavior begins to feel natural, we can choose the next area of focus. Over time, those small adjustments add up.</p>
+                <div class="callout">A coach who consistently looks for their next 1% improvement becomes more intentional, adaptable, and confident.</div>
+              </article>
+
+              <article class="reading-slide" data-slide="1">
+                <p class="eyebrow">Mindset</p>
+                <h3 class="subheading">Growing Your Mindset</h3>
+                <p>Think back over the different parts of your life where you had to learn something difficult: school, work, relationships, sports, parenting, coaching, or even learning how to handle pressure. At some point, you probably ran into something that did not come naturally to you. Maybe you struggled, made mistakes, received criticism, or watched someone else seem to “get it” faster than you did.</p>
+                <p>In those moments, most of us develop a story about what that struggle means.</p>
+
+                <div class="thought-grid">
+                  <div class="thought-card fixed">
+                    <h4>Sometimes the story sounds like:</h4>
+                    <p>“I’m just not good at this.”</p>
+                    <p>“I’ve always been bad at speaking up.”</p>
+                    <p>“I’m just not a confident person.”</p>
+                    <p>“This is just how I am.”</p>
+                  </div>
+                  <div class="thought-card growth">
+                    <h4>Other times, the story sounds more like:</h4>
+                    <p>“I’m not good at this yet.”</p>
+                    <p>“I need more practice.”</p>
+                    <p>“I can probably get better if I figure out what isn’t working.”</p>
+                    <p>“This is uncomfortable, but discomfort is part of learning.”</p>
+                  </div>
+                </div>
+
+                <p>Those two ways of thinking reflect the difference between a <strong>fixed mindset</strong> and a <strong>growth mindset</strong>.</p>
+              </article>
+
+              <article class="reading-slide" data-slide="2">
+                <p class="eyebrow">Mindset</p>
+                <h3 class="subheading">Fixed Mindset vs. Growth Mindset</h3>
+                <p>A <strong>fixed mindset</strong> assumes that abilities are largely set. You either have a skill or you do not. When someone operates from that mindset, mistakes can feel threatening because they seem to reveal something permanent about who they are. Feedback can feel personal. Being corrected can feel embarrassing. Difficult tasks may become something to avoid because struggling seems like evidence that you are not capable.</p>
+                <p>A <strong>growth mindset</strong> views ability differently. It recognizes that skills can be developed through practice, feedback, reflection, and effort. Struggle is not proof that you cannot do something; it is often evidence that you are still learning how to do it. Feedback becomes information instead of a judgment.</p>
+                <p>This does not mean a growth mindset is simply “stay positive” or “believe you can do anything.” It is more practical than that. A growth mindset asks:</p>
+                <div class="big-question">What can I learn from this? &nbsp; What can I try differently? &nbsp; What support might help me improve?</div>
+              </article>
+
+              <article class="reading-slide" data-slide="3">
+                <p class="eyebrow">Mindset</p>
+                <h3 class="subheading">Notice the Story You Tell Yourself</h3>
+                <p>Your mindset also affects what happens after feedback. If feedback feels like a verdict, the natural response may be to defend yourself, explain why something happened, avoid the situation, or hope the issue simply goes away. If feedback is viewed as information for growth, the response becomes more productive: ask questions, choose a specific behavior to practice, seek support, try something different, and evaluate whether it worked.</p>
+                <p>Most people do not operate with a growth mindset or a fixed mindset <strong>all the time</strong>. You might have a growth mindset in one area and a fixed mindset in another. You may welcome feedback about a skill you are still learning but become defensive when the feedback touches something you believe you should already be good at.</p>
+                <p>The next time you receive feedback, pay attention to your first internal reaction. Instead of judging that reaction, notice it. Then ask yourself:</p>
+                <div class="big-question">Is this thought helping me learn, or is it helping me protect myself from feeling uncomfortable?</div>
+              </article>
+
+              <article class="reading-slide" data-slide="4">
+                <p class="eyebrow">Feedback Responses</p>
+                <h3 class="subheading">How We Respond Matters</h3>
+                <p>When we receive feedback, our response can shape what happens next just as much as the feedback itself. Two people can hear the exact same message and walk away with very different outcomes depending on how they respond. A useful way to think about feedback reactions is through four common response types: <strong>productive, defensive, clarifying, and avoidant</strong>.</p>
+
+                <div class="feedback-grid">
+                  <div class="feedback-card">
+                    <h4>Productive</h4>
+                    <p>A productive response is open, thoughtful, and focused on growth. The person listens to the feedback, considers what they can learn from it, and identifies what they can do differently. A productive response does not mean automatically agreeing with every piece of feedback. It means treating the feedback as useful information rather than as a personal attack.</p>
+                  </div>
+                  <div class="feedback-card">
+                    <h4>Defensive</h4>
+                    <p>A defensive response happens when the first goal becomes protecting yourself rather than understanding the feedback. This can look like explaining, justifying, blaming circumstances, or immediately pointing out why the feedback is not fair or accurate. There may be legitimate context to share, but moving straight into defense can cause us to miss something useful in the feedback.</p>
+                  </div>
+                </div>
+              </article>
+
+              <article class="reading-slide" data-slide="5">
+                <p class="eyebrow">Feedback Responses</p>
+                <h3 class="subheading">Clarify, Reflect, and Decide What Comes Next</h3>
+                <div class="feedback-grid">
+                  <div class="feedback-card">
+                    <h4>Clarifying</h4>
+                    <p>A clarifying response is an important and healthy part of receiving feedback. Clarifying means asking questions so you fully understand what the other person observed and what improvement might look like. Questions such as, “Can you give me an example of where I could have slowed down?” can turn broad feedback into something specific and actionable.</p>
+                  </div>
+                  <div class="feedback-card">
+                    <h4>Avoidant</h4>
+                    <p>An avoidant response happens when someone tries to move away from the feedback rather than engage with it. This might look like changing the subject, staying unusually quiet, agreeing quickly without reflection, avoiding follow-up conversations, or simply not doing anything differently afterward.</p>
+                  </div>
+                </div>
+                <p style="margin-top:24px;">These response types are not permanent personality traits. Most people move between them depending on the situation, the topic, and sometimes who is delivering the feedback.</p>
+                <div class="callout">A strong feedback response often combines clarifying and productive behaviors: listen, ask questions, identify the key takeaway, and decide how you will apply it. That is what turns feedback from a conversation into development.</div>
+              </article>
+
+              <div class="reading-nav">
+                <button id="prev-slide" class="btn btn-secondary" type="button">← Previous</button>
+                <div class="right-nav">
+                  <button id="next-slide" class="btn btn-primary" type="button">Next →</button>
+                  <button id="finish-reading" class="btn btn-green hidden" type="button">I’ve Finished the Reading</button>
+                </div>
+              </div>
+            </div>
+
+            <div id="reading-complete-message" class="success-message hidden">
+              Reading complete. Step 2 is now available.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 2 -->
+  <section class="section section-light" id="step-2">
+    <div class="section-inner">
+      <div class="step-shell">
+        <div class="step-header">
+          <p class="eyebrow">Step 2</p>
+          <h2>Reflection Meeting</h2>
+        </div>
+        <div class="step-body">
+          <div id="step-2-locked" class="locked-panel">
+            <strong>Step 2 is locked.</strong>
+            Finish the Step 1 reading to continue.
+          </div>
+
+          <div id="step-2-content" class="hidden">
+            <p class="lead">
+              Your next step is a reflection meeting. Come prepared to discuss the reading,
+              including how you tend to respond to feedback, where you notice fixed or growth
+              mindset patterns, and what 1% improvement could look like in your own coaching.
+            </p>
+
+            <div class="meeting-card">
+              <h3>Request Your Reflection Meeting</h3>
+              <p>Use the button below to request your reflection meeting. You will later receive meeting details from leadership.</p>
+              <button id="request-reflection" class="btn btn-primary" type="button">Request Reflection Meeting</button>
+              <div id="reflection-request-status" aria-live="polite"></div>
+            </div>
+
+            <div id="reflection-takeaway-card" class="form-card hidden">
+              <h3>Reflection Meeting Takeaways</h3>
+              <p><strong>Record your takeaways from the reflection meeting.</strong> Consider any new insights you gained about yourself and actions you may take based on those insights.</p>
+              <form id="reflection-form">
+                <div class="field">
+                  <label for="reflection-takeaways">Key Takeaways</label>
+                  <textarea id="reflection-takeaways" required placeholder="Record your takeaways here..."></textarea>
+                </div>
+                <div class="form-actions">
+                  <button class="btn btn-green" type="submit">Submit Takeaways</button>
+                  <span class="inline-note">Submitting this unlocks Step 3.</span>
+                </div>
+                <div id="reflection-form-status" aria-live="polite"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 3 -->
+  <section class="section section-white" id="step-3">
+    <div class="section-inner">
+      <div class="step-shell">
+        <div class="step-header">
+          <p class="eyebrow">Step 3</p>
+          <h2>Observation &amp; Self-Guided Development Goal</h2>
+        </div>
+        <div class="step-body">
+          <div id="step-3-locked" class="locked-panel">
+            <strong>Step 3 is locked.</strong>
+            Submit your reflection meeting takeaways to continue.
+          </div>
+
+          <div id="step-3-content" class="hidden">
+            <p class="lead">
+              Request an observation so you can receive focused feedback on your current coaching practice.
+              After the observation and feedback conversation, use what you learned to create a self-guided development goal.
+            </p>
+
+            <div class="meeting-card">
+              <h3>Request an Observation</h3>
+              <p>This observation is meant to give you a clear picture of where you are now and identify an area where intentional practice could strengthen your coaching.</p>
+              <button id="request-observation" class="btn btn-primary" type="button">Request Observation</button>
+              <div id="observation-request-status" aria-live="polite"></div>
+            </div>
+
+            <div id="development-goal-card" class="form-card hidden">
+              <h3>Create Your Self-Guided Development Goal</h3>
+              <p>
+                Complete this form <strong>after your observation and feedback conversation</strong>.
+                Use the feedback you received to identify a focused area for development. Your goal should not try to fix everything at once;
+                choose an area where small, intentional changes can create meaningful improvement.
+              </p>
+
+              <form id="development-goal-form">
+                <div class="field">
+                  <label for="goal-strength">What strength do you want to continue?</label>
+                  <textarea id="goal-strength" required></textarea>
+                </div>
+
+                <div class="field">
+                  <label for="goal-area">What is one area you will actively work on improving?</label>
+                  <textarea id="goal-area" required></textarea>
+                </div>
+
+                <div class="field">
+                  <label for="goal-why">Why did you choose that area, and how will working on it improve your coaching interactions?</label>
+                  <textarea id="goal-why" required></textarea>
+                </div>
+
+                <div class="field">
+                  <label for="goal-steps">What tangible steps will you take toward improvement?</label>
+                  <textarea id="goal-steps" required></textarea>
+                </div>
+
+                <div class="form-actions">
+                  <button class="btn btn-green" type="submit">Submit Development Goal</button>
+                  <span class="inline-note">Submitting this unlocks Step 4.</span>
+                </div>
+                <div id="development-goal-status" aria-live="polite"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 4 -->
+  <section class="section section-gray" id="step-4">
+    <div class="section-inner">
+      <div class="step-shell">
+        <div class="step-header">
+          <p class="eyebrow">Step 4</p>
+          <h2>Seek Out Support</h2>
+        </div>
+        <div class="step-body">
+          <div id="step-4-locked" class="locked-panel">
+            <strong>Step 4 is locked.</strong>
+            Submit your self-guided development goal to continue.
+          </div>
+
+          <div id="step-4-content" class="hidden">
+            <p class="lead">
+              Development does not have to happen alone. Reach out to someone in the department for additional perspective on your goal.
+              This can be your supervisor, manager, a peer, a Senior Peer Navigator, or the Development Supervisor.
+            </p>
+
+            <div class="support-card">
+              <h3>Your Task</h3>
+              <p>
+                Tell the person what you are working on and the steps you plan to take. Ask whether they have any additional tips,
+                strategies, resources, or perspectives that could help you. You may do this through a Teams message or a meeting.
+              </p>
+            </div>
+
+            <div class="form-card">
+              <h3>Record What You Learned</h3>
+              <form id="support-form">
+                <div class="field">
+                  <label for="support-person">What is the name of the person you reached out to and what is their role?</label>
+                  <textarea id="support-person" required></textarea>
+                </div>
+
+                <div class="field">
+                  <label for="support-insights">What additional insights did you gain from your conversation with them?</label>
+                  <textarea id="support-insights" required></textarea>
+                </div>
+
+                <div class="form-actions">
+                  <button class="btn btn-green" type="submit">Submit Support Reflection</button>
+                  <span class="inline-note">Submitting this unlocks Step 5.</span>
+                </div>
+                <div id="support-form-status" aria-live="polite"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 5 -->
+  <section class="section section-light" id="step-5">
+    <div class="section-inner">
+      <div class="step-shell">
+        <div class="step-header">
+          <p class="eyebrow">Step 5</p>
+          <h2>Request a Recording &amp; Self-Evaluate</h2>
+        </div>
+        <div class="step-body">
+          <div id="step-5-locked" class="locked-panel">
+            <strong>Step 5 is locked.</strong>
+            Complete the Seek Out Support activity to continue.
+          </div>
+
+          <div id="step-5-content" class="hidden">
+            <p class="lead">
+              Now it is time to look for evidence of progress in your own coaching. Request a recording to use for self-evaluation.
+              Once you receive it, review the call with your original development goal in mind.
+            </p>
+
+            <div class="meeting-card">
+              <h3>Request a Recording</h3>
+              <button id="request-recording" class="btn btn-primary" type="button">Request Recording for Self-Evaluation</button>
+              <div id="recording-request-status" aria-live="polite"></div>
+            </div>
+
+            <div id="self-eval-card" class="form-card hidden">
+              <h3>Self-Evaluation</h3>
+              <div class="goal-preview">
+                <strong>Your development focus:</strong>
+                <div id="saved-goal-preview">Your saved goal will appear here.</div>
+              </div>
+
+              <form id="self-eval-form">
+                <div class="field">
+                  <label for="self-original-goal">What was your original development goal?</label>
+                  <textarea id="self-original-goal" required></textarea>
+                </div>
+
+                <div class="field">
+                  <label for="self-one-percent">Based on this call recording, do you feel you have reached at least 1% improvement on your goal? Why or why not?</label>
+                  <textarea id="self-one-percent" required></textarea>
+                </div>
+
+                <div class="form-actions">
+                  <button class="btn btn-green" type="submit">Submit Self-Evaluation</button>
+                  <span class="inline-note">Submitting this unlocks Step 6.</span>
+                </div>
+                <div id="self-eval-status" aria-live="polite"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 6 -->
+  <section class="section section-white" id="step-6">
+    <div class="section-inner">
+      <div class="step-shell">
+        <div class="step-header">
+          <p class="eyebrow">Step 6</p>
+          <h2>Final Observation</h2>
+        </div>
+        <div class="step-body">
+          <div id="step-6-locked" class="locked-panel">
+            <strong>Step 6 is locked.</strong>
+            Submit your self-evaluation to continue.
+          </div>
+
+          <div id="step-6-content" class="hidden">
+            <p class="lead">
+              You have worked through feedback, chosen a focused development goal, sought additional support,
+              practiced intentionally, and evaluated your own progress. Your final step is to request another observation
+              so leadership can look for evidence that the feedback has been applied in your coaching practice.
+            </p>
+
+            <div class="meeting-card">
+              <h3>Request Your Final Observation</h3>
+              <button id="request-final-observation" class="btn btn-primary" type="button">Request Final Observation</button>
+              <div id="final-observation-status" aria-live="polite"></div>
+            </div>
+
+            <div id="completion-box" class="completion-box hidden">
+              <h3>Final Observation Requested</h3>
+              <p>
+                Your request has been recorded. The final observation will provide an opportunity to compare your current coaching
+                with your original development focus and continue identifying your next 1% improvement.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-tools">
+        <button id="reset-progress" class="btn btn-linklike" type="button">Reset learning path progress</button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // =========================================================
+    // ENDPOINTS TO CONNECT LATER
+    // Use Cloudflare Worker URLs here when each backend is ready.
+    // Leaving an endpoint blank keeps the page in local/demo mode.
+    // =========================================================
+
+    const REFLECTION_REQUEST_ENDPOINT = "";
+    const REFLECTION_TAKEAWAYS_ENDPOINT = "";
+    const OBSERVATION_REQUEST_ENDPOINT = "";
+    const DEVELOPMENT_GOAL_ENDPOINT = "";
+    const SUPPORT_REFLECTION_ENDPOINT = "";
+    const RECORDING_REQUEST_ENDPOINT = "";
+    const SELF_EVAL_ENDPOINT = "";
+    const FINAL_OBSERVATION_REQUEST_ENDPOINT = "";
+
+    const KEYS = {
+      coachName: "raf_coach_name",
+      readingComplete: "raf_reading_complete",
+      currentSlide: "raf_current_slide",
+      reflectionRequested: "raf_reflection_requested",
+      reflectionTakeaways: "raf_reflection_takeaways",
+      reflectionSubmitted: "raf_reflection_submitted",
+      observationRequested: "raf_observation_requested",
+      developmentGoal: "raf_development_goal",
+      developmentGoalSubmitted: "raf_development_goal_submitted",
+      supportReflection: "raf_support_reflection",
+      supportSubmitted: "raf_support_submitted",
+      recordingRequested: "raf_recording_requested",
+      selfEval: "raf_self_eval",
+      selfEvalSubmitted: "raf_self_eval_submitted",
+      finalObservationRequested: "raf_final_observation_requested"
+    };
+
+    const $ = (id) => document.getElementById(id);
+
+    function getBool(key) {
+      return localStorage.getItem(key) === "true";
+    }
+
+    function setBool(key, value = true) {
+      localStorage.setItem(key, value ? "true" : "false");
+    }
+
+    function saveJSON(key, value) {
+      localStorage.setItem(key, JSON.stringify(value));
+    }
+
+    function loadJSON(key, fallback = null) {
+      try {
+        const raw = localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : fallback;
+      } catch {
+        return fallback;
+      }
+    }
+
+    function coachName() {
+      return localStorage.getItem(KEYS.coachName) || "";
+    }
+
+    function nowIso() {
+      return new Date().toISOString();
+    }
+
+    async function postJSON(endpoint, payload) {
+      if (!endpoint) {
+        return { ok: true, demo: true };
+      }
+
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        throw new Error(`Request failed with status ${response.status}`);
+      }
+
+      let data = null;
+      try { data = await response.json(); } catch { data = null; }
+      return { ok: true, demo: false, data };
+    }
+
+    function showSuccess(container, message) {
+      container.innerHTML = `<div class="success-message">${message}</div>`;
+    }
+
+    function showWarning(container, message) {
+      container.innerHTML = `<div class="warning-message">${message}</div>`;
+    }
+
+    function demoSuffix(result) {
+      return result.demo
+        ? " <span class='inline-note'>(Local test mode — notification/data endpoint will be connected later.)</span>"
+        : "";
+    }
+
+    // =========================================================
+    // START / NAME
+    // =========================================================
+
+    function initializeStart() {
+      const savedName = coachName();
+      if (savedName) {
+        $("coach-name").value = savedName;
+        $("start-status").textContent = `Welcome back, ${savedName}. Your saved progress has been restored.`;
+      }
+    }
+
+    $("confirm-start").addEventListener("click", () => {
+      const name = $("coach-name").value.trim();
+      if (!name || name.split(/\s+/).length < 2) {
+        $("start-status").textContent = "Please enter your first and last name.";
+        return;
+      }
+      localStorage.setItem(KEYS.coachName, name);
+      $("start-status").textContent = `Thanks, ${name}. Step 1 is ready.`;
+      updateUI();
+      $("step-1").scrollIntoView({ behavior: "smooth" });
+    });
+
+    // =========================================================
+    // READING SLIDES
+    // =========================================================
+
+    const slides = Array.from(document.querySelectorAll(".reading-slide"));
+    let currentSlide = Number(localStorage.getItem(KEYS.currentSlide) || 0);
+    if (!Number.isFinite(currentSlide) || currentSlide < 0 || currentSlide >= slides.length) currentSlide = 0;
+
+    function showSlide(index) {
+      currentSlide = Math.max(0, Math.min(index, slides.length - 1));
+      localStorage.setItem(KEYS.currentSlide, String(currentSlide));
+
+      slides.forEach((slide, i) => slide.classList.toggle("active", i === currentSlide));
+      $("slide-counter").textContent = `${currentSlide + 1} of ${slides.length}`;
+      $("reading-progress-bar").style.width = `${((currentSlide + 1) / slides.length) * 100}%`;
+      $("prev-slide").disabled = currentSlide === 0;
+      $("next-slide").classList.toggle("hidden", currentSlide === slides.length - 1);
+      $("finish-reading").classList.toggle("hidden", currentSlide !== slides.length - 1 || getBool(KEYS.readingComplete));
+    }
+
+    $("prev-slide").addEventListener("click", () => showSlide(currentSlide - 1));
+    $("next-slide").addEventListener("click", () => showSlide(currentSlide + 1));
+
+    $("finish-reading").addEventListener("click", () => {
+      setBool(KEYS.readingComplete);
+      showSuccess($("reading-complete-message"), "Reading complete. Step 2 is now available.");
+      $("reading-complete-message").classList.remove("hidden");
+      updateUI();
+      setTimeout(() => $("step-2").scrollIntoView({ behavior: "smooth" }), 250);
+    });
+
+    // =========================================================
+    // STEP 2: REFLECTION MEETING
+    // =========================================================
+
+    $("request-reflection").addEventListener("click", async () => {
+      const btn = $("request-reflection");
+      btn.disabled = true;
+      btn.textContent = "Sending Request...";
+
+      try {
+        const result = await postJSON(REFLECTION_REQUEST_ENDPOINT, {
+          coach_name: coachName(),
+          request_type: "reflection_meeting",
+          requested_at: nowIso()
+        });
+        setBool(KEYS.reflectionRequested);
+        showSuccess($("reflection-request-status"), `Reflection meeting request recorded.${demoSuffix(result)}`);
+        $("reflection-takeaway-card").classList.remove("hidden");
+        btn.textContent = "Reflection Meeting Requested";
+        updateUI();
+      } catch (error) {
+        showWarning($("reflection-request-status"), "The request could not be sent. Please try again.");
+        btn.disabled = false;
+        btn.textContent = "Request Reflection Meeting";
+      }
+    });
+
+    $("reflection-form").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const takeaways = $("reflection-takeaways").value.trim();
+      if (!takeaways) return;
+
+      const payload = {
+        coach_name: coachName(),
+        submitted_at: nowIso(),
+        takeaways
+      };
+
+      const submitButton = event.submitter;
+      if (submitButton) submitButton.disabled = true;
+
+      try {
+        const result = await postJSON(REFLECTION_TAKEAWAYS_ENDPOINT, payload);
+        localStorage.setItem(KEYS.reflectionTakeaways, takeaways);
+        setBool(KEYS.reflectionSubmitted);
+        showSuccess($("reflection-form-status"), `Takeaways submitted. Step 3 is now available.${demoSuffix(result)}`);
+        updateUI();
+      } catch (error) {
+        showWarning($("reflection-form-status"), "Your takeaways could not be submitted. Please try again.");
+        if (submitButton) submitButton.disabled = false;
+      }
+    });
+
+    // =========================================================
+    // STEP 3: OBSERVATION + DEVELOPMENT GOAL
+    // =========================================================
+
+    $("request-observation").addEventListener("click", async () => {
+      const btn = $("request-observation");
+      btn.disabled = true;
+      btn.textContent = "Sending Request...";
+
+      try {
+        const result = await postJSON(OBSERVATION_REQUEST_ENDPOINT, {
+          coach_name: coachName(),
+          request_type: "development_observation",
+          requested_at: nowIso()
+        });
+        setBool(KEYS.observationRequested);
+        showSuccess($("observation-request-status"), `Observation request recorded.${demoSuffix(result)}`);
+        $("development-goal-card").classList.remove("hidden");
+        btn.textContent = "Observation Requested";
+        updateUI();
+      } catch (error) {
+        showWarning($("observation-request-status"), "The request could not be sent. Please try again.");
+        btn.disabled = false;
+        btn.textContent = "Request Observation";
+      }
+    });
+
+    $("development-goal-form").addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const payload = {
+        coach_name: coachName(),
+        submitted_at: nowIso(),
+        strength_to_continue: $("goal-strength").value.trim(),
+        area_to_improve: $("goal-area").value.trim(),
+        why_this_area: $("goal-why").value.trim(),
+        tangible_steps: $("goal-steps").value.trim()
+      };
+
+      if (!payload.strength_to_continue || !payload.area_to_improve || !payload.why_this_area || !payload.tangible_steps) return;
+
+      const submitButton = event.submitter;
+      if (submitButton) submitButton.disabled = true;
+
+      try {
+        const result = await postJSON(DEVELOPMENT_GOAL_ENDPOINT, payload);
+        saveJSON(KEYS.developmentGoal, payload);
+        setBool(KEYS.developmentGoalSubmitted);
+        showSuccess($("development-goal-status"), `Development goal submitted. Step 4 is now available.${demoSuffix(result)}`);
+        updateUI();
+      } catch (error) {
+        showWarning($("development-goal-status"), "Your development goal could not be submitted. Please try again.");
+        if (submitButton) submitButton.disabled = false;
+      }
+    });
+
+    // =========================================================
+    // STEP 4: SEEK OUT SUPPORT
+    // =========================================================
+
+    $("support-form").addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const payload = {
+        coach_name: coachName(),
+        submitted_at: nowIso(),
+        support_person_and_role: $("support-person").value.trim(),
+        additional_insights: $("support-insights").value.trim()
+      };
+
+      if (!payload.support_person_and_role || !payload.additional_insights) return;
+
+      const submitButton = event.submitter;
+      if (submitButton) submitButton.disabled = true;
+
+      try {
+        const result = await postJSON(SUPPORT_REFLECTION_ENDPOINT, payload);
+        saveJSON(KEYS.supportReflection, payload);
+        setBool(KEYS.supportSubmitted);
+        showSuccess($("support-form-status"), `Support reflection submitted. Step 5 is now available.${demoSuffix(result)}`);
+        updateUI();
+      } catch (error) {
+        showWarning($("support-form-status"), "Your support reflection could not be submitted. Please try again.");
+        if (submitButton) submitButton.disabled = false;
+      }
+    });
+
+    // =========================================================
+    // STEP 5: RECORDING + SELF EVALUATION
+    // =========================================================
+
+    $("request-recording").addEventListener("click", async () => {
+      const btn = $("request-recording");
+      btn.disabled = true;
+      btn.textContent = "Sending Request...";
+
+      try {
+        const result = await postJSON(RECORDING_REQUEST_ENDPOINT, {
+          coach_name: coachName(),
+          request_type: "self_evaluation_recording",
+          requested_at: nowIso()
+        });
+        setBool(KEYS.recordingRequested);
+        showSuccess($("recording-request-status"), `Recording request recorded.${demoSuffix(result)}`);
+        $("self-eval-card").classList.remove("hidden");
+        btn.textContent = "Recording Requested";
+        updateUI();
+      } catch (error) {
+        showWarning($("recording-request-status"), "The request could not be sent. Please try again.");
+        btn.disabled = false;
+        btn.textContent = "Request Recording for Self-Evaluation";
+      }
+    });
+
+    $("self-eval-form").addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const payload = {
+        coach_name: coachName(),
+        submitted_at: nowIso(),
+        original_development_goal: $("self-original-goal").value.trim(),
+        one_percent_reflection: $("self-one-percent").value.trim()
+      };
+
+      if (!payload.original_development_goal || !payload.one_percent_reflection) return;
+
+      const submitButton = event.submitter;
+      if (submitButton) submitButton.disabled = true;
+
+      try {
+        const result = await postJSON(SELF_EVAL_ENDPOINT, payload);
+        saveJSON(KEYS.selfEval, payload);
+        setBool(KEYS.selfEvalSubmitted);
+        showSuccess($("self-eval-status"), `Self-evaluation submitted. Step 6 is now available.${demoSuffix(result)}`);
+        updateUI();
+      } catch (error) {
+        showWarning($("self-eval-status"), "Your self-evaluation could not be submitted. Please try again.");
+        if (submitButton) submitButton.disabled = false;
+      }
+    });
+
+    // =========================================================
+    // STEP 6: FINAL OBSERVATION
+    // =========================================================
+
+    $("request-final-observation").addEventListener("click", async () => {
+      const btn = $("request-final-observation");
+      btn.disabled = true;
+      btn.textContent = "Sending Request...";
+
+      try {
+        const result = await postJSON(FINAL_OBSERVATION_REQUEST_ENDPOINT, {
+          coach_name: coachName(),
+          request_type: "final_observation",
+          requested_at: nowIso()
+        });
+        setBool(KEYS.finalObservationRequested);
+        showSuccess($("final-observation-status"), `Final observation request recorded.${demoSuffix(result)}`);
+        $("completion-box").classList.remove("hidden");
+        btn.textContent = "Final Observation Requested";
+        updateUI();
+      } catch (error) {
+        showWarning($("final-observation-status"), "The request could not be sent. Please try again.");
+        btn.disabled = false;
+        btn.textContent = "Request Final Observation";
+      }
+    });
+
+    // =========================================================
+    // RESTORE SAVED FORM CONTENT
+    // =========================================================
+
+    function restoreSavedContent() {
+      $("reflection-takeaways").value = localStorage.getItem(KEYS.reflectionTakeaways) || "";
+
+      const goal = loadJSON(KEYS.developmentGoal, {});
+      $("goal-strength").value = goal.strength_to_continue || "";
+      $("goal-area").value = goal.area_to_improve || "";
+      $("goal-why").value = goal.why_this_area || "";
+      $("goal-steps").value = goal.tangible_steps || "";
+
+      const support = loadJSON(KEYS.supportReflection, {});
+      $("support-person").value = support.support_person_and_role || "";
+      $("support-insights").value = support.additional_insights || "";
+
+      const selfEval = loadJSON(KEYS.selfEval, {});
+      $("self-original-goal").value = selfEval.original_development_goal || goal.area_to_improve || "";
+      $("self-one-percent").value = selfEval.one_percent_reflection || "";
+
+      const goalPreview = goal.area_to_improve
+        ? `<p><strong>Area of focus:</strong> ${escapeHTML(goal.area_to_improve)}</p><p><strong>Planned steps:</strong> ${escapeHTML(goal.tangible_steps || "")}</p>`
+        : "Your saved goal will appear here after Step 3 is complete.";
+      $("saved-goal-preview").innerHTML = goalPreview;
+    }
+
+    function escapeHTML(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    // =========================================================
+    // UI / PROGRESS GATING
+    // =========================================================
+
+    function setStepState(step, state) {
+      const card = $(`path-card-${step}`);
+      const status = $(`path-status-${step}`);
+      card.classList.remove("ready", "complete");
+
+      if (state === "complete") {
+        card.classList.add("complete");
+        status.textContent = "Complete";
+      } else if (state === "ready") {
+        card.classList.add("ready");
+        status.textContent = "Ready";
+      } else {
+        status.textContent = "Locked";
+      }
+    }
+
+    function toggleStep(step, unlocked) {
+      $(`step-${step}-locked`).classList.toggle("hidden", unlocked);
+      $(`step-${step}-content`).classList.toggle("hidden", !unlocked);
+    }
+
+    function updateUI() {
+      const started = Boolean(coachName());
+      const readingDone = getBool(KEYS.readingComplete);
+      const reflectionRequested = getBool(KEYS.reflectionRequested);
+      const reflectionSubmitted = getBool(KEYS.reflectionSubmitted);
+      const observationRequested = getBool(KEYS.observationRequested);
+      const developmentGoalSubmitted = getBool(KEYS.developmentGoalSubmitted);
+      const supportSubmitted = getBool(KEYS.supportSubmitted);
+      const recordingRequested = getBool(KEYS.recordingRequested);
+      const selfEvalSubmitted = getBool(KEYS.selfEvalSubmitted);
+      const finalObservationRequested = getBool(KEYS.finalObservationRequested);
+
+      toggleStep(1, started);
+      toggleStep(2, readingDone);
+      toggleStep(3, reflectionSubmitted);
+      toggleStep(4, developmentGoalSubmitted);
+      toggleStep(5, supportSubmitted);
+      toggleStep(6, selfEvalSubmitted);
+
+      setStepState(1, readingDone ? "complete" : started ? "ready" : "locked");
+      setStepState(2, reflectionSubmitted ? "complete" : readingDone ? "ready" : "locked");
+      setStepState(3, developmentGoalSubmitted ? "complete" : reflectionSubmitted ? "ready" : "locked");
+      setStepState(4, supportSubmitted ? "complete" : developmentGoalSubmitted ? "ready" : "locked");
+      setStepState(5, selfEvalSubmitted ? "complete" : supportSubmitted ? "ready" : "locked");
+      setStepState(6, finalObservationRequested ? "complete" : selfEvalSubmitted ? "ready" : "locked");
+
+      if (readingDone) {
+        $("reading-complete-message").classList.remove("hidden");
+        $("reading-complete-message").textContent = "Reading complete. Step 2 is now available.";
+      }
+
+      if (reflectionRequested) {
+        $("request-reflection").disabled = true;
+        $("request-reflection").textContent = "Reflection Meeting Requested";
+        $("reflection-takeaway-card").classList.remove("hidden");
+      }
+
+      if (reflectionSubmitted) {
+        showSuccess($("reflection-form-status"), "Takeaways submitted. Step 3 is available.");
+      }
+
+      if (observationRequested) {
+        $("request-observation").disabled = true;
+        $("request-observation").textContent = "Observation Requested";
+        $("development-goal-card").classList.remove("hidden");
+      }
+
+      if (developmentGoalSubmitted) {
+        showSuccess($("development-goal-status"), "Development goal submitted. Step 4 is available.");
+      }
+
+      if (supportSubmitted) {
+        showSuccess($("support-form-status"), "Support reflection submitted. Step 5 is available.");
+      }
+
+      if (recordingRequested) {
+        $("request-recording").disabled = true;
+        $("request-recording").textContent = "Recording Requested";
+        $("self-eval-card").classList.remove("hidden");
+      }
+
+      if (selfEvalSubmitted) {
+        showSuccess($("self-eval-status"), "Self-evaluation submitted. Step 6 is available.");
+      }
+
+      if (finalObservationRequested) {
+        $("request-final-observation").disabled = true;
+        $("request-final-observation").textContent = "Final Observation Requested";
+        $("completion-box").classList.remove("hidden");
+      }
+
+      restoreSavedContent();
+      showSlide(currentSlide);
+    }
+
+    // =========================================================
+    // RESET FOR TESTING
+    // =========================================================
+
+    $("reset-progress").addEventListener("click", () => {
+      const confirmed = window.confirm("Reset all saved progress for this learning path on this browser?");
+      if (!confirmed) return;
+
+      Object.values(KEYS).forEach((key) => localStorage.removeItem(key));
+      window.location.reload();
+    });
+
+    initializeStart();
+    restoreSavedContent();
+    showSlide(currentSlide);
+    updateUI();
+  </script>
+</body>
+</html>
