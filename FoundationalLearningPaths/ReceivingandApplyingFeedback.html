@@ -1118,6 +1118,10 @@
     // Leaving an endpoint blank keeps the page in local/demo mode.
     // =========================================================
 
+  
+const START_ENDPOINT =
+  "https://receivingandapplyingfeedbackstart.breanna-evenson.workers.dev/";
+  
     const REFLECTION_REQUEST_ENDPOINT = "";
     const REFLECTION_TAKEAWAYS_ENDPOINT = "";
     const OBSERVATION_REQUEST_ENDPOINT = "";
@@ -1222,17 +1226,57 @@
       }
     }
 
-    $("confirm-start").addEventListener("click", () => {
-      const name = $("coach-name").value.trim();
-      if (!name || name.split(/\s+/).length < 2) {
-        $("start-status").textContent = "Please enter your first and last name.";
-        return;
-      }
-      localStorage.setItem(KEYS.coachName, name);
-      $("start-status").textContent = `Thanks, ${name}. Step 1 is ready.`;
-      updateUI();
-      $("step-1").scrollIntoView({ behavior: "smooth" });
+    
+$("confirm-start").addEventListener("click", async () => {
+  const name = $("coach-name").value.trim();
+
+  if (!name || name.split(/\s+/).length < 2) {
+    $("start-status").textContent =
+      "Please enter your first and last name.";
+    return;
+  }
+
+  const button = $("confirm-start");
+
+  // Prevent another submission while saving.
+  button.disabled = true;
+  button.textContent = "Saving...";
+  $("start-status").textContent =
+    "Recording your learning path start...";
+
+  try {
+    // Do not submit another start for a name
+    // already confirmed in this browser.
+    if (coachName() !== name) {
+      await postJSON(START_ENDPOINT, {
+        name: name,
+        learningPath: "Receiving & Applying Feedback"
+      });
+    }
+
+    localStorage.setItem(KEYS.coachName, name);
+
+    $("start-status").textContent =
+      `Thanks, ${name}. Step 1 is ready.`;
+
+    updateUI();
+
+    $("step-1").scrollIntoView({
+      behavior: "smooth"
     });
+
+  } catch (error) {
+    console.error(error);
+
+    $("start-status").textContent =
+      "Your start could not be recorded. Please try again.";
+
+  } finally {
+    button.disabled = false;
+    button.textContent = "Confirm";
+  }
+});
+
 
     // =========================================================
     // READING SLIDES
