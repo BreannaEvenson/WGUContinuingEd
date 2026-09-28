@@ -4962,21 +4962,11 @@ localStorage.removeItem(
         }
 
 
-        const payload = {
-
-          name:
-            name,
-
-          learningPath:
-            "Foundations of Coaching",
-
-          requestType:
-            "Call or live event recording request",
-
-          requestedAt:
-            new Date().toISOString()
-
-        };
+      const payload = {
+  name: name,
+  learningPath: "Foundations of Coaching",
+  activity: "Self-Evaluation"
+};
 
 
         localStorage.setItem(
