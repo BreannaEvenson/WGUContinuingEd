@@ -684,7 +684,7 @@
         shadow1: "https://idowedoyoudoforbeginners-appointmentshadow1.breanna-evenson.workers.dev/",
         shadow2: "https://idowedoyoudoforbeginners-appointmentshadow2.breanna-evenson.workers.dev/",
         liveEvent: "https://idowedoyoudoforbeginners-liveeventshadow.breanna-evenson.workers.dev/",
-        knowledgeCheck: "",
+        knowledgeCheck: "https://idowedoyoudoforbeginners-youdotransitionquiz.breanna-evenson.workers.dev/",
         circleRequest: ""
       }
     };
@@ -1230,10 +1230,15 @@
         if (
           key === "circleRequest" &&
           !REQUIRED.every(
-            requirement =>
-              state.records[requirement] &&
-              !state.records[requirement].pending
-          )
+  requirement =>
+    state.records[requirement] &&
+    !state.records[requirement].pending &&
+    (
+      requirement !== "knowledgeCheck" ||
+      state.records[requirement].payload.responses.score ===
+        QUESTIONS.length
+    )
+)
         ) {
           message.textContent =
             "Confirm your name, complete the three shadow reflections, and finish the knowledge checks before requesting your circle.";
@@ -1258,29 +1263,65 @@
     }
 
     document
-      .getElementById("quiz")
-      .addEventListener("submit", async event => {
-        event.preventDefault();
+  .getElementById("quiz")
+  .addEventListener("submit", async event => {
+    event.preventDefault();
 
-        const form = event.target;
-        const answers = values(form);
+    const form = event.target;
+    const answers = values(form);
+    const message = document.getElementById("quizStatus");
 
-        let score = 0;
+    if (!state.records.start) {
+      message.textContent =
+        "Confirm your name at the top of the page before submitting your answers.";
+      return;
+    }
 
-        QUESTIONS.forEach((question, index) => {
-          const correct =
-            Number(answers["q" + index]) === question.correct;
+    let score = 0;
 
-          if (correct) {
-            score++;
-          }
+    QUESTIONS.forEach((question, index) => {
+      const correct =
+        Number(answers["q" + index]) === question.correct;
 
-          document.getElementById(
-            "feedback" + index
-          ).textContent =
-            (correct ? "Correct. " : "Try again. ") +
-            question.why;
-        });
+      if (correct) {
+        score++;
+      }
+
+      document.getElementById(
+        "feedback" + index
+      ).textContent =
+        (correct ? "Correct. " : "Try again. ") +
+        question.why;
+    });
+
+    // Save every completed attempt, including incorrect answers.
+    // A new attempt timestamp distinguishes separate attempts.
+    const saved = await submit(
+      "knowledgeCheck",
+      {
+        ...answers,
+        score,
+        total: QUESTIONS.length,
+        attemptedAt: new Date().toISOString()
+      },
+      message,
+      form.querySelector("button")
+    );
+
+    const deliveryMessage = message.textContent;
+
+    message.textContent =
+      score +
+      " of " +
+      QUESTIONS.length +
+      " correct. " +
+      (
+        score === QUESTIONS.length
+          ? "You have completed the knowledge check. "
+          : "Review the feedback and try again. "
+      ) +
+      deliveryMessage;
+  });
 
         const message = document.getElementById("quizStatus");
 
