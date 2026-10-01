@@ -13,7 +13,9 @@
       --line: #d3e2ea;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
@@ -67,653 +69,8 @@
       gap: 22px;
     }
 
-    .objective, .box {
-      padding: 30px;
-      background: white;
-      border-top: 5px solid #3cb2f4;
-      border-radius: 18px;
-      box-shadow: 0 10px 30px #00182f0d;
-    }
-
-    .objective {
-      display: flex;
-      align-items: center;
-      min-height: 140px;
-    }
-
-    .badge {
-      color: var(--blue);
-      font-size: clamp(1.5rem, 4vw, 3.4rem);
-      font-weight: 700;
-      letter-spacing: .02em;
-      text-transform: uppercase;
-    }
-
-    .duration {
-      display: flex;
-      align-items: center;
-      gap: 50px;
-      margin: 30px 0;
-      padding: 24px 30px;
-      background: #172f46;
-      color: white;
-      border-left: 5px solid #91e238;
-      border-radius: 16px;
-    }
-
-    .duration span { max-width: 290px; }
-
-    .start-card {
-      padding: 30px;
-      background: white;
-      color: var(--navy);
-      border-radius: 18px;
-    }
-
-    label {
-      display: block;
-      margin: 18px 0 6px;
-      font-weight: 650;
-    }
-
-    .start-card label { margin: 0 0 18px; }
-
-    input, textarea, select {
-      width: 100%;
-      padding: 10px;
-      background: white;
-      color: var(--ink);
-      border: 1px solid #91aab8;
-      border-radius: 7px;
-      font: inherit;
-    }
-
-    textarea { min-height: 110px; }
-
-    input[type="radio"] {
-      width: auto;
-      margin-right: 10px;
-    }
-
-    button {
-      display: inline-block;
-      margin: 12px 8px 0 0;
-      padding: 12px 20px;
-      background: var(--blue);
-      color: white;
-      border: 0;
-      border-radius: 8px;
-      font: inherit;
-      font-weight: 650;
-      cursor: pointer;
-    }
-
-    button:disabled {
-      opacity: .6;
-      cursor: wait;
-    }
-
-    :focus-visible {
-      outline: 3px solid #ce8f05;
-      outline-offset: 3px;
-    }
-
-    .name-row { display: flex; }
-
-    .name-row input {
-      min-width: 0;
-      border-radius: 9px 0 0 9px;
-    }
-
-    .name-row button {
-      margin: 0;
-      border-radius: 0 9px 9px 0;
-    }
-
-    .status {
-      min-height: 30px;
-      padding: 10px 0;
-      font-size: 1rem;
-    }
-
-    details {
-      padding: 16px 0;
-      border-top: 1px solid var(--line);
-    }
-
-    summary {
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    #shadowForms details {
-      margin: 22px 0;
-      padding: 24px;
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-    }
-
-    #shadowForms summary { font-size: 1.3rem; }
-
-    blockquote {
-      margin: 16px 0;
-      padding: 18px;
-      background: white;
-      border-left: 4px solid var(--blue);
-    }
-
-    .question {
-      margin: 24px 0;
-      padding: 24px;
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-    }
-
-    .question .question-title {
-      margin: 0 0 16px;
-      color: var(--navy);
-      font-size: 1.1rem;
-    }
-
-    .question label { font-weight: 400; }
-    .feedback { font-weight: 600; }
-    #circle { padding-bottom: 80px; }
-
-    @media (max-width: 700px) {
-      header { padding: 28px 20px; }
-      main { padding: 0 20px; }
-      section { padding: 40px 0; }
-      .grid { grid-template-columns: 1fr; }
-      .duration { display: block; padding: 22px; }
-
-      .duration strong {
-        display: block;
-        margin-top: 12px;
-      }
-
-      .start-card { padding: 22px; }
-
-      .name-row {
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-
-      .name-row input, .name-row button {
-        border-radius: 8px;
-      }
-
-      .objective {
-        min-height: 0;
-        padding: 22px;
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <header>
-    <h1>I Do, We Do, You Do</h1>
-
-    <div class="duration">
-      <span>Estimated duration of learning path:</span>
-      <strong>
-        5.5 hour time commitment<br>
-        over a 4 week period
-      </strong>
-    </div>
-
-    <div class="start-card" id="start">
-      <form data-key="start">
-        <label for="fullName">
-          Type your first and last name in the textbox below to confirm
-          you are starting this learning path.
-        </label>
-
-        <div class="name-row">
-          <input
-            id="fullName"
-            name="fullName"
-            autocomplete="name"
-            placeholder="Type your name here"
-            maxlength="160"
-            required
-          >
-          <button type="submit">Confirm</button>
-        </div>
-
-        <p class="status" role="status"></p>
-      </form>
-    </div>
-  </header>
-
-  <main>
-    <section id="objectives">
-      <h2>Learning Objectives</h2>
-
-      <p>
-        Throughout this learning path, you should gain these competencies.
-      </p>
-
-      <div class="grid">
-        <div class="objective">
-          Model a study strategy during the I Do stage while keeping
-          focus on the process rather than the course content.
-        </div>
-
-        <div class="objective">
-          Use questions, prompts, and wait time during the We Do to
-          support the student without taking over.
-        </div>
-
-        <div class="objective">
-          Create a clear transition from the We Do to the You Do.
-        </div>
-
-        <div class="objective">
-          Demonstrate a complete I Do, We Do, You Do sequence.
-        </div>
-      </div>
-    </section>
-
-    <section id="student">
-      <div class="badge">STEP ONE</div>
-      <h2>You're the Student</h2>
-
-      <p>
-        Experience I Do, We Do, You Do from the student's perspective.
-        A development program Senior Peer Navigator will coach you on
-        a real challenge in a course you are currently working on.
-      </p>
-
-      <ol>
-        <li>
-          <strong>Before scheduling:</strong> Identify your current
-          course, the specific topic or module, and the challenge you
-          want help working through. Have the relevant course
-          material ready.
-        </li>
-
-        <li>
-          Go to the <strong>Training and Development page in
-          SharePoint</strong> and use one of the development program
-          Senior Peer Navigators' booking links.
-        </li>
-
-        <li>
-          <strong>Immediately after booking:</strong> Send that Senior
-          Peer Navigator a Teams message with the meeting day and
-          time, your course, and the specific topic or module you want
-          to work through. Include your challenge so they can prepare.
-        </li>
-
-        <li>
-          Attend as the student. Bring your actual materials and
-          participate in the practice.
-        </li>
-      </ol>
-
-      <details>
-        <summary>Teams message template</summary>
-        <p>
-          Hi [name]! I booked a You're the Student appointment with
-          you for [day, date, time, and time zone]. I'm currently
-          working on [course]. I'd like to work through [topic/module],
-          and my specific challenge is [challenge]. Thank you!
-        </p>
-      </details>
-    </section>
-
-    <section id="shadow">
-      <div class="badge">STEP TWO</div>
-      <h2>Shadow &amp; Reflect</h2>
-
-      <p>
-        Shadow <strong>two appointments of your choice</strong> and
-        <strong>one live event</strong>. Complete a separate reflection
-        for each. You do not need to find a perfect example of the
-        framework: noticing an effective move, a missed opportunity,
-        or a stage that did not occur can all support your learning.
-      </p>
-
-      <div id="shadowForms"></div>
-    </section>
-
-    <section id="reading">
-      <div class="badge">STEP THREE</div>
-      <h2>From We Do to You Do</h2>
-
-      <p>
-        In We Do, the student practices with your support. In You Do,
-        the student takes responsibility for using the strategy. Your
-        transition should make the task, level of support, and next
-        step clear. You Do can happen during a session or continue
-        afterward with a specific plan.
-      </p>
-
-      <h3>Make the shift visible</h3>
-
-      <p>
-        Give the student a manageable piece of material and explain
-        what they will do independently. During independent practice,
-        allow them to make decisions and finish before offering
-        feedback. A pause or moment of uncertainty is not automatically
-        a reason to step in. If they need support, use a brief prompt
-        and let them resume the work.
-      </p>
-
-      <div class="grid">
-        <article class="box">
-          <h3>In appointments</h3>
-          <h4>When there is time to practice</h4>
-
-          <blockquote>
-            “So far, I've demonstrated the strategy, and you've gotten
-            in some really strong practice. Now I want you to try this
-            next step on your own. Talk me through your thought
-            process as you go.”
-          </blockquote>
-
-          <p>
-            Identify the next question, paragraph, concept, or other
-            small task. Listen to the student's thinking without
-            completing it for them. Once they finish, invite their
-            reflection and provide supportive, constructive feedback
-            on the process.
-          </p>
-
-          <h4>When time is limited</h4>
-
-          <p>
-            Help the student describe exactly how they will use the
-            strategy after the appointment. Ask:
-          </p>
-
-          <ul>
-            <li>Which part of your course material will you try next?</li>
-            <li>When will you work on it?</li>
-            <li>What will tell you that the strategy is helping?</li>
-            <li>What will you do if you get stuck?</li>
-          </ul>
-
-          <p>
-            Have them explain the plan in their own words. Arrange a
-            follow-up before ending the appointment when appropriate.
-          </p>
-        </article>
-
-        <article class="box">
-          <h3>In live events</h3>
-          <h4>When there is time to practice</h4>
-
-          <blockquote>
-            “We've all had a chance to practice this strategy together.
-            Now we're going to take five minutes to try the next part
-            independently. Use the next two concepts in this module
-            to create your own flashcards.”
-          </blockquote>
-
-          <p>
-            Specify the course material, the task, the time available,
-            and how participants will share afterward. Clear
-            instructions make it easier to engage. Allow independent
-            study time, then debrief:
-          </p>
-
-          <ul>
-            <li>How did that feel?</li>
-            <li>What was challenging?</li>
-            <li>What went well?</li>
-            <li>What came up that was unexpected?</li>
-          </ul>
-
-          <h4>When time is limited</h4>
-
-          <p>
-            Ask participants to identify a specific next use of the
-            strategy. Invite them to share the topic, when they will
-            try it, how they will check its usefulness, and what they
-            will do if they need support.
-          </p>
-        </article>
-      </div>
-
-      <h3>Feedback that helps the student improve</h3>
-
-      <p>
-        Describe what you noticed, connect it to the strategy, and
-        offer an opportunity to adjust. Keep feedback focused on how
-        the student used the strategy.
-      </p>
-
-      <div class="grid">
-        <div class="box">
-          <h4>If a student copies the textbook word for word</h4>
-          <p>
-            “I noticed you used the same wording as the textbook.
-            How could you put that idea into your own words so the
-            flashcard helps you check your understanding?”
-          </p>
-          <p>
-            Give the student time to revise. Then ask what changed
-            and how the revision might support studying.
-          </p>
-        </div>
-
-        <div class="box">
-          <h4>If the student catches an overloaded flashcard</h4>
-          <p>
-            “You noticed that the card was starting to include several
-            ideas and decided to split it. That keeps each card
-            focused on one thing to recall. What helped you
-            recognize that?”
-          </p>
-          <p>
-            Name the useful action so the student knows what to repeat.
-          </p>
-        </div>
-      </div>
-
-      <h3>Check your understanding</h3>
-      <p>
-        Choose an answer for each scenario, then check your responses.
-      </p>
-
-      <form id="quiz">
-        <div id="questions"></div>
-        <button type="submit">Check my answers</button>
-        <p class="status" id="quizStatus" role="status"></p>
-      </form>
-    </section>
-
-    <section id="circle">
-      <div class="badge">STEP FOUR</div>
-      <h2>Coaching Circle</h2>
-
-      <p>
-        Practice a complete I Do, We Do, You Do sequence in a supportive
-        setting. Request your Coaching Circle by clicking on the request button below.
-      </p>
-
-      <h3>What to expect</h3>
-
-      <ul>
-        <li>
-          <strong>Three participants:</strong> two coaches currently
-          completing this learning path and either a Senior Peer
-          Navigator or the development program supervisor.
-        </li>
-        <li>
-          <strong>Three rotating responsibilities:</strong> coach,
-          student, and observer. Each person takes each role once.
-        </li>
-        <li>
-          <strong>Short practice:</strong> each coaching session lasts
-          about 10 minutes. After each session, share brief feedback
-          and rotate roles.
-        </li>
-        <li>
-          <strong>Materials are provided:</strong> scenarios, course
-          material, and selected study strategies will be supplied
-          during the meeting. All coaching circles will use general
-          education courses.
-        </li>
-        <li>
-          <strong>Your focus:</strong> model the strategy, guide
-          practice without taking over, make a clear transition,
-          and give the student an opportunity to use the strategy
-          independently.
-        </li>
-      </ul>
-
-      <form data-key="circleRequest">
-        <button type="submit">Request coaching circle scheduling</button>
-        <p class="status" role="status"></p>
-      </form>
-    </section>
-  </main>
-
-  <script>
-    /*
-      Cloudflare Workers accept POST JSON and return { success: true }.
-      Keep EXPORT_KEY and Teams webhook secrets inside Cloudflare.
-      The coaching-circle URL will be added when its Worker is ready.
-    */
-
-    const CONFIG = {
-      endpoints: {
-        start: "https://idowedoyoudoforbeginners-start.breanna-evenson.workers.dev/",
-        shadow1: "https://idowedoyoudoforbeginners-appointmentshadow1.breanna-evenson.workers.dev/",
-        shadow2: "https://idowedoyoudoforbeginners-appointmentshadow2.breanna-evenson.workers.dev/",
-        liveEvent: "https://idowedoyoudoforbeginners-liveeventshadow.breanna-evenson.workers.dev/",
-        knowledgeCheck: "https://idowedoyoudoforbeginners-youdotransitionquiz.breanna-evenson.workers.dev/",
-        circleRequest: ""
-      }
-    };
-
-    const PATH = "I Do, We Do, You Do";
-
-    const LABELS = {
-      start: "Learning Path Start",
-      shadow1: "Appointment Shadow 1",
-      shadow2: "Appointment Shadow 2",
-      liveEvent: "Live Event Shadow",
-      knowledgeCheck: "We Do to You Do Knowledge Check",
-      circleRequest: "Request Coaching Circle"
-    };
-
-    const REQUIRED = [
-      "start",
-      "shadow1",
-      "shadow2",
-      "liveEvent",
-      "knowledgeCheck"
-    ];
-
-    const STORE = "pn-foundational-idwy-v1";
-
-    let state = {
-      drafts: {},
-      records: {}
-    };
-
-    let storageAvailable = true;
-
-    try {
-      const raw = localStorage.getItem(STORE);
-
-      if (raw) {
-        const saved = JSON.parse(raw);
-
-        if (saved && saved.drafts && saved.records) {
-          state = saved;
-        }
-      }
-    } catch (error) {
-      storageAvailable = false;
-    }
-
-    function persist() {
-      try {
-
-The old quiz handler had leftover code below the new one, which stopped the script from running. I fixed it and verified that all five questions render and both incorrect and correct attempts submit.
-
-**Replace your entire GitHub file with the code below.** Your existing connections and wording are preserved.
-
-:chatgpt-content-reference{index="1"}[Download the complete corrected HTML](sandbox:/workspace/scratch/f9dd179b9ebc/output/IDoWeDoYouDo.html)
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>I Do, We Do, You Do | Foundational Development</title>
-
-  <style>
-    :root {
-      --navy: #00264b;
-      --blue: #0075f5;
-      --ink: #00264b;
-      --line: #d3e2ea;
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      background: #eef7fa;
-      color: var(--ink);
-      font: 18px/1.65 Arial, Helvetica, sans-serif;
-    }
-
-    header {
-      max-width: 1440px;
-      margin: 0 auto;
-      padding: 48px;
-      background: #00182f;
-      color: white;
-    }
-
-    h1 {
-      margin: 12px 0;
-      font-size: clamp(2.8rem, 6.5vw, 6rem);
-      font-weight: 800;
-      line-height: 1.15;
-    }
-
-    h2 {
-      color: var(--blue);
-      font-size: clamp(2rem, 4.5vw, 4rem);
-      font-weight: 800;
-      line-height: 1.3;
-    }
-
-    h3 {
-      color: var(--navy);
-      font-size: 1.5rem;
-      line-height: 1.3;
-    }
-
-    main {
-      max-width: 1440px;
-      margin: auto;
-      padding: 0 48px;
-    }
-
-    section {
-      padding: 64px 0;
-      scroll-margin-top: 20px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 22px;
-    }
-
-    .objective, .box {
+    .objective,
+    .box {
       padding: 30px;
       background: white;
       border-top: 5px solid #3cb2f4;
@@ -752,7 +109,9 @@ The old quiz handler had leftover code below the new one, which stopped the scri
       border-radius: 16px;
     }
 
-    .duration span { max-width: 290px; }
+    .duration span {
+      max-width: 290px;
+    }
 
     .start-card {
       padding: 30px;
@@ -767,9 +126,13 @@ The old quiz handler had leftover code below the new one, which stopped the scri
       font-weight: 650;
     }
 
-    .start-card label { margin: 0 0 18px; }
+    .start-card label {
+      margin: 0 0 18px;
+    }
 
-    input, textarea, select {
+    input,
+    textarea,
+    select {
       width: 100%;
       padding: 10px;
       background: white;
@@ -779,7 +142,9 @@ The old quiz handler had leftover code below the new one, which stopped the scri
       font: inherit;
     }
 
-    textarea { min-height: 110px; }
+    textarea {
+      min-height: 110px;
+    }
 
     input[type="radio"] {
       width: auto;
@@ -809,7 +174,9 @@ The old quiz handler had leftover code below the new one, which stopped the scri
       outline-offset: 3px;
     }
 
-    .name-row { display: flex; }
+    .name-row {
+      display: flex;
+    }
 
     .name-row input {
       min-width: 0;
@@ -845,7 +212,9 @@ The old quiz handler had leftover code below the new one, which stopped the scri
       border-radius: 16px;
     }
 
-    #shadowForms summary { font-size: 1.3rem; }
+    #shadowForms summary {
+      font-size: 1.3rem;
+    }
 
     blockquote {
       margin: 16px 0;
@@ -868,15 +237,34 @@ The old quiz handler had leftover code below the new one, which stopped the scri
       font-size: 1.1rem;
     }
 
-    .question label { font-weight: 400; }
-    .feedback { font-weight: 600; }
-    #circle { padding-bottom: 80px; }
+    .question label {
+      font-weight: 400;
+    }
+
+    .feedback {
+      font-weight: 600;
+    }
+
+    #circle {
+      padding-bottom: 80px;
+    }
 
     @media (max-width: 700px) {
-      header { padding: 28px 20px; }
-      main { padding: 0 20px; }
-      section { padding: 40px 0; }
-      .grid { grid-template-columns: 1fr; }
+      header {
+        padding: 28px 20px;
+      }
+
+      main {
+        padding: 0 20px;
+      }
+
+      section {
+        padding: 40px 0;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
 
       .duration {
         display: block;
@@ -888,14 +276,17 @@ The old quiz handler had leftover code below the new one, which stopped the scri
         margin-top: 12px;
       }
 
-      .start-card { padding: 22px; }
+      .start-card {
+        padding: 22px;
+      }
 
       .name-row {
         flex-wrap: wrap;
         gap: 10px;
       }
 
-      .name-row input, .name-row button {
+      .name-row input,
+      .name-row button {
         border-radius: 8px;
       }
 
@@ -909,6 +300,8 @@ The old quiz handler had leftover code below the new one, which stopped the scri
 
 <body>
   <header>
+
+
     <h1>I Do, We Do, You Do</h1>
 
     <div class="duration">
@@ -974,6 +367,7 @@ The old quiz handler had leftover code below the new one, which stopped the scri
 
     <section id="student">
       <div class="badge">STEP ONE</div>
+
       <h2>You're the Student</h2>
 
       <p>
@@ -989,17 +383,20 @@ The old quiz handler had leftover code below the new one, which stopped the scri
           want help working through. Have the relevant course
           material ready.
         </li>
+
         <li>
           Go to the <strong>Training and Development page in
           SharePoint</strong> and use one of the development program
           Senior Peer Navigators' booking links.
         </li>
+
         <li>
           <strong>Immediately after booking:</strong> Send that Senior
           Peer Navigator a Teams message with the meeting day and
           time, your course, and the specific topic or module you want
           to work through. Include your challenge so they can prepare.
         </li>
+
         <li>
           Attend as the student. Bring your actual materials and
           participate in the practice.
@@ -1008,6 +405,7 @@ The old quiz handler had leftover code below the new one, which stopped the scri
 
       <details>
         <summary>Teams message template</summary>
+
         <p>
           Hi [name]! I booked a You're the Student appointment with
           you for [day, date, time, and time zone]. I'm currently
@@ -1019,6 +417,7 @@ The old quiz handler had leftover code below the new one, which stopped the scri
 
     <section id="shadow">
       <div class="badge">STEP TWO</div>
+
       <h2>Shadow &amp; Reflect</h2>
 
       <p>
@@ -1034,6 +433,7 @@ The old quiz handler had leftover code below the new one, which stopped the scri
 
     <section id="reading">
       <div class="badge">STEP THREE</div>
+
       <h2>From We Do to You Do</h2>
 
       <p>
@@ -1058,6 +458,7 @@ The old quiz handler had leftover code below the new one, which stopped the scri
       <div class="grid">
         <article class="box">
           <h3>In appointments</h3>
+
           <h4>When there is time to practice</h4>
 
           <blockquote>
@@ -1097,6 +498,7 @@ The old quiz handler had leftover code below the new one, which stopped the scri
 
         <article class="box">
           <h3>In live events</h3>
+
           <h4>When there is time to practice</h4>
 
           <blockquote>
@@ -1126,7 +528,7 @@ The old quiz handler had leftover code below the new one, which stopped the scri
             Ask participants to identify a specific next use of the
             strategy. Invite them to share the topic, when they will
             try it, how they will check its usefulness, and what they
-            will do if they need support.
+            will do if they need support. 
           </p>
         </article>
       </div>
@@ -1179,19 +581,21 @@ The old quiz handler had leftover code below the new one, which stopped the scri
 
       <form id="quiz">
         <div id="questions"></div>
+
         <button type="submit">Check my answers</button>
+
         <p class="status" id="quizStatus" role="status"></p>
       </form>
     </section>
 
     <section id="circle">
       <div class="badge">STEP FOUR</div>
+
       <h2>Coaching Circle</h2>
 
       <p>
         Practice a complete I Do, We Do, You Do sequence in a supportive
-        setting. Request your Coaching Circle by clicking on the request
-        button below.
+        setting. Request your Coaching Circle by clicking on the request button below.
       </p>
 
       <h3>What to expect</h3>
@@ -1202,21 +606,25 @@ The old quiz handler had leftover code below the new one, which stopped the scri
           completing this learning path and either a Senior Peer
           Navigator or the development program supervisor.
         </li>
+
         <li>
           <strong>Three rotating responsibilities:</strong> coach,
           student, and observer. Each person takes each role once.
         </li>
+
         <li>
           <strong>Short practice:</strong> each coaching session lasts
           about 10 minutes. After each session, share brief feedback
           and rotate roles.
         </li>
+
         <li>
           <strong>Materials are provided:</strong> scenarios, course
           material, and selected study strategies will be supplied
           during the meeting. All coaching circles will use general
           education courses.
         </li>
+
         <li>
           <strong>Your focus:</strong> model the strategy, guide
           practice without taking over, make a clear transition,
@@ -1229,6 +637,7 @@ The old quiz handler had leftover code below the new one, which stopped the scri
         <button type="submit">
           Request coaching circle scheduling
         </button>
+
         <p class="status" role="status"></p>
       </form>
     </section>
@@ -1236,9 +645,37 @@ The old quiz handler had leftover code below the new one, which stopped the scri
 
   <script>
     /*
-      Cloudflare Worker connections.
-      Keep EXPORT_KEY and Teams webhook secrets inside Cloudflare,
-      never in this public page.
+      CLOUDFLARE CONNECTION SETUP
+
+      Add the appropriate Cloudflare Worker URL for each activity below.
+
+      Keep the Teams webhook URL inside your Cloudflare Worker.
+      Do not put the Teams webhook URL directly in this HTML.
+
+      Each Worker should:
+      - Accept POST JSON.
+      - Handle CORS for your GitHub Pages origin.
+      - Validate submitted fields.
+      - Deduplicate requests using submissionId.
+      - Return JSON { success: true } after successful processing.
+
+      For circleRequest, success should be returned only after the
+      request has been saved and the Teams notification delivered.
+
+      Payload structure:
+      {
+        schemaVersion,
+        submissionId,
+        submittedAt,
+        learningPath,
+        activity,
+        firstName,
+        lastName,
+        responses
+      }
+
+      submittedAt is an ISO timestamp in UTC.
+      Responses can be flattened into columns for Excel later.
     */
 
     const CONFIG = {
@@ -1334,13 +771,15 @@ The old quiz handler had leftover code below the new one, which stopped the scri
           "Select an option",
           "Observed",
           "Partly observed",
-          "Not observed"
+          "Not observed",
         ];
 
         for (const choice of choices) {
           const option = document.createElement("option");
+
           option.textContent = choice;
           option.value = choice === "Select an option" ? "" : choice;
+
           element.append(option);
         }
       }
@@ -1366,7 +805,12 @@ The old quiz handler had leftover code below the new one, which stopped the scri
       const form = document.createElement("form");
       form.dataset.key = key;
 
-      field(form, "sessionDate", "Date shadowed", "date");
+      field(
+        form,
+        "sessionDate",
+        "Date shadowed",
+        "date"
+      );
 
       field(
         form,
@@ -1503,7 +947,10 @@ The old quiz handler had leftover code below the new one, which stopped the scri
       const container = document.createElement("div");
       container.className = "question";
       container.setAttribute("role", "group");
-      container.setAttribute("aria-labelledby", "question" + index);
+      container.setAttribute(
+        "aria-labelledby",
+        "question" + index
+      );
 
       const title = document.createElement("h4");
       title.className = "question-title";
@@ -1549,7 +996,9 @@ The old quiz handler had leftover code below the new one, which stopped the scri
       const responses = {};
 
       for (const element of form.elements) {
-        if (!element.name) continue;
+        if (!element.name) {
+          continue;
+        }
 
         if (element.type === "radio") {
           if (element.checked) {
@@ -1571,6 +1020,7 @@ The old quiz handler had leftover code below the new one, which stopped the scri
       if (!person.firstName || !person.lastName) {
         message.textContent =
           "Type both your first and last name at the top of the page before confirming or saving a response.";
+
         document.getElementById("start").scrollIntoView();
         return false;
       }
@@ -1607,6 +1057,7 @@ The old quiz handler had leftover code below the new one, which stopped the scri
           if (key === "circleRequest") {
             message.textContent =
               "Scheduling is not connected yet. No request has been sent. Contact the development program supervisor to arrange your circle.";
+
             return false;
           }
 
@@ -1620,7 +1071,10 @@ The old quiz handler had leftover code below the new one, which stopped the scri
           if (key === "start") {
             message.textContent =
               "Learning path started for " +
-              person.firstName + " " + person.lastName + ". " +
+              person.firstName +
+              " " +
+              person.lastName +
+              ". " +
               (
                 storageAvailable
                   ? "Saved in this browser only; not yet submitted."
@@ -1638,10 +1092,14 @@ The old quiz handler had leftover code below the new one, which stopped the scri
         if (same && existing.sent) {
           message.textContent =
             "This response was already submitted successfully.";
+
           return true;
         }
 
-        // Reuse the submission ID when retrying the same response.
+        /*
+          Retain the same submission ID on retry if the server saved
+          a request but its response was lost.
+        */
         state.records[key] = {
           payload,
           sent: false,
@@ -1651,7 +1109,11 @@ The old quiz handler had leftover code below the new one, which stopped the scri
         persist();
 
         const controller = new AbortController();
-        const timer = setTimeout(() => controller.abort(), 20000);
+
+        const timer = setTimeout(
+          () => controller.abort(),
+          20000
+        );
 
         let response;
 
@@ -1687,19 +1149,24 @@ The old quiz handler had leftover code below the new one, which stopped the scri
         } else if (key === "start") {
           message.textContent =
             "Learning path started for " +
-            person.firstName + " " + person.lastName +
+            person.firstName +
+            " " +
+            person.lastName +
             ". Your confirmation was submitted successfully.";
         } else {
-          message.textContent = key === "knowledgeCheck"
-            ? "Quiz answers submitted successfully."
-            : "Submitted successfully. Thank you for your reflection.";
+          message.textContent =
+            (key === "knowledgeCheck" ? "Quiz answers submitted successfully." : "Submitted successfully. Thank you for your reflection.");
         }
 
         return true;
       } catch (error) {
         message.textContent =
           "Delivery could not be confirmed. Your response is retained " +
-          (storageAvailable ? "in this browser" : "for this session") +
+          (
+            storageAvailable
+              ? "in this browser"
+              : "for this session"
+          ) +
           ". Retry this form to check delivery; do not assume the request was received.";
 
         return false;
@@ -1717,7 +1184,10 @@ The old quiz handler had leftover code below the new one, which stopped the scri
 
       if (saved) {
         for (const element of form.elements) {
-          if (element.name && saved[element.name] !== undefined) {
+          if (
+            element.name &&
+            saved[element.name] !== undefined
+          ) {
             if (element.type === "checkbox") {
               element.checked = saved[element.name] === true;
             } else {
@@ -1753,23 +1223,26 @@ The old quiz handler had leftover code below the new one, which stopped the scri
         if (key !== "start" && !state.records.start) {
           message.textContent =
             "Confirm your name at the top of the page first.";
+
           return;
         }
 
         if (
           key === "circleRequest" &&
-          !REQUIRED.every(requirement =>
-            state.records[requirement] &&
-            !state.records[requirement].pending &&
-            (
-              requirement !== "knowledgeCheck" ||
-              state.records[requirement].payload.responses.score ===
-                QUESTIONS.length
-            )
-          )
+          !REQUIRED.every(
+  requirement =>
+    state.records[requirement] &&
+    !state.records[requirement].pending &&
+    (
+      requirement !== "knowledgeCheck" ||
+      state.records[requirement].payload.responses.score ===
+        QUESTIONS.length
+    )
+)
         ) {
           message.textContent =
             "Confirm your name, complete the three shadow reflections, and finish the knowledge checks before requesting your circle.";
+
           return;
         }
 
@@ -1789,70 +1262,42 @@ The old quiz handler had leftover code below the new one, which stopped the scri
       }
     }
 
-    document.getElementById("quiz").addEventListener(
-      "submit",
-      async event => {
-        event.preventDefault();
-
-        const form = event.target;
-        const answers = values(form);
-        const message = document.getElementById("quizStatus");
-
-        if (!state.records.start) {
-          message.textContent =
-            "Confirm your name at the top of the page before submitting your answers.";
-          return;
-        }
-
-        if (
-          !QUESTIONS.every((question, index) =>
-            ["0", "1", "2"].includes(answers["q" + index])
-          )
-        ) {
-          message.textContent = "Choose an answer for every question.";
-          return;
-        }
-
-        let score = 0;
-
-        QUESTIONS.forEach((question, index) => {
-          const correct =
-            Number(answers["q" + index]) === question.correct;
-
-          if (correct) score++;
-
-          document.getElementById("feedback" + index).textContent =
-            (correct ? "Correct. " : "Try again. ") + question.why;
-        });
-
-        // Incorrect and correct attempts are both submitted.
-        // Changed answers create a new submission.
-        // Retrying unchanged answers reuses the submission ID.
-        const saved = await submit(
-          "knowledgeCheck",
-          {
-            ...answers,
-            score,
-            total: QUESTIONS.length
-          },
-          message,
-          form.querySelector("button")
-        );
-
-        const deliveryMessage = message.textContent;
-
-        message.textContent =
-          score + " of " + QUESTIONS.length + " correct. " +
-          (
-            score === QUESTIONS.length && saved
-              ? "You have completed the knowledge check. "
-              : score === QUESTIONS.length
-                ? "All answers are correct; retry to confirm your submission. "
-                : "Review the feedback and try again. "
-          ) +
-          deliveryMessage;
+    document.getElementById("quiz").addEventListener("submit", async event => {
+      event.preventDefault();
+      const form = event.target;
+      const answers = values(form);
+      const message = document.getElementById("quizStatus");
+      if (!state.records.start) {
+        message.textContent = "Confirm your name at the top of the page before submitting your answers.";
+        return;
       }
-    );
+      if (!QUESTIONS.every((question, index) => ["0", "1", "2"].includes(answers["q" + index]))) {
+        message.textContent = "Choose an answer for every question.";
+        return;
+      }
+      let score = 0;
+      QUESTIONS.forEach((question, index) => {
+        const correct = Number(answers["q" + index]) === question.correct;
+        if (correct) score++;
+        document.getElementById("feedback" + index).textContent =
+          (correct ? "Correct. " : "Try again. ") + question.why;
+      });
+      // Changed answers create a new submission. Retrying the same answers
+      // reuses the submission ID so a lost response does not create duplicates.
+      const saved = await submit(
+        "knowledgeCheck",
+        { ...answers, score, total: QUESTIONS.length },
+        message,
+        form.querySelector("button")
+      );
+      const deliveryMessage = message.textContent;
+      message.textContent = score + " of " + QUESTIONS.length + " correct. " +
+        (score === QUESTIONS.length && saved
+          ? "You have completed the knowledge check. "
+          : score === QUESTIONS.length
+            ? "All answers are correct; retry to confirm your submission. "
+            : "Review the feedback and try again. ") + deliveryMessage;
+    });
   </script>
 </body>
 </html>
