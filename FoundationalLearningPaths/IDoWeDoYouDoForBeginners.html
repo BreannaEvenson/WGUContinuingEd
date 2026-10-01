@@ -300,9 +300,7 @@
 
 <body>
   <header>
-    <div class="badge">
-      Peer Navigator Development • Foundational Level
-    </div>
+
 
     <h1>I Do, We Do, You Do</h1>
 
@@ -412,8 +410,7 @@
           Hi [name]! I booked a You're the Student appointment with
           you for [day, date, time, and time zone]. I'm currently
           working on [course]. I'd like to work through [topic/module],
-          and my specific challenge is [challenge]. I'll bring the
-          relevant course materials. Thank you!
+          and my specific challenge is [challenge]. Thank you!
         </p>
       </details>
     </section>
@@ -496,8 +493,6 @@
           <p>
             Have them explain the plan in their own words. Arrange a
             follow-up before ending the appointment when appropriate.
-            Planning for You Do supports later practice; it does not
-            show that independent use has already happened.
           </p>
         </article>
 
@@ -533,9 +528,7 @@
             Ask participants to identify a specific next use of the
             strategy. Invite them to share the topic, when they will
             try it, how they will check its usefulness, and what they
-            will do if they need support. Use chat, a brief written
-            plan, or verbal responses so participants can articulate
-            their next steps.
+            will do if they need support. 
           </p>
         </article>
       </div>
@@ -550,12 +543,12 @@
 
       <div class="grid">
         <div class="box">
-          <h4>If a flashcard copies the textbook word for word</h4>
+          <h4>If a student copies the textbook word for word</h4>
 
           <p>
-            “I notice the answer uses the same wording as the textbook.
+            “I noticed you used the same wording as the textbook.
             How could you put that idea into your own words so the
-            card helps you check your understanding?”
+            flashcard helps you check your understanding?”
           </p>
 
           <p>
@@ -584,7 +577,6 @@
 
       <p>
         Choose an answer for each scenario, then check your responses.
-        You can try again.
       </p>
 
       <form id="quiz">
@@ -603,8 +595,7 @@
 
       <p>
         Practice a complete I Do, We Do, You Do sequence in a supportive
-        setting. Request scheduling after completing the earlier
-        activities.
+        setting. Request your Coaching Circle by clicking on the request button below.
       </p>
 
       <h3>What to expect</h3>
@@ -630,7 +621,7 @@
         <li>
           <strong>Materials are provided:</strong> scenarios, course
           material, and selected study strategies will be supplied
-          during the meeting. All coaching circles use general
+          during the meeting. All coaching circles will use general
           education courses.
         </li>
 
@@ -781,7 +772,6 @@
           "Observed",
           "Partly observed",
           "Not observed",
-          "Not applicable to this session"
         ];
 
         for (const choice of choices) {
@@ -825,7 +815,7 @@
       field(
         form,
         "courseStrategy",
-        "Course/topic and study strategy (do not include names)",
+        "Course/topic and study strategy",
         "input"
       );
 
@@ -864,14 +854,14 @@
       field(
         form,
         "transitionObserved",
-        "Was the transition to independent use visible?",
+        "Was the transition from the We Do to the You Do visible?",
         "select"
       );
 
       field(
         form,
         "transition",
-        "How did the student(s) move toward independent use? If You Do did not occur, was a clear plan established? What could have made the transition stronger?"
+        "How did the student(s) participate in the You Do? If You Do did not occur, was a clear plan established? What could have made the transition stronger?"
       );
 
       field(
@@ -916,7 +906,7 @@
         a: [
           "Describe what you noticed and invite them to restate the idea in their own words.",
           "Rewrite the card for them immediately.",
-          "Say “That is wrong” and move on."
+          "Tell them not to do that next time."
         ],
         correct: 0,
         why: "Supportive feedback names the observation and gives the student a chance to adjust."
@@ -932,7 +922,7 @@
         why: "A specific plan prepares the student for independent application after the session."
       },
       {
-        q: "Which live-event instruction best supports independent practice?",
+        q: "Which live event instruction best supports independent practice?",
         a: [
           "“Try it on your own for a while.”",
           "“For five minutes, create a flashcard for each of the next two concepts. Then we will discuss what worked and what was challenging.”",
@@ -946,7 +936,7 @@
         a: [
           "“Great job!” and nothing else.",
           "“You caught that the card had several ideas and split it so each card focuses on one thing to recall. What helped you notice?”",
-          "“Next time, let me decide when to split the card.”"
+          "“Don't second guess yourself. Stick with your first idea next time because you're the only one that knows the best way for you to study.”"
         ],
         correct: 1,
         why: "Name the effective process and invite reflection so the student can repeat it."
