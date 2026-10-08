@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Transitioning From Conversation to Action | Foundational Development</title><style>
+    :root {
+      --navy: #00264b;
+      --blue: #0075f5;
+      --ink: #00264b;
+      --line: #d3e2ea;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #eef7fa;
+      color: var(--ink);
+      font: 18px/1.65 Arial, Helvetica, sans-serif;
+    }
+
+    header {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 48px;
+      background: #00182f;
+      color: white;
+    }
+
+    h1 {
+      margin: 12px 0;
+      font-size: clamp(2.8rem, 6.5vw, 6rem);
+      font-weight: 800;
+      line-height: 1.15;
+    }
+
+    h2 {
+      color: var(--blue);
+      font-size: clamp(2rem, 4.5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.3;
+    }
+
+    h3 {
+      color: var(--navy);
+      font-size: 1.5rem;
+      line-height: 1.3;
+    }
+
+    main {
+      max-width: 1440px;
+      margin: auto;
+      padding: 0 48px;
+    }
+
+    section {
+      padding: 64px 0;
+      scroll-margin-top: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .objective,
+    .box {
+      padding: 30px;
+      background: white;
+      border-top: 5px solid #3cb2f4;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px #00182f0d;
+    }
+
+    .objective {
+      display: flex;
+      align-items: center;
+      min-height: 140px;
+    }
+
+    .badge {
+      color: var(--blue);
+      font-size: clamp(1.5rem, 4vw, 3.4rem);
+      font-weight: 700;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+    }
+
+    header .badge {
+      color: #b7d9ec;
+      font-size: .9rem;
+    }
+
+    .duration {
+      display: flex;
+      align-items: center;
+      gap: 50px;
+      margin: 30px 0;
+      padding: 24px 30px;
+      background: #172f46;
+      color: white;
+      border-left: 5px solid #91e238;
+      border-radius: 16px;
+    }
+
+    .duration span {
+      max-width: 290px;
+    }
+
+    .start-card {
+      padding: 30px;
+      background: white;
+      color: var(--navy);
+      border-radius: 18px;
+    }
+
+    label {
+      display: block;
+      margin: 18px 0 6px;
+      font-weight: 650;
+    }
+
+    .start-card label {
+      margin: 0 0 18px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px;
+      background: white;
+      color: var(--ink);
+      border: 1px solid #91aab8;
+      border-radius: 7px;
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 110px;
+    }
+
+    input[type="radio"] {
+      width: auto;
+      margin-right: 10px;
+    }
+
+    button {
+      display: inline-block;
+      margin: 12px 8px 0 0;
+      padding: 12px 20px;
+      background: var(--blue);
+      color: white;
+      border: 0;
+      border-radius: 8px;
+      font: inherit;
+      font-weight: 650;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: .6;
+      cursor: wait;
+    }
+
+    :focus-visible {
+      outline: 3px solid #ce8f05;
+      outline-offset: 3px;
+    }
+
+    .name-row {
+      display: flex;
+    }
+
+    .name-row input {
+      min-width: 0;
+      border-radius: 9px 0 0 9px;
+    }
+
+    .name-row button {
+      margin: 0;
+      border-radius: 0 9px 9px 0;
+    }
+
+    .status {
+      min-height: 30px;
+      padding: 10px 0;
+      font-size: 1rem;
+    }
+
+    details {
+      padding: 16px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    summary {
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    #shadowForms details {
+      margin: 22px 0;
+      padding: 24px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+
+    #shadowForms summary {
+      font-size: 1.3rem;
+    }
+
+    blockquote {
+      margin: 16px 0;
+      padding: 18px;
+      background: white;
+      border-left: 4px solid var(--blue);
+    }
+
+    .question {
+      margin: 24px 0;
+      padding: 24px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+    }
+
+    .question .question-title {
+      margin: 0 0 16px;
+      color: var(--navy);
+      font-size: 1.1rem;
+    }
+
+    .question label {
+      font-weight: 400;
+    }
+
+    .feedback {
+      font-weight: 600;
+    }
+
+    #circle {
+      padding-bottom: 80px;
+    }
+
+    @media (max-width: 700px) {
+      header {
+        padding: 28px 20px;
+      }
+
+      main {
+        padding: 0 20px;
+      }
+
+      section {
+        padding: 40px 0;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .duration {
+        display: block;
+        padding: 22px;
+      }
+
+      .duration strong {
+        display: block;
+        margin-top: 12px;
+      }
+
+      .start-card {
+        padding: 22px;
+      }
+
+      .name-row {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .name-row input,
+      .name-row button {
+        border-radius: 8px;
+      }
+
+      .objective {
+        min-height: 0;
+        padding: 22px;
+      }
+    }
+  
+[hidden]{display:none!important}.checkline{display:flex;align-items:flex-start;gap:12px}.checkline input{width:22px;height:22px;flex-shrink:0;margin-top:5px}.notice{padding:24px 28px;background:#e0efff;border-left:5px solid var(--blue);border-radius:10px}.locked{padding:28px;background:#fff;border:1px solid var(--line);border-radius:16px}.status{margin:14px 0 0;min-height:1.5em}.error{color:#a12020}.success{color:#236128}.quote{margin:20px 0;padding:24px;background:#eef7fa;border-left:4px solid #3cb2f4;border-radius:8px}.reading h3{margin-top:38px}.questions li{margin:12px 0}.fine{font-size:.95rem}.finish{padding:30px;background:#eaf7df;border-left:5px solid #91e238;border-radius:16px}:focus-visible{outline:3px solid #91e238;outline-offset:4px}button:disabled{cursor:not-allowed}.identity{margin-top:16px}.identity button{font-size:1rem}.reading p{max-width:1050px}@media(max-width:650px){header{padding:30px 22px}main{padding:0 22px}.grid{grid-template-columns:1fr}.duration{gap:20px;flex-wrap:wrap}.box,.objective{padding:22px}section{padding:40px 0}h1{font-size:2.7rem}}
+
+/* Keep each step label and title together. */
+section > .badge {
+  font-size: 1.05rem;
+  line-height: 1.2;
+  letter-spacing: .12em;
+  margin: 0 0 10px;
+}
+section > .badge + h2 {
+  margin: 0 0 24px;
+  line-height: 1.15;
+}
+section > .badge + h2 + h3 {
+  margin-top: 0;
+}
+</style></head><body>
+<header><div class="badge">Foundational Development Program</div><h1>Transitioning From Conversation to Action</h1>
+<p>Turn an understanding of the student’s challenge into purposeful instruction and active participation.</p>
+<div class="duration"><strong>Estimated duration</strong><span>2.5 hours over a 2-week period</span></div>
+<div class="start-card"><form id="startForm"><label for="fullName">Type your first and last name in the textbox below to confirm you are starting this learning path.</label><input id="fullName" name="fullName" autocomplete="name" maxlength="160" placeholder="First and last name" required><button id="startButton" type="submit">Confirm start</button></form><p id="startStatus" class="status" role="status" aria-live="polite"></p><div id="identity" class="identity" hidden><span id="identityText"></span> <button id="changeName" type="button">Change name</button></div></div></header>
+<main><section aria-labelledby="objectives"><h2 id="objectives">Learning objectives</h2><div class="grid">
+<div class="objective">Select a study strategy that addresses a student’s stated challenge and explain the connection between the strategy and their challenge.</div>
+<div class="objective">Introduce a strategy using specific language that explains its purpose and invites participation.</div>
+<div class="objective">Distinguish coaching from advice-giving and personal storytelling, directing the session toward student participation.</div>
+<div class="objective">Use resources as part of an active coaching experience by supporting navigation, reflection, and application.</div></div></section>
+<section aria-labelledby="workshop"><div class="badge">Step 1</div><h2 id="workshop">Attend the workshop</h2><h3>Setting the Stage for Focused Instruction</h3>
+<div class="notice"><strong>You do not need to do anything yet!</strong><p>The Development Program Supervisor or a Senior Peer Navigator will schedule this group workshop with you shortly. Sit tight and do not move forward with this learning path until you have attended the workshop.</p></div>
+<p>In this workshop, you will explore barriers to focused instruction and intentional practice, including advice-giving, extended personal stories, and uncertainty about how to begin. You will practice matching strategies to student challenges and successfully inviting a student to practice a strategy with you.</p><p><strong>Active participation is required.</strong> Expect to discuss sample conversations and take part in speed coaching with other interns.</p>
+<label class="checkline"><input id="attended" type="checkbox" disabled><span>I have attended Setting the Stage for Focused Instruction and am ready to continue.</span></label><p class="fine">Confirm your name above before recording workshop attendance. Your attendance confirmation stays on this browser.</p></section>
+<section aria-labelledby="readingTitle"><div class="badge">Step 2</div><h2 id="readingTitle">Coaching through a resource conversation</h2>
+<div id="readingLock" class="locked">🔒 Attend the workshop and confirm your attendance above to open this reading.</div>
+<div id="reading" class="reading" hidden>
+<p>Resource conversations can be valuable. The right resource can help a student access support, clarify a confusing concept, or find a useful way to work with their course material. The value comes from helping the student understand and use the resource in relation to their own challenge.</p>
+<div class="notice"><strong>Keep the student actively involved.</strong><p>Simply showing a handful of resources and explaining each one does not meet the expectations for a coaching interaction. Invite the student to navigate, reflect, evaluate, and apply what they find.</p></div>
+<h3>1. Let the student’s challenge guide the selection</h3><p>During <strong>Frame the Session</strong>, ask enough questions to understand what the student wants to accomplish, what is getting in the way, what they have already tried, and what would make today’s appointment useful. Clarify vague challenges before recommending a resource.</p>
+<div class="quote"><strong>Questions to establish the need</strong><ul class="questions"><li>“What part of this course is giving you the most difficulty?”</li><li>“What happens when you try to work through that material?”</li><li>“What have you already tried, and how has it worked for you?”</li><li>“What would you like to be able to do by the end of our appointment?”</li></ul></div>
+<p>If the student says, “I need more resources,” explore what they hope another resource will help them do. A student struggling to understand an explanation has a different need from a student who cannot locate practice opportunities.</p>
+<h3>2. Choose one or two resources that fit</h3><p>Show only <strong>one or two resources</strong> that align with the challenge. Explain the connection in specific language. Give the student room to evaluate whether the resource fits their needs rather than assuming it will work because you found it helpful.</p>
+<div class="quote">“You mentioned that the written explanation is difficult to follow and you’d like to see an example. This course video walks through an example of that topic. Is it okay with you if we open that section together and see how useful it is for your question?”</div>
+<p>Avoid turning the appointment into a tour of every available option. Explore a targeted resource in enough depth for the student to decide how they will use it.</p>
+<h3>3. Put navigation in the student’s hands</h3><p>When you show where to find a resource, ask the student to follow along on their own device. Even better, invite them to <strong>share their screen while you talk them through the clicks</strong>. This lets you see where they need support and gives them experience accessing the resource themselves.</p>
+
+<p>Give the student time to navigate. If they get stuck, offer a prompt and let them make the next click. When sharing a screen, they can share only the course window they need.</p>
+<h3>4. Explore the resource through coaching questions</h3><p>Move beyond describing the resource’s features. Ask the student to examine how it connects to their challenge, what value it adds, and what it leaves unanswered. Choose questions that fit the moment and allow time for a thoughtful response.</p>
+<div class="grid"><div class="box"><h3>Fit and value</h3><ul class="questions"><li>“How does this connect to what you wanted help with today?”</li><li>“Which part looks most useful to you, and why?”</li><li>“What does this add to the material you have already used?”</li><li>“How does this explanation compare with the one in the textbook?”</li></ul></div>
+<div class="box"><h3>Gaps and application</h3><ul class="questions"><li>“What is still unclear or missing for you?”</li><li>“Where might you need another example or a different kind of support?”</li><li>“How could you use this with the section you are working on?”</li><li>“How will you tell whether using it is helping?”</li></ul></div></div>
+<p>Listen to the answers and let them shape the next step. If the resource does not address the challenge, acknowledge that and reconsider the fit together. You do not need to persuade the student to use it.</p>
+<h3>5. Give the student something meaningful to do</h3><p>Build a small opportunity for application into the appointment. The student might locate the relevant section of a study guide, open a specific example, examine a practice question, or review a short portion of a course video and identify what it clarifies. The task should address their stated need.</p>
+<p>A resource conversation does not always require a separate study-strategy demonstration. It still requires student participation. Watching you click through pages while you explain everything gives the student little opportunity to practice accessing or evaluating the resource.</p>
+<div class="quote">“Let’s open the part that addresses the concept you mentioned. Take a moment to look through the example. What does it help you understand? What question do you still have?”</div>
+<h3>What this can sound like</h3><div class="box">
+<p><strong>Student:</strong> “I really need a study guide for this course. I need something that tells me what I’m supposed to be focusing on.”</p>
+<p><strong>Coach:</strong> “I completely understand. Courses can feel never-ending when you feel like you’re lacking direction. Would you mind sharing your screen so we could navigate through some resources together?”</p>
+<p><strong>Student:</strong> “Sure.”</p>
+<p><strong>Coach:</strong> “If you click on the resources button, there’s a document in there titled “Study Guide.” Let’s take a look at that.”</p>
+<p><strong>Student:</strong> “Yeah, I’ve seen this already. The “study guide” in the course resources is just a bulleted list of the learning objectives. I want a study guide that asks me questions where I have to search for an answer to fill in.”</p>
+<p><strong>Coach:</strong> “Hmm, okay. So what I’m hearing is that the study guide in this form isn’t the most valuable for you, and you’d like something a little more interactive. Is that correct?”</p>
+<p><strong>Student:</strong> “Yes. This just doesn’t feel like it does much for me, honestly.”</p>
+<p><strong>Coach:</strong> “Before we ditch this altogether, would you be open to exploring it a little more?”</p>
+<p><strong>Student:</strong> “Yeah, that’s okay.”</p>
+<p><strong>Coach:</strong> “You mentioned that this study guide doesn’t do much for you because you want something that keeps you actively engaged. How do you think you could tweak this resource to make it more suitable for you?”</p>
+<p><strong>Student:</strong> “Well, I’m not sure. I guess I could put these learning objectives into question form?”</p>
+<p><strong>Coach:</strong> “Absolutely. What else?”</p>
+<p><strong>Student:</strong> “I really don’t know what else I could do with it.”</p>
+<p><strong>Coach:</strong> “That’s okay. Here’s an idea: what if you identified the main concepts inside each learning objective, used those main topics as headings, and turned this into a note-taking template? How could that approach add value for you?”</p>
+<p><strong>Student:</strong> “I could definitely see that working. I never considered transforming this study guide into something else.”</p>
+</div>
+<h3>6. Close with a student-owned next step</h3><p>Invite the student to decide how they will use the resource after the appointment. Make the next step specific enough to act on and explore any barriers to following through.</p><ul class="questions"><li>“What will you work on next using this resource?”</li><li>“When would you like to try that?”</li><li>“What could make it difficult to follow through?”</li><li>“What will you do if the resource does not answer your question?”</li></ul>
+<div class="notice"><strong>Before you move on, think about:</strong><p>What did the student get to do? What did their reflection help you understand? How did the conversation help them choose a useful next action?</p></div>
+<label class="checkline"><input id="readDone" type="checkbox"><span>I have completed the reading and am ready to demonstrate a resource conversation in a mock session.</span></label></div></section>
+<section aria-labelledby="mockTitle"><div class="badge">Step 3</div><h2 id="mockTitle">Request your mock session</h2><div id="mockLock" class="locked">🔒 Attend the workshop and complete the reading before requesting your mock session.</div><div id="mockContent" hidden>
+<p>After you request your mock session, the Development Program Supervisor or a Senior Peer Navigator will schedule it with you. The “student” will be in a course you currently support.</p>
+<div class="notice"><strong>This mock session focuses on coaching through resources.</strong><p>The purpose is to observe your ability to have a coaching conversation about resources. You will not be expected to demonstrate and practice a study strategy together, which makes this different from other mock sessions you have completed.</p></div>
+<h3>What to expect</h3><ul class="questions"><li>Ask questions to understand the student’s challenge and session goal.</li><li>Recommend one or two appropriate resources and explain why they fit.</li><li>Support the student in finding the resource on their own screen.</li><li>Ask coaching questions that encourage reflection, evaluation, and application.</li><li>Help the student identify a specific next step.</li></ul>
+<p id="requestName"></p><button id="requestButton" type="button">Request mock session</button><p id="requestStatus" class="status" role="status" aria-live="polite"></p><div id="requestSuccess" class="finish" hidden><h3>Your request has been sent!</h3><p>The Development Program Supervisor or a Senior Peer Navigator will schedule your mock session with you. You are ready to put resource coaching into practice.</p></div>
+</div></section></main>
+<script>
+// Add the two Cloudflare Worker URLs here when they are ready.
+// Never place export keys or the Teams webhook URL in this page.
+const ENDPOINTS = { start: "", mockSession: "" };
+const LEARNING_PATH = "Transitioning From Conversation to Action";
+const STORAGE_KEY = "wgu-transitioning-conversation-action-v1";
+const $ = id => document.getElementById(id);
+let state = {}; try { state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}') || {}; } catch (_) {}
+if (!state || typeof state !== 'object' || Array.isArray(state)) state = {};
+const save = () => { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (_) {} };
+const newId = () => globalThis.crypto?.randomUUID?.() || Date.now().toString(36) + '-' + Math.random().toString(36).slice(2);
+function status(id, message, error=false) { $(id).textContent = message; $(id).className = 'status ' + (error ? 'error' : ''); }
+function render() {
+ const named = !!state.fullName;
+ $('fullName').value = state.fullName || ''; $('startForm').hidden = named; $('identity').hidden = !named;
+ $('identityText').textContent = named ? 'Learning path started by ' + state.fullName + '.' : '';
+ $('attended').disabled = !named; $('attended').checked = named && !!state.attended;
+ $('reading').hidden = !named || !state.attended; $('readingLock').hidden = named && !!state.attended;
+ $('readDone').checked = !!state.readDone;
+ const ready = named && state.attended && state.readDone;
+ $('mockContent').hidden = !ready; $('mockLock').hidden = !!ready;
+ $('requestName').textContent = named ? 'Request for: ' + state.fullName : '';
+ $('requestButton').disabled = !!state.requestSent; $('requestButton').textContent = state.requestSent ? 'Mock session requested' : 'Request mock session';
+ $('requestSuccess').hidden = !state.requestSent;
+ if(named) status('startStatus', state.startSent ? 'Your start has been recorded.' : 'Your name is saved on this browser. Your start has not been submitted yet.');
+}
+function payload(activity,existing) {
+ if(existing) return existing;
+ const names = state.fullName.trim().split(/\s+/);
+ return {schemaVersion:1,submissionId:newId(),submittedAt:new Date().toISOString(),learningPath:LEARNING_PATH,activity,firstName:names.shift(),lastName:names.join(' '),fullName:state.fullName,responses:{}};
+}
+async function send(url, data) {
+ const controller = new AbortController(); const timeout = setTimeout(()=>controller.abort(),20000);
+ try { const response = await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),signal:controller.signal});
+ const result = await response.json().catch(()=>null);
+ if(!response.ok || !result || result.success !== true) throw new Error('Submission failed');
+ return result;
+ } finally { clearTimeout(timeout); }
+}
+$('startForm').addEventListener('submit', async event => {
+ event.preventDefault(); const name = $('fullName').value.trim().replace(/\s+/g,' ');
+ if(name.split(' ').length < 2) {status('startStatus','Please enter your first and last name.',true);return;}
+ if(state.fullName !== name) state = {fullName:name};
+ state.startPayload = payload('Learning Path Start',state.startPayload); save();
+ if(!ENDPOINTS.start) {render();return;}
+ $('startButton').disabled=true;status('startStatus','Recording your start…');
+ try {await send(ENDPOINTS.start,state.startPayload);state.startSent=true;save();render();}
+ catch(_){status('startStatus','Your start could not be submitted. Please try again.',true);}
+ finally {$('startButton').disabled=false;}
+});
+$('changeName').addEventListener('click',()=>{if(!confirm('Change the participant name? This will clear the progress saved for this person on this browser.'))return;state={};save();render();status('startStatus','');status('requestStatus','');$('fullName').focus();});
+$('attended').addEventListener('change',()=>{state.attended=$('attended').checked;if(!state.attended)state.readDone=false;save();render();});
+$('readDone').addEventListener('change',()=>{state.readDone=$('readDone').checked;save();render();});
+$('requestButton').addEventListener('click',async()=>{
+ if(!state.fullName || !state.attended || !state.readDone || state.requestSent)return;
+ if(!ENDPOINTS.mockSession){status('requestStatus','Mock-session requests are not available yet. Your request has not been sent.',true);return;}
+ const button=$('requestButton');button.disabled=true;status('requestStatus','Sending your request…');
+ state.requestPayload=payload('Request Mock Session',state.requestPayload);save();
+ try{await send(ENDPOINTS.mockSession,state.requestPayload);state.requestSent=true;save();render();status('requestStatus','Your mock-session request has been sent.');}
+ catch(_){status('requestStatus','Your request could not be confirmed. Please try again.',true);button.disabled=false;}
+});
+render();
+// Submit a locally saved start once its Worker URL is configured.
+if(ENDPOINTS.start && state.fullName && !state.startSent){state.startPayload=payload('Learning Path Start',state.startPayload);save();send(ENDPOINTS.start,state.startPayload).then(()=>{state.startSent=true;save();render();}).catch(()=>status('startStatus','Your name is saved here, but your start could not be submitted. Refresh this page to retry.',true));}
+</script></body></html>
