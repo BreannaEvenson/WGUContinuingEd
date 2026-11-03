@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>I Do, We Do, You Do | Leadership Preview</title>
+<style>
+    :root {
+      --navy: #00264b;
+      --blue: #0075f5;
+      --ink: #00264b;
+      --line: #d3e2ea;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #eef7fa;
+      color: var(--ink);
+      font: 18px/1.65 Arial, Helvetica, sans-serif;
+    }
+
+    header {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 48px;
+      background: #00182f;
+      color: white;
+    }
+
+    h1 {
+      margin: 12px 0;
+      font-size: clamp(2.8rem, 6.5vw, 6rem);
+      font-weight: 800;
+      line-height: 1.15;
+    }
+
+    h2 {
+      color: var(--blue);
+      font-size: clamp(2rem, 4.5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.3;
+    }
+
+    h3 {
+      color: var(--navy);
+      font-size: 1.5rem;
+      line-height: 1.3;
+    }
+
+    main {
+      max-width: 1440px;
+      margin: auto;
+      padding: 0 48px;
+    }
+
+    section {
+      padding: 64px 0;
+      scroll-margin-top: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .objective,
+    .box {
+      padding: 30px;
+      background: white;
+      border-top: 5px solid #3cb2f4;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px #00182f0d;
+    }
+
+    .objective {
+      display: flex;
+      align-items: center;
+      min-height: 140px;
+    }
+
+    .badge {
+      color: var(--blue);
+      font-size: clamp(1.5rem, 4vw, 3.4rem);
+      font-weight: 700;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+    }
+
+    header .badge {
+      color: #b7d9ec;
+      font-size: .9rem;
+    }
+
+    .duration {
+      display: flex;
+      align-items: center;
+      gap: 50px;
+      margin: 30px 0;
+      padding: 24px 30px;
+      background: #172f46;
+      color: white;
+      border-left: 5px solid #91e238;
+      border-radius: 16px;
+    }
+
+    .duration span {
+      max-width: 290px;
+    }
+
+    .start-card {
+      padding: 30px;
+      background: white;
+      color: var(--navy);
+      border-radius: 18px;
+    }
+
+    label {
+      display: block;
+      margin: 18px 0 6px;
+      font-weight: 650;
+    }
+
+    .start-card label {
+      margin: 0 0 18px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px;
+      background: white;
+      color: var(--ink);
+      border: 1px solid #91aab8;
+      border-radius: 7px;
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 110px;
+    }
+
+    input[type="radio"] {
+      width: auto;
+      margin-right: 10px;
+    }
+
+    button {
+      display: inline-block;
+      margin: 12px 8px 0 0;
+      padding: 12px 20px;
+      background: var(--blue);
+      color: white;
+      border: 0;
+      border-radius: 8px;
+      font: inherit;
+      font-weight: 650;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: .6;
+      cursor: wait;
+    }
+
+    :focus-visible {
+      outline: 3px solid #ce8f05;
+      outline-offset: 3px;
+    }
+
+    .name-row {
+      display: flex;
+    }
+
+    .name-row input {
+      min-width: 0;
+      border-radius: 9px 0 0 9px;
+    }
+
+    .name-row button {
+      margin: 0;
+      border-radius: 0 9px 9px 0;
+    }
+
+    .status {
+      min-height: 30px;
+      padding: 10px 0;
+      font-size: 1rem;
+    }
+
+    details {
+      padding: 16px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    summary {
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    #shadowForms details {
+      margin: 22px 0;
+      padding: 24px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+
+    #shadowForms summary {
+      font-size: 1.3rem;
+    }
+
+    blockquote {
+      margin: 16px 0;
+      padding: 18px;
+      background: white;
+      border-left: 4px solid var(--blue);
+    }
+
+    .question {
+      margin: 24px 0;
+      padding: 24px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+    }
+
+    .question .question-title {
+      margin: 0 0 16px;
+      color: var(--navy);
+      font-size: 1.1rem;
+    }
+
+    .question label {
+      font-weight: 400;
+    }
+
+    .feedback {
+      font-weight: 600;
+    }
+
+    #circle {
+      padding-bottom: 80px;
+    }
+
+    @media (max-width: 700px) {
+      header {
+        padding: 28px 20px;
+      }
+
+      main {
+        padding: 0 20px;
+      }
+
+      section {
+        padding: 40px 0;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .duration {
+        display: block;
+        padding: 22px;
+      }
+
+      .duration strong {
+        display: block;
+        margin-top: 12px;
+      }
+
+      .start-card {
+        padding: 22px;
+      }
+
+      .name-row {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .name-row input,
+      .name-row button {
+        border-radius: 8px;
+      }
+
+      .objective {
+        min-height: 0;
+        padding: 22px;
+      }
+    }
+  
+/* Leadership-only viewing helpers */
+.leadership-intro { border-left: 5px solid #91e238; }
+.leadership-intro strong { display:block; font-size:1.2rem; color:#00264b; }
+.leadership-intro p { margin:10px 0 16px; }
+.leadership-intro nav { display:flex; flex-wrap:wrap; gap:10px; }
+.leadership-intro nav a { background:#0075f5; color:#fff; text-decoration:none; border-radius:8px; padding:8px 14px; font-weight:700; }
+.preview-action { background:#fff; border-left:5px solid #3cb2f4; padding:24px; border-radius:14px; }
+.preview-action button:disabled { cursor:not-allowed; }
+.preview-note { padding:12px 16px; background:#fff; border-left:4px solid #91e238; border-radius:6px; }
+</style>
+</head>
+<body>
+<header>
+<h1>I Do, We Do, You Do</h1>
+<div class="duration">
+<span>Estimated duration of learning path:</span>
+<strong>
+        5.5 hour time commitment<br/>
+        over a 4 week period
+      </strong>
+</div>
+<div class="start-card leadership-intro"><strong>Leadership Preview</strong><p>This version provides open access to the full learning path. Activities and reflection forms are for review only; no responses are collected, saved, or sent.</p><nav aria-label="Jump to learning path steps"><a href="#student">Step One</a><a href="#shadow">Step Two</a><a href="#reading">Step Three</a><a href="#circle">Step Four</a></nav></div>
+</header>
+<main>
+<section id="objectives">
+<h2>Learning Objectives</h2>
+<p>
+        Throughout this learning path, you should gain these competencies.
+      </p>
+<div class="grid">
+<div class="objective">
+          Model a study strategy during the I Do stage while keeping
+          focus on the process rather than the course content.
+        </div>
+<div class="objective">
+          Use questions, prompts, and wait time during the We Do to
+          support the student without taking over.
+        </div>
+<div class="objective">
+          Create a clear transition from the We Do to the You Do.
+        </div>
+<div class="objective">
+          Demonstrate a complete I Do, We Do, You Do sequence.
+        </div>
+</div>
+</section>
+<section id="student">
+<div class="badge">STEP ONE</div>
+<h2>You're the Student</h2>
+<p>
+        Experience I Do, We Do, You Do from the student's perspective.
+        A development program Senior Peer Navigator will coach you on
+        a real challenge in a course you are currently working on.
+      </p>
+<ol>
+<li>
+<strong>Before scheduling:</strong> Identify your current
+          course, the specific topic or module, and the challenge you
+          want help working through. Have the relevant course
+          material ready.
+        </li>
+<li>
+          Go to the <strong>Training and Development page in
+          SharePoint</strong> and use one of the development program
+          Senior Peer Navigators' booking links.
+        </li>
+<li>
+<strong>Immediately after booking:</strong> Send that Senior
+          Peer Navigator a Teams message with the meeting day and
+          time, your course, and the specific topic or module you want
+          to work through. Include your challenge so they can prepare.
+        </li>
+<li>
+          Attend as the student. Bring your actual materials and
+          participate in the practice.
+        </li>
+</ol>
+<details>
+<summary>Teams message template</summary>
+<p>
+          Hi [name]! I booked a You're the Student appointment with
+          you for [day, date, time, and time zone]. I'm currently
+          working on [course]. I'd like to work through [topic/module],
+          and my specific challenge is [challenge]. Thank you!
+        </p>
+</details>
+</section>
+<section id="shadow">
+<div class="badge">STEP TWO</div>
+<h2>Shadow &amp; Reflect</h2>
+<p>
+        Shadow <strong>two appointments of your choice</strong> and
+        <strong>one live event</strong>. Complete a separate reflection
+        for each. You do not need to find a perfect example of the
+        framework: noticing an effective move, a missed opportunity,
+        or a stage that did not occur can all support your learning.
+      </p>
+<p class="preview-note">Leadership preview: Shadow reflection forms are available to explore. They do not save or submit data.</p><div id="shadowForms"></div>
+</section>
+<section id="reading">
+<div class="badge">STEP THREE</div>
+<h2>From We Do to You Do</h2>
+<p>
+        In We Do, the student practices with your support. In You Do,
+        the student takes responsibility for using the strategy. Your
+        transition should make the task, level of support, and next
+        step clear. You Do can happen during a session or continue
+        afterward with a specific plan.
+      </p>
+<h3>Make the shift visible</h3>
+<p>
+        Give the student a manageable piece of material and explain
+        what they will do independently. During independent practice,
+        allow them to make decisions and finish before offering
+        feedback. A pause or moment of uncertainty is not automatically
+        a reason to step in. If they need support, use a brief prompt
+        and let them resume the work.
+      </p>
+<div class="grid">
+<article class="box">
+<h3>In appointments</h3>
+<h4>When there is time to practice</h4>
+<blockquote>
+            “So far, I've demonstrated the strategy, and you've gotten
+            in some really strong practice. Now I want you to try this
+            next step on your own. Talk me through your thought
+            process as you go.”
+          </blockquote>
+<p>
+            Identify the next question, paragraph, concept, or other
+            small task. Listen to the student's thinking without
+            completing it for them. Once they finish, invite their
+            reflection and provide supportive, constructive feedback
+            on the process.
+          </p>
+<h4>When time is limited</h4>
+<p>
+            Help the student describe exactly how they will use the
+            strategy after the appointment. Ask:
+          </p>
+<ul>
+<li>Which part of your course material will you try next?</li>
+<li>When will you work on it?</li>
+<li>What will tell you that the strategy is helping?</li>
+<li>What will you do if you get stuck?</li>
+</ul>
+<p>
+            Have them explain the plan in their own words. Arrange a
+            follow-up before ending the appointment when appropriate.
+          </p>
+</article>
+<article class="box">
+<h3>In live events</h3>
+<h4>When there is time to practice</h4>
+<blockquote>
+            “We've all had a chance to practice this strategy together.
+            Now we're going to take five minutes to try the next part
+            independently. Use the next two concepts in this module
+            to create your own flashcards.”
+          </blockquote>
+<p>
+            Specify the course material, the task, the time available,
+            and how participants will share afterward. Clear
+            instructions make it easier to engage. Allow independent
+            study time, then debrief:
+          </p>
+<ul>
+<li>How did that feel?</li>
+<li>What was challenging?</li>
+<li>What went well?</li>
+<li>What came up that was unexpected?</li>
+</ul>
+<h4>When time is limited</h4>
+<p>
+            Ask participants to identify a specific next use of the
+            strategy. Invite them to share the topic, when they will
+            try it, how they will check its usefulness, and what they
+            will do if they need support. 
+          </p>
+</article>
+</div>
+<h3>Feedback that helps the student improve</h3>
+<p>
+        Describe what you noticed, connect it to the strategy, and
+        offer an opportunity to adjust. Keep feedback focused on how
+        the student used the strategy.
+      </p>
+<div class="grid">
+<div class="box">
+<h4>If a student copies the textbook word for word</h4>
+<p>
+            “I noticed you used the same wording as the textbook.
+            How could you put that idea into your own words so the
+            flashcard helps you check your understanding?”
+          </p>
+<p>
+            Give the student time to revise. Then ask what changed
+            and how the revision might support studying.
+          </p>
+</div>
+<div class="box">
+<h4>If the student catches an overloaded flashcard</h4>
+<p>
+            “You noticed that the card was starting to include several
+            ideas and decided to split it. That keeps each card
+            focused on one thing to recall. What helped you
+            recognize that?”
+          </p>
+<p>
+            Name the useful action so the student knows what to repeat.
+          </p>
+</div>
+</div>
+<h3>Check your understanding</h3>
+<p>
+        Choose an answer for each scenario, then check your responses.
+      </p>
+<form id="quiz">
+<div id="questions"></div>
+<button type="submit">Check my answers</button>
+<p class="status" id="quizStatus" role="status"></p>
+</form>
+</section>
+<section id="circle">
+<div class="badge">STEP FOUR</div>
+<h2>Coaching Circle</h2>
+<p>
+        Practice a complete I Do, We Do, You Do sequence in a supportive
+        setting. Request your Coaching Circle by clicking on the request button below.
+      </p>
+<h3>What to expect</h3>
+<ul>
+<li>
+<strong>Three participants:</strong> two coaches currently
+          completing this learning path and either a Senior Peer
+          Navigator or the development program supervisor.
+        </li>
+<li>
+<strong>Three rotating responsibilities:</strong> coach,
+          student, and observer. Each person takes each role once.
+        </li>
+<li>
+<strong>Short practice:</strong> each coaching session lasts
+          about 10 minutes. After each session, share brief feedback
+          and rotate roles.
+        </li>
+<li>
+<strong>Materials are provided:</strong> scenarios, course
+          material, and selected study strategies will be supplied
+          during the meeting. All coaching circles will use general
+          education courses.
+        </li>
+<li>
+<strong>Your focus:</strong> model the strategy, guide
+          practice without taking over, make a clear transition,
+          and give the student an opportunity to use the strategy
+          independently.
+        </li>
+</ul>
+<div class="preview-action"><strong>Request Coaching Circle</strong><p>In the intern-facing version, this button sends a scheduling request to the development team. It is disabled in the leadership preview.</p><button aria-label="Request Coaching Circle, preview only" disabled="" type="button">Request Coaching Circle (Preview Only)</button></div>
+</section>
+</main>
+<script>/* Leadership preview: no endpoints, webhooks, storage or external submissions. */
+    function field(
+      form,
+      name,
+      text,
+      type = "textarea",
+      required = true
+    ) {
+      const label = document.createElement("label");
+      label.textContent = text;
+
+      const element = document.createElement(
+        type === "textarea"
+          ? "textarea"
+          : type === "select"
+            ? "select"
+            : "input"
+      );
+
+      element.name = name;
+      element.required = required;
+
+      if (type === "date") {
+        element.type = "date";
+      }
+
+      if (type === "select") {
+        const choices = [
+          "Select an option",
+          "Observed",
+          "Partly observed",
+          "Not observed",
+        ];
+
+        for (const choice of choices) {
+          const option = document.createElement("option");
+
+          option.textContent = choice;
+          option.value = choice === "Select an option" ? "" : choice;
+
+          element.append(option);
+        }
+      }
+
+      label.append(element);
+      form.append(label);
+    }
+
+    const SHADOW_ACTIVITIES = [
+      ["shadow1", "Appointment shadow 1"],
+      ["shadow2", "Appointment shadow 2"],
+      ["liveEvent", "Live event shadow"]
+    ];
+
+    for (const [key, title] of SHADOW_ACTIVITIES) {
+      const details = document.createElement("details");
+      details.open = true;
+
+      const summary = document.createElement("summary");
+      summary.textContent = title;
+      details.append(summary);
+
+      const form = document.createElement("form");
+      form.dataset.key = key;
+
+      field(
+        form,
+        "sessionDate",
+        "Date shadowed",
+        "date"
+      );
+
+      field(
+        form,
+        "courseStrategy",
+        "Course/topic and study strategy",
+        "input"
+      );
+
+      field(
+        form,
+        "thinkAloudObserved",
+        "Was a think-aloud used?",
+        "select"
+      );
+
+      field(
+        form,
+        "thinkAloud",
+        "Describe a think-aloud you heard and its effect. If none occurred, describe a moment where one might have helped."
+      );
+
+      field(
+        form,
+        "questionsPrompts",
+        "What questions or prompts were used during the sequence? Who was doing the thinking, and how effective was the support? If none occurred, explain the opportunity."
+      );
+
+      field(
+        form,
+        "waitTimeObserved",
+        "Was wait time used?",
+        "select"
+      );
+
+      field(
+        form,
+        "waitTime",
+        "Describe what happened after a question or prompt. How did the pause—or lack of one—affect participation?"
+      );
+
+      field(
+        form,
+        "transitionObserved",
+        "Was the transition from the We Do to the You Do visible?",
+        "select"
+      );
+
+      field(
+        form,
+        "transition",
+        "How did the student(s) participate in the You Do? If You Do did not occur, was a clear plan established? What could have made the transition stronger?"
+      );
+
+      field(
+        form,
+        "effectiveness",
+        "What worked well, and what would you adjust? Ground your reflection in an observable coaching action."
+      );
+
+      field(
+        form,
+        "takeaway",
+        "What will you use in your own coaching?"
+      );
+
+      const button = document.createElement("button");
+      button.type = "reset";
+      button.textContent = "Clear preview responses";
+      form.append(button);
+
+      const message = document.createElement("p");
+      message.className = "status";
+      message.setAttribute("role", "status");
+      form.append(message);
+
+      details.append(form);
+      document.getElementById("shadowForms").append(details);
+    }
+
+    const QUESTIONS = [
+      {
+        q: "A student has practiced making flashcards with your support. What is the clearest transition to You Do?",
+        a: [
+          "Make the next card for them so they have another example.",
+          "Ask them to make a card for the next concept independently and talk through their thinking.",
+          "Tell them to keep studying after the appointment."
+        ],
+        correct: 1,
+        why: "Give a specific independent task and let the student own the process."
+      },
+      {
+        q: "During You Do, the student copies a textbook definition word for word. What should you do after they finish?",
+        a: [
+          "Describe what you noticed and invite them to restate the idea in their own words.",
+          "Rewrite the card for them immediately.",
+          "Tell them not to do that next time."
+        ],
+        correct: 0,
+        why: "Supportive feedback names the observation and gives the student a chance to adjust."
+      },
+      {
+        q: "Your appointment is almost over and there is no time for independent practice. What is the best next step?",
+        a: [
+          "Skip You Do because the session is ending.",
+          "Ask whether they understand, then end the appointment.",
+          "Ask what material they will try next, when they will try it, and how they will know the strategy is helping."
+        ],
+        correct: 2,
+        why: "A specific plan prepares the student for independent application after the session."
+      },
+      {
+        q: "Which live event instruction best supports independent practice?",
+        a: [
+          "“Try it on your own for a while.”",
+          "“For five minutes, create a flashcard for each of the next two concepts. Then we will discuss what worked and what was challenging.”",
+          "“Watch me create a few more examples.”"
+        ],
+        correct: 1,
+        why: "Specify material, task, time, and debrief so students know exactly how to participate."
+      },
+      {
+        q: "A student notices their flashcard includes too many ideas and splits it. Which feedback is most useful?",
+        a: [
+          "“Great job!” and nothing else.",
+          "“You caught that the card had several ideas and split it so each card focuses on one thing to recall. What helped you notice?”",
+          "“Don't second guess yourself. Stick with your first idea next time because you're the only one that knows the best way for you to study.”"
+        ],
+        correct: 1,
+        why: "Name the effective process and invite reflection so the student can repeat it."
+      }
+    ];
+
+    QUESTIONS.forEach((question, index) => {
+      const container = document.createElement("div");
+      container.className = "question";
+      container.setAttribute("role", "group");
+      container.setAttribute(
+        "aria-labelledby",
+        "question" + index
+      );
+
+      const title = document.createElement("h4");
+      title.className = "question-title";
+      title.id = "question" + index;
+      title.textContent = (index + 1) + ". " + question.q;
+      container.append(title);
+
+      question.a.forEach((answer, answerIndex) => {
+        const label = document.createElement("label");
+
+        const radio = document.createElement("input");
+        radio.type = "radio";
+        radio.name = "q" + index;
+        radio.value = answerIndex;
+        radio.required = true;
+
+        label.append(radio, document.createTextNode(answer));
+        container.append(label);
+      });
+
+      const feedback = document.createElement("p");
+      feedback.className = "feedback";
+      feedback.id = "feedback" + index;
+      container.append(feedback);
+
+      document.getElementById("questions").append(container);
+    });
+
+
+    // Allow leadership to answer the knowledge check locally without a name or prior steps.
+    document.getElementById("quiz").addEventListener("submit", event => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const message = document.getElementById("quizStatus");
+      let score = 0;
+      QUESTIONS.forEach((question, index) => {
+        const selected = form.querySelector(`input[name="q${index}"]:checked`);
+        const correct = selected && Number(selected.value) === question.correct;
+        if (correct) score++;
+        document.getElementById("feedback" + index).textContent =
+          (correct ? "Correct. " : "Not quite. ") + question.why;
+      });
+      message.textContent = `${score} of ${QUESTIONS.length} correct. Preview only — no responses were saved or submitted.`;
+    });
+    // No form submissions are used by this preview.
+</script>
+</body>
+</html>
